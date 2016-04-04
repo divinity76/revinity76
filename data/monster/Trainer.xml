@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<monster name="Trainer" level="20" maglevel="50" experience="200" pushable="0" armor="25" defense="30" canpushitems="1" staticattack="50" changetarget="238">
+	<health now="100000" max="100000"/>
+	<look type="57" head="20" body="30" legs="40" feet="50" corpse="3128"/>
+	<combat targetdistance="1" runonhealth="0"/>
+
+	<attacks>
+		<attack type="melee" maxdamage="100"/>
+		<attack type="instant" name="exura vita" exhaustion="10" cycleticks="100" probability="100"/>
+	</attacks>
+
+	<defenses>
+		<defense immunity="invisible"/>
+	</defenses>
+
+	<voices>
+	</voices>
+
+	<loot>
+	</loot>
+</monster>

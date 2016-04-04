@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<npc name="Pydar" script="data/npc/scripts/Hest.lua" access="5" monster="1" speed="50" level="100" maglevel="100" exp="0" pushable="0" lookdir="0">
+	<mana now="100" max="100"/>
+	<health now="100" max="100"/>
+	<look type="57" head="78" body="61" legs="52" feet="114" corpse="2276"/>
+	<attack type="melee" damage="10"/>       
+</npc>

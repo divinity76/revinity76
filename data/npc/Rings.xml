@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<npc name="Rings" script="data/npc/scripts/rings.lua" access="5">
+ 	<look type="131" head="57" body="57" legs="57" feet="57"/>
+</npc>

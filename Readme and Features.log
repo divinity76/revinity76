@@ -1,0 +1,73 @@
+ADDED COMMANDS:
+
+<command cmd="/savehouses"          access="3" />  --Saves houses
+<command cmd="/access"          access="5" />  -- Changes player access (/access 5 Gihow)
+<command cmd="/check"          access="3" /> --Checks a specific player for MCing (/check Gihow)
+<command cmd="/checkall"          access="3" /> --Checks all players MCing (/checkall)
+<command cmd="/noskull"          access="3" />  --Removes Player Skull (/noskull Gihow)
+<command cmd="/private"          access="3" />  --Turns private messaging on/pff (not working fully)
+<command cmd="/redskull"          access="5" />  --Adds playder redskull   (/redskull Gihow)
+<command cmd="/sex"          access="3" />   --Changes a players sex   (/sex Gihow)
+<command cmd="/whiteskull"          access="5" />   --Adds player whiteskull   (/whiteskull Gihow)
+<command cmd="!comment"		access="0" />   --Leaves a server comment   (!comment This is a test)
+<command cmd="!commands"		access="0" />  --Shows commands for players (!commands)
+
+Note that the skull commands are slightly bugged, the skull will only show/remove when the player goes up or
+down a floor.
+
+Other Added Features:
+
+--Follow System
+--!info (shows server info from config.lua)
+--!website (shows server website from config.lua)
+--House doors show host cost when unowned.
+
+
+
+ALL DIVINITY FEATURES:
+
+All YurOTs 9.4f and YurOTs STF Edition Features
+ Parcel system
+!buyhouse Added
+Party system fixed
+Configurable Attack speeds
+rings of healing work
+/addskill command
+Configurable Save times
+creatures attack immediately when summoned by GM
+NPC doTurn function
+tutors speak in orange
+onWalk & offWalk functions
+Double damage with wands/weapons fixed
+Soft boots give mana/health
+GM Shopkeeper (to buyhp/mana)
+/outfit command
+Blue Robe adds magic damage (configurable)
+Dragon Scale set reduces 8% fire damage
+NPC getHasMoney function (checks if player has money, doesnt take)
+Follow System
+!info (shows server info from config.lua)
+!website (shows server website from config.lua)
+House doors show host cost when unowned.
+/savehouses  --Saves houses
+/access  -- Changes player access (/access 5 Gihow)
+/check --Checks a specific player for MCing (/check Gihow)
+/checkall --Checks all players MCing (/checkall)
+/noskull  --Removes Player Skull (/noskull Gihow)
+/private  --Turns private messaging on/pff (not working fully)
+/redskull  --Adds playder redskull   (/redskull Gihow)
+/sex   --Changes a players sex   (/sex Gihow)
+/whiteskull   --Adds player whiteskull   (/whiteskull Gihow)
+!comment   --Leaves a server comment   (!comment This is a test)
+!commands    --Shows commands for players (!commands)
+
+
+KNOWN BUGS:
+
+Ring of healing weighs more when worn
+You have to logout twice to fully logout (Cntrl + q 2 times)
+Skull system times don't exactly match up to what's in config.lua
+Small attack starting delay (about 0.7 secs)
+
+
+

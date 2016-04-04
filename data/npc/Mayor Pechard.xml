@@ -1,0 +1,6 @@
+<?xml version="1.0"?> 
+<npc name="Mayor Pechard" script="data/npc/scripts/king.lua" access="3" lookdir="2"> 
+<mana now="800" max="800"/> 
+<health now="200" max="200"/> 
+<look type="130" head="19" body="71" legs="128" feet="128" corpse="4246"/> 
+</npc>

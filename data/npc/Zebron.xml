@@ -1,0 +1,1 @@
+<?xml version="1.0"?> <npc name="Zebron" script="gamble.lua" access="1" level="1" exp="0" lookdir="3">  <health now="666" max="666"/>  <look type="128" head="95" body="34" legs="128" feet="95" corpse="4175"/> </npc> 

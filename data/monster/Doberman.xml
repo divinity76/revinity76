@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<monster name="Doberman" level="20" maglevel="0" experience="80" pushable="1" armor="10" defense="15" speed="300" canpushitems="0" staticattack="50" changetarget="200">
+<health now="155" max="155"/>
+<look type="32" head="20" body="30" legs="40" feet="50" corpse="2839"/>
+<combat targetdistance="1" runonhealth="25"/>
+<attacks>
+
+<attack type="melee" maxdamage="50" cycleticks="1800" probability="100"/>
+
+</attacks>
+
+<defenses>
+
+</defenses>
+<voices>
+<voice sentence="Grrr.."/>
+<voice sentence="Bark! Bark! Whoof! Whoof!"/>
+
+</voices>
+<loot>
+
+</loot>
+</monster>

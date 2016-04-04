@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+ 
+ <npc name="Edward Teach" script="data/npc/scripts/boat_lakeshore.lua" access="3" lookdir="2">
+ 	<mana now="800" max="800"/>
+ 	<health now="200" max="200"/>
+ 	<look type="129" head="114" body="119" legs="114" feet="114"/>
+ </npc>

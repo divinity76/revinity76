@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<npc name="Big Jim" script="data/npc/scripts/jim.lua" access="1">
+ 	<look type="69" head="20" body="30" legs="40" feet="50"/>
+</npc>

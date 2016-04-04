@@ -1,0 +1,3 @@
+<?xml version="1.0"?>
+<npc name="Decco" script="data/npc/scripts/decco.lua" access="5">	<look type="128" head="4" body="114" legs="132" feet="115"/>
+</npc>

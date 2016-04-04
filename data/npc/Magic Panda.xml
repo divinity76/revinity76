@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+ 
+ <npc name="Magic Panda" script="data/npc/scripts/panda.lua" access="3" lookdir="1">
+ 	<health now="100" max="100"/>
+ 	<look type="123" corpse="4286"/>
+ </npc>

@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+ <monster name="Serpent" level="80" maglevel="150" experience="3000" pushable="0" armor="60" defense="60" canpushitems="1" staticattack="50" changetarget="200" speed="250">
+ 	<health now="3500" max="3500"/>
+ 	<look type="220" corpse="4323"/>
+ 	<combat targetdistance="1" runonhealth="0"/>
+ 
+ <attacks>
+ 	<attack type="instant" name="dragonlord_firewave" exhaustion="500" cycleticks="6000" probability="80"/>
+ 	<attack type="rune" name="dragonlord_fireball" exhaustion="500" cycleticks="6000" probability="80"/>
+ 	<attack type="rune" name="dragonlord_firebomb" exhaustion="500" cycleticks="7000" probability="40"/>
+ 	<attack type="instant" name="hydra_bubblewave" exhaustion="500" cycleticks="3000" probability="50"/>
+ 	<attack type="instant" name="hydra_poisonwave" exhaustion="500" cycleticks="5000" probability="70"/>
+ 	<attack type="instant" name="exura vita" cycleticks="2500" probability="60"/>
+ 	<attack type="melee" mindamage="240" maxdamage="480" probability="100"/>
+ </attacks>
+ 
+ <defenses>
+ 	<defense immunity="fire"/>
+ 	<defense immunity="invisible"/>
+ 	<defense immunity="poison"/>
+ 	<defense immunity="drunk"/>
+ 	<defense immunity="paralyze"/>
+ </defenses>
+ 
+ <voices>
+ 	<voice sentence="YOU WILL BURN!"/>
+ 	<voice sentence="ZCHHHHHHH!"/>
+ 	<voice sentence="FCHHHHH"/>
+ 	<voice sentence="HISSSS"/>
+ </voices>
+ 
+<loot>
+  	<item id="2148" countmax="100" chance1="100000" chancemax="0"/>
+  	<item id="2672" countmax="2" chance1="20000" chancemax="0"/>
+  	<item id="2033" chance="1818"/>
+  	<item id="1976" chance="3333"/>
+  	<item id="2413" chance="5000"/>
+	<item id="2498" chance="600"/>
+  	<item id="2475" chance="800"/>
+  	<item id="2536" chance="700"/>
+  	<item id="2195" chance="900"/>
+  	<item id="2214" chance="1818"/>
+  	<item id="2146" countmax="1" chance1="2000" chancemax="0"/>
+  	<item id="2476" chance="1200"/>
+  	<item id="2498" chance="888"/>
+  	<item id="2492" chance="500"/>
+  	<item id="2414" chance="1000"/>
+  	<item id="2546" countmax="5" chance1="2222" chancemax="0"/>
+  	<item id="2796" countmax="1" chance1="6666" chancemax="0"/>
+ 
+  	<item id="1987" chance="50000">
+  	<inside>
+  	<item id="2148" countmax="100" chance1="100000" chancemax="0"/>
+  	<item id="2149" countmax="2" chance1="893" chancemax="0"/>
+  	<item id="2392" chance="1428"/>
+     	<item id="2148" countmax="250" chance1="100000" chancemax="0"/>
+     	<item id="2666" countmax="4" chance1="20000" chancemax="0"/>
+     	<item id="2671" countmax="4" chance1="20000" chancemax="0"/>
+ 	<item id="2146" countmax="2" chance1="3222" chancemax="0"/>
+  	<item id="2528" chance="2333"/>
+  	</inside>
+  	</item>
+ </loot>
+ </monster>

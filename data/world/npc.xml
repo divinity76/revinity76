@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<npclist>
+<npc name="Mad" x="162" y="47" z="7"/>
+<npc name="Guild master" x="132" y="49" z="7"/>
+<npc name="Perac" x="156" y="50" z="6"/>
+<npc name="Dark rodo" x="149" y="71" z="7"/>
+<npc name="Seller" x="162" y="61" z="7"/>
+<npc name="GM Shopmaster" x="160" y="49" z="6"/>
+<npc name="Dufi" x="164" y="50" z="6"/>
+<npc name="Fargum" x="133" y="34" z="6"/>
+<npc name="Fargum" x="336" y="62" z="6"/>
+<npc name="Fargum" x="37" y="60" z="7"/>
+<npc name="Fargum" x="71" y="160" z="6"/>
+<npc name="Fargum" x="158" y="431" z="6"/>
+<npc name="Fargum" x="126" y="111" z="6"/>
+<npc name="Fargum" x="264" y="156" z="6"/>
+<npc name="Rings" x="156" y="57" z="6"/>
+<npc name="Decco" x="164" y="57" z="6"/>
+<npc name="Seller" x="253" y="167" z="7"/>
+<npc name="Dufi" x="256" y="154" z="7"/>
+<npc name="Seller" x="121" y="404" z="7"/>
+<npc name="Fargum" x="562" y="622" z="6"/>
+<npc name="Fargum" x="706" y="720" z="6"/>
+<npc name="Dark rodo" x="638" y="635" z="7"/>
+<npc name="Mad" x="601" y="629" z="6"/>
+<npc name="Perac" x="601" y="629" z="5"/>
+<npc name="Dark rodo" x="697" y="639" z="7"/>
+<npc name="Mad" x="697" y="639" z="6"/>
+<npc name="Seller" x="697" y="639" z="5"/>
+<npc name="Orlan" x="151" y="51" z="7"/>
+<npc name="Buddy" x="212" y="49" z="6"/>
+<npc name="Buddy" x="213" y="49" z="6"/>
+</npclist>

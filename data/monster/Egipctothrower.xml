@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+      <monster name="Egipctothrower" level="20" maglevel="50" experience="600" pushable="0" armor="15" defense="20" canpushitems="1" staticattack="50" changetarget="200" speed="170">
+      	<health now="9950" max="9950"/>
+      	<look type="93" head="20" body="30" legs="40" feet="50" corpse="3022"/>
+      	<combat targetdistance="0" runonhealth="0"/>
+      <attacks>
+      	<attack type="rune" name="Heavy magic missile" exhaustion="500" cycleticks="1000" probability="100"/>
+      </attacks>
+   
+      <defenses>
+      	<defense immunity="energy"/>
+      	<defense immunity="fire"/>
+      	<!-- <defense immunity="poison"/> -->
+      	<defense immunity="paralyze"/>
+      	<defense immunity="drunk"/>
+      </defenses>
+   
+      <loot>
+       	<item id="2148" countmax="20" chance1="100000" chancemax="0"/>
+      </loot>
+      </monster>

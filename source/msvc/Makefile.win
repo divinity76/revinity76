@@ -1,0 +1,174 @@
+# Project: Divinity
+# Makefile created by Dev-C++ 4.9.9.2
+
+CPP  = g++.exe
+CC   = gcc.exe
+WINDRES = windres.exe
+RES  = Divinity_private.res
+OBJ  = ../actions.o ../allocator.o ../chat.o ../commands.o ../container.o ../creature.o ../exception.o ../fileloader.o ../game.o ../guilds.o ../houses.o ../ioaccount.o ../ioaccountxml.o ../iomapbin.o ../iomapotbm.o ../iomapxml.o ../ioplayer.o ../ioplayerxml.o ../item.o ../itemloader.o ../items.o ../logger.o ../loginqueue.o ../luascript.o ../magic.o ../map.o ../md5.o ../mdump.o ../monster.o ../monsters.o ../networkmessage.o ../npc.o ../otserv.o ../player.o ../position.o ../protocol.o ../protocol76.o ../pvparena.o ../readables.o ../scheduler.o ../spawn.o ../spells.o ../status.o ../summons.o ../thing.o ../tile.o ../tools.o ../account.o $(RES)
+LINKOBJ  = ../actions.o ../allocator.o ../chat.o ../commands.o ../container.o ../creature.o ../exception.o ../fileloader.o ../game.o ../guilds.o ../houses.o ../ioaccount.o ../ioaccountxml.o ../iomapbin.o ../iomapotbm.o ../iomapxml.o ../ioplayer.o ../ioplayerxml.o ../item.o ../itemloader.o ../items.o ../logger.o ../loginqueue.o ../luascript.o ../magic.o ../map.o ../md5.o ../mdump.o ../monster.o ../monsters.o ../networkmessage.o ../npc.o ../otserv.o ../player.o ../position.o ../protocol.o ../protocol76.o ../pvparena.o ../readables.o ../scheduler.o ../spawn.o ../spells.o ../status.o ../summons.o ../thing.o ../tile.o ../tools.o ../account.o $(RES)
+LIBS =  -L"C:/Dev-Cpp/lib" -llibxml2 -llua -llualib -lwsock32 -s -Wl,-Map=otserv.map  
+INCS =  -I"C:/Dev-Cpp/include" 
+CXXINCS =  -I"C:/Dev-Cpp/lib/gcc/mingw32/3.4.2/include"  -I"C:/Dev-Cpp/include/c++/3.4.2/backward"  -I"C:/Dev-Cpp/include/c++/3.4.2/mingw32"  -I"C:/Dev-Cpp/include/c++/3.4.2"  -I"C:/Dev-Cpp/include" 
+BIN  = Divinity.exe
+CXXFLAGS = $(CXXINCS) -DTLM_BUY_SELL -DTLM_SERVER_SAVE -DTLM_HOUSE_SYSTEM -DBDB_UTEVO_LUX -DWOLV_LOAD_NPC -DBD_HOUSE_WINDOW -DTR_ANTI_AFK -DELEM_VIP_LIST -DTR_SUMMONS -DTRS_GM_INVISIBLE -DTLM_SKULLS_PARTY -DBRN_EXIVA -DSD_BURST_ARROW -DBDB_REPLACE_SPEARS -DBD_ITEM_LOOK -DSM_RELOAD_CONFIG -DJD_DEATH_LIST -DCT_EXANI_TERA -DCVS_DAY_CYCLE -DTJ_MONSTER_BLOOD -DJD_WANDS -D__DEBUG_PLAYERS__ -DYUR_CVS_MODS -DYUR_ICE_RAPIER -DYUR_AOL -DYUR_LOGIN_QUEUE -DYUR_MULTIPLIERS -DYUR_BOH -DYUR_NPC_EXT -DYUR_GUILD_SYSTEM -DYUR_CMD_EXT -DYUR_ITEM_EXT -DYUR_ACT_EXT -DYUR_NO_MONSTER_HEAL -DYUR_PVP_ARENA -DYUR_RINGS_AMULETS -DYUR_CONFIG_CAP -DYUR_FIGHT_MODE -DYUR_READABLES -DYUR_LEARN_SPELLS -DYUR_HEAL_EXHAUST -DYUR_SHUTDOWN -DYUR_ROOKGARD -DYUR_LIGHT_ITEM -DYUR_CLEAN_MAP -DYUR_GM_LOOK -DYUR_HIGH_LEVELS -DYUR_PREMIUM_PROMOTION -DYUR_INVISIBLE -DYUR_DRAINS -DUCB_ONOFF_PRIVATE -DBD_FOLLOW  
+CFLAGS = $(INCS)  
+RM = rm -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before Divinity.exe all-after
+
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o "Divinity.exe" $(LIBS)
+
+../actions.o: ../actions.cpp
+	$(CPP) -c ../actions.cpp -o ../actions.o $(CXXFLAGS)
+
+../allocator.o: ../allocator.cpp
+	$(CPP) -c ../allocator.cpp -o ../allocator.o $(CXXFLAGS)
+
+../chat.o: ../chat.cpp
+	$(CPP) -c ../chat.cpp -o ../chat.o $(CXXFLAGS)
+
+../commands.o: ../commands.cpp
+	$(CPP) -c ../commands.cpp -o ../commands.o $(CXXFLAGS)
+
+../container.o: ../container.cpp
+	$(CPP) -c ../container.cpp -o ../container.o $(CXXFLAGS)
+
+../creature.o: ../creature.cpp
+	$(CPP) -c ../creature.cpp -o ../creature.o $(CXXFLAGS)
+
+../exception.o: ../exception.cpp
+	$(CPP) -c ../exception.cpp -o ../exception.o $(CXXFLAGS)
+
+../fileloader.o: ../fileloader.cpp
+	$(CPP) -c ../fileloader.cpp -o ../fileloader.o $(CXXFLAGS)
+
+../game.o: ../game.cpp
+	$(CPP) -c ../game.cpp -o ../game.o $(CXXFLAGS)
+
+../guilds.o: ../guilds.cpp
+	$(CPP) -c ../guilds.cpp -o ../guilds.o $(CXXFLAGS)
+
+../houses.o: ../houses.cpp
+	$(CPP) -c ../houses.cpp -o ../houses.o $(CXXFLAGS)
+
+../ioaccount.o: ../ioaccount.cpp
+	$(CPP) -c ../ioaccount.cpp -o ../ioaccount.o $(CXXFLAGS)
+
+../ioaccountxml.o: ../ioaccountxml.cpp
+	$(CPP) -c ../ioaccountxml.cpp -o ../ioaccountxml.o $(CXXFLAGS)
+
+../iomapbin.o: ../iomapbin.cpp
+	$(CPP) -c ../iomapbin.cpp -o ../iomapbin.o $(CXXFLAGS)
+
+../iomapotbm.o: ../iomapotbm.cpp
+	$(CPP) -c ../iomapotbm.cpp -o ../iomapotbm.o $(CXXFLAGS)
+
+../iomapxml.o: ../iomapxml.cpp
+	$(CPP) -c ../iomapxml.cpp -o ../iomapxml.o $(CXXFLAGS)
+
+../ioplayer.o: ../ioplayer.cpp
+	$(CPP) -c ../ioplayer.cpp -o ../ioplayer.o $(CXXFLAGS)
+
+../ioplayerxml.o: ../ioplayerxml.cpp
+	$(CPP) -c ../ioplayerxml.cpp -o ../ioplayerxml.o $(CXXFLAGS)
+
+../item.o: ../item.cpp
+	$(CPP) -c ../item.cpp -o ../item.o $(CXXFLAGS)
+
+../itemloader.o: ../itemloader.cpp
+	$(CPP) -c ../itemloader.cpp -o ../itemloader.o $(CXXFLAGS)
+
+../items.o: ../items.cpp
+	$(CPP) -c ../items.cpp -o ../items.o $(CXXFLAGS)
+
+../logger.o: ../logger.cpp
+	$(CPP) -c ../logger.cpp -o ../logger.o $(CXXFLAGS)
+
+../loginqueue.o: ../loginqueue.cpp
+	$(CPP) -c ../loginqueue.cpp -o ../loginqueue.o $(CXXFLAGS)
+
+../luascript.o: ../luascript.cpp
+	$(CPP) -c ../luascript.cpp -o ../luascript.o $(CXXFLAGS)
+
+../magic.o: ../magic.cpp
+	$(CPP) -c ../magic.cpp -o ../magic.o $(CXXFLAGS)
+
+../map.o: ../map.cpp
+	$(CPP) -c ../map.cpp -o ../map.o $(CXXFLAGS)
+
+../md5.o: ../md5.cpp
+	$(CPP) -c ../md5.cpp -o ../md5.o $(CXXFLAGS)
+
+../mdump.o: ../mdump.cpp
+	$(CPP) -c ../mdump.cpp -o ../mdump.o $(CXXFLAGS)
+
+../monster.o: ../monster.cpp
+	$(CPP) -c ../monster.cpp -o ../monster.o $(CXXFLAGS)
+
+../monsters.o: ../monsters.cpp
+	$(CPP) -c ../monsters.cpp -o ../monsters.o $(CXXFLAGS)
+
+../networkmessage.o: ../networkmessage.cpp
+	$(CPP) -c ../networkmessage.cpp -o ../networkmessage.o $(CXXFLAGS)
+
+../npc.o: ../npc.cpp
+	$(CPP) -c ../npc.cpp -o ../npc.o $(CXXFLAGS)
+
+../otserv.o: ../otserv.cpp
+	$(CPP) -c ../otserv.cpp -o ../otserv.o $(CXXFLAGS)
+
+../player.o: ../player.cpp
+	$(CPP) -c ../player.cpp -o ../player.o $(CXXFLAGS)
+
+../position.o: ../position.cpp
+	$(CPP) -c ../position.cpp -o ../position.o $(CXXFLAGS)
+
+../protocol.o: ../protocol.cpp
+	$(CPP) -c ../protocol.cpp -o ../protocol.o $(CXXFLAGS)
+
+../protocol76.o: ../protocol76.cpp
+	$(CPP) -c ../protocol76.cpp -o ../protocol76.o $(CXXFLAGS)
+
+../pvparena.o: ../pvparena.cpp
+	$(CPP) -c ../pvparena.cpp -o ../pvparena.o $(CXXFLAGS)
+
+../readables.o: ../readables.cpp
+	$(CPP) -c ../readables.cpp -o ../readables.o $(CXXFLAGS)
+
+../scheduler.o: ../scheduler.cpp
+	$(CPP) -c ../scheduler.cpp -o ../scheduler.o $(CXXFLAGS)
+
+../spawn.o: ../spawn.cpp
+	$(CPP) -c ../spawn.cpp -o ../spawn.o $(CXXFLAGS)
+
+../spells.o: ../spells.cpp
+	$(CPP) -c ../spells.cpp -o ../spells.o $(CXXFLAGS)
+
+../status.o: ../status.cpp
+	$(CPP) -c ../status.cpp -o ../status.o $(CXXFLAGS)
+
+../summons.o: ../summons.cpp
+	$(CPP) -c ../summons.cpp -o ../summons.o $(CXXFLAGS)
+
+../thing.o: ../thing.cpp
+	$(CPP) -c ../thing.cpp -o ../thing.o $(CXXFLAGS)
+
+../tile.o: ../tile.cpp
+	$(CPP) -c ../tile.cpp -o ../tile.o $(CXXFLAGS)
+
+../tools.o: ../tools.cpp
+	$(CPP) -c ../tools.cpp -o ../tools.o $(CXXFLAGS)
+
+../account.o: ../account.cpp
+	$(CPP) -c ../account.cpp -o ../account.o $(CXXFLAGS)
+
+Divinity_private.res: Divinity_private.rc 
+	$(WINDRES) -i Divinity_private.rc --input-format=rc -o Divinity_private.res -O coff 

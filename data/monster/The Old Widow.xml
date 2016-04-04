@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+ <monster name="The Old Widow" level="90" maglevel="60" experience="2000" pushable="0" armor="90" defense="100" canpushitems="1" staticattack="50" changetarget="200" speed="380">
+ <health now="3200" max="3200"/>
+ <look type="38" corpse="2857"/>
+ <combat targetdistance="1" runonhealth="0"/>
+ 
+ <attacks>
+ 	<attack type="melee" maxdamage="600"/>
+ 	<attack type="distance" name="poisonfield" mindamage="200" maxdamage="500"/>
+ </attacks>
+ 
+ <defenses>
+ 	<defense immunity="fire"/>
+ 	<!-- <defense immunity="poison"/> -->
+ 	<defense immunity="paralyze"/>
+ 	<defense immunity="drunk"/>
+ </defenses>
+ 
+ 
+ <loot>
+ 	<item id="2152" countmax="3" chance1="100000" chancemax="0"/>
+ 	<item id="2463" chance="40000"/>
+ 	<item id="2171" chance="6666"/>
+ 
+ 	<item id="1999" chance="100000">
+ 	<inside>
+ 	<item id="2476" chance="14287"/>
+ 	<item id="2477" chance="10000"/>
+ 	<item id="2169" chance="8000"/>
+ 	</inside>
+ 	</item>
+ </loot>
+ 
+ <summons maxSummons="2">
+  	<summon name="Giant Spider" chance="2000"/>
+ </summons>
+ 
+ <voices>
+ 	<voice sentence="Teh bozz, run if u can" cycleticks="10000" probability="40"/>
+ </voices>
+ 
+ </monster>

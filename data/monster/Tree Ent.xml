@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<monster name="Tree Ent" level="20" maglevel="20" speed="80" experience="150" pushable="0" armor="35" defense="10" canpushitems="1" staticattack="50" changetarget="200">
+<health now="650" max="650"/>
+<look type="2712" head="20" body="30" legs="40" feet="50" corpse="2253"/>
+<combat targetdistance="1" runonhealth="0"/>
+<attacks>
+
+<attack type="melee" maxdamage="50" cycleticks="3000" probability="100"/>
+<attack type="distance" name="smallstone" mindamage="5" maxdamage="50" exhaustion="500" cycleticks="3000" probability="100"/>
+
+</attacks>
+
+<defenses>
+</defenses>
+
+<loot>
+
+</loot>
+<voices>
+<voice sentence="Why... are.. you... doing... this.... to... me...?" cycleticks="10000" probability="40"/>
+<voice sentence="I.. thought... we.. were... friends..." cycleticks="15000" probability="50"/>
+<voice sentence="I... have.... no... choice... but... to... kill... you.." cycleticks="20000" probability="60"/>
+</voices>
+</monster>
