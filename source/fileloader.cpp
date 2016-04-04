@@ -1,13 +1,13 @@
 //////////////////////////////////////////////////////////////////////
 // OpenTibia - an opensource roleplaying game
 //////////////////////////////////////////////////////////////////////
-// 
+//
 //////////////////////////////////////////////////////////////////////
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -17,7 +17,7 @@
 // along with this program; if not, write to the Free Software Foundation,
 // Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 //////////////////////////////////////////////////////////////////////
-
+#include <stdlib.h>//abs()
 #include "fileloader.h"
 
 #ifndef min
@@ -103,11 +103,11 @@ const unsigned char* FileLoader::getProps(const NODE node, unsigned long &size)
 {
 	if(!checks(node))
 		return NULL;
-	
+
 	if(!safeSeek(node)){
 		return NULL;
 	}
-	
+
 	int byte, position;
 	if(!readByte(byte))
 		return NULL;
@@ -119,12 +119,12 @@ const unsigned char* FileLoader::getProps(const NODE node, unsigned long &size)
 	//read node type
 	if(!readByte(byte))
 		return NO_NODE;
-	
+
 	position = 0;
 	while(1){
 		if(!readByte(byte))
 			return NULL;
-		
+
 		if(byte == NODE_END || byte ==NODE_START)
 			break;
 		else if(byte == ESCAPE_CHAR){
@@ -212,7 +212,7 @@ const NODE FileLoader::getChildNode(const NODE parent, unsigned long &type)
 		if(safeTell(tmp)){
 			if(!readByte(byte))
 				return NO_NODE;
-					
+
 			type = byte;
 			return (NODE)tmp;
 		}
@@ -223,11 +223,11 @@ const NODE FileLoader::getChildNode(const NODE parent, unsigned long &type)
 	else{
 		if(!readByte(byte))
 			return NO_NODE;
-		
+
 		while(1){
 			if(!readByte(byte))
 				return NO_NODE;
-		
+
 			if(byte == NODE_END){
 				return NO_NODE;
 			}
@@ -235,7 +235,7 @@ const NODE FileLoader::getChildNode(const NODE parent, unsigned long &type)
 				if(safeTell(tmp)){
 					if(!readByte(byte))
 						return NO_NODE;
-					
+
 					type = byte;
 					return (NODE)tmp;
 				}
@@ -279,13 +279,13 @@ const NODE FileLoader::getNextNode(const NODE prev, unsigned long &type)
 	while(1){
 		if(!readByte(byte))
 			return NO_NODE;
-		
+
 		if(byte == NODE_END){
 			level--;
 			if(level == 0){
 				if(!readByte(byte))
 					return NO_NODE;
-				
+
 				if(byte == NODE_END){
 					return NO_NODE;
 				}
@@ -474,7 +474,7 @@ long FileLoader::loadCacheBlock(unsigned long pos)
 			loading_cache = 0;
 		}
 	}
-			
+
 	if(m_cached_data[loading_cache].data == NULL){
 		m_cached_data[loading_cache].data = new unsigned char[m_cache_size];
 	}

@@ -7,7 +7,7 @@
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -23,7 +23,7 @@
 #include <libxml/xmlmemory.h>
 #include <libxml/parser.h>
 #include <algorithm>
-
+#include <string.h>//strcmp
 extern LuaScript g_config;
 
 Summons::SummonMap Summons::summons;
@@ -51,7 +51,7 @@ bool Summons::Load()
 	xmlNodePtr root, summonNode;
 	root = xmlDocGetRootElement(doc);
 
-	if (xmlStrcmp(root->name, (const xmlChar*)"summons")) 
+	if (xmlStrcmp(root->name, (const xmlChar*)"summons"))
 	{
 		xmlFreeDoc(doc);
 		return false;
@@ -71,6 +71,6 @@ bool Summons::Load()
 	}
 
 	xmlFreeDoc(doc);
-	return true;	
+	return true;
 }
 #endif //TR_SUMMONS

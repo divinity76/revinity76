@@ -98,7 +98,7 @@ void LoginQueue::removeDeadEntries()
 			iter = lq.erase(iter);
 			continue;	// this avoids ++iter
 		}
-		
+
 		++iter;
 	}
 }
@@ -135,7 +135,7 @@ bool LoginQueue::load()
 
 	xmlNodePtr root, entryNode;
 	root = xmlDocGetRootElement(doc);
-	if (xmlStrcmp(root->name, (const xmlChar*)"queue")) 
+	if (xmlStrcmp(root->name, (const xmlChar*)"queue"))
 	{
 		xmlFreeDoc(doc);
 		xmlMutexUnlock(xmlmutex);
@@ -170,7 +170,7 @@ bool LoginQueue::save()
 
 	doc->children = xmlNewDocNode(doc, NULL, (const xmlChar*)"queue", NULL);
     root = doc->children;
-	char buf[64];
+	//char buf[64];
 
 	removeDeadEntries();	// clean before saving
 
@@ -179,8 +179,8 @@ bool LoginQueue::save()
 		iter != Player::listPlayer.list.end(); ++iter)
 	{
 		entryNode = xmlNewNode(NULL, (const xmlChar*)"entry");
-		xmlSetProp(entryNode, (const xmlChar*)"account", (const xmlChar*)itoa(iter->second->getAccount(), buf, 10));
-		xmlSetProp(entryNode, (const xmlChar*)"state", (const xmlChar*)itoa(LOGGED, buf, 10));
+		xmlSetProp(entryNode, (const xmlChar*)"account", (const xmlChar*)std::to_string(iter->second->getAccount()).c_str());
+		xmlSetProp(entryNode, (const xmlChar*)"state", (const xmlChar*)std::to_string(LOGGED).c_str());
 		xmlAddChild(root, entryNode);
 	}
 
@@ -188,8 +188,8 @@ bool LoginQueue::save()
 	for (LoginTryList::iterator iter = lq.begin(); iter != lq.end(); ++iter)
 	{
 		entryNode = xmlNewNode(NULL, (const xmlChar*)"entry");
-		xmlSetProp(entryNode, (const xmlChar*)"account", (const xmlChar*)itoa(iter->accountNumber, buf, 10));
-		xmlSetProp(entryNode, (const xmlChar*)"state", (const xmlChar*)itoa(iter->state, buf, 10));
+		xmlSetProp(entryNode, (const xmlChar*)"account", (const xmlChar*)std::to_string(iter->accountNumber).c_str());
+		xmlSetProp(entryNode, (const xmlChar*)"state", (const xmlChar*)std::to_string(iter->state).c_str());
 		xmlAddChild(root, entryNode);
 	}
 

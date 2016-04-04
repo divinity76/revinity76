@@ -7,7 +7,7 @@
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -21,6 +21,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/timeb.h>
+//#include <time.h>
+#include <chrono>
 #include <string>
 #include <cmath>
 #include <sstream>
@@ -176,11 +178,12 @@ int safe_atoi(const char* str)
 	else
 		return 0;
 }
-
+#ifdef __oldtimer__
 double timer()
 {
 	static bool running = false;
-	static _timeb start, end;
+	static struct _timeb start;
+	static struct _timeb end;
 
 	if (!running)
 	{
@@ -195,7 +198,30 @@ double timer()
 		return (end.time-start.time)+(end.millitm-start.millitm)/1000.0;
 	}
 }
+#else
+double timer()
+{
+	static bool running = false;
+//	static std::chrono::time_point start;
+//	static std::chrono::time_point end;
+	static auto start=std::chrono::system_clock::now();
+	static auto end=std::chrono::system_clock::now();
 
+	if (!running)
+	{
+
+		start=std::chrono::system_clock::now();
+		running = true;
+		return 0.0;
+	}
+	else
+	{
+		end=std::chrono::system_clock::now();//
+		running = false;
+		return ((std::chrono::duration_cast<std::chrono::milliseconds>(start - end)).count())/1000.0;
+	}
+}
+#endif//__oldtimer__
 std::string article(const std::string& name)
 {
 	if (name.empty())

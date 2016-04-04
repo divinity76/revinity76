@@ -7,7 +7,7 @@
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -136,7 +136,7 @@ bool setSpellbookText(Player* player, Item* item);
 	    std::string getBedSleeper(const Position pos);
           unsigned int getBedID(const Position pos);
           Position getBedPos(std::string name);
-  
+
           bool changeBed(const Position pos, unsigned int oldid, std::string sleepname);
           bool loadBeds(std::string file);
 #endif //TLM BEDS
@@ -148,18 +148,18 @@ void sendMagicEffect(const Position pos, unsigned char type);
 	  * \returns Int 0 built-in spawns, 1 needs xml spawns, 2 needs sql spawns, -1 if got error
 	  */
     int loadMap(std::string filename, std::string filekind);
-	
+
 	/**
 	  * Get the map size - info purpose only
 	  * \param a the referenced witdh var
 	  * \param b the referenced height var
 	  */
 	void getMapDimensions(int& a, int& b) {
-     a = map->mapwidth;  
-     b = map->mapheight;  
+     a = map->mapwidth;
+     b = map->mapheight;
      return;
   }
-  
+
 	void setWorldType(enum_world_type type);
   enum_world_type getWorldType() const {return worldType;}
 	const std::string& getSpawnFile() {return map->spawnfile;}
@@ -218,7 +218,7 @@ void sendMagicEffect(const Position pos, unsigned char type);
 			const Position& fromPos, unsigned char stackPos, unsigned short itemid,
 			unsigned char to_cid, unsigned char to_slotid,
 			bool isInventory, unsigned char count);
-	
+
 	//ground to ground
 	void thingMove(Creature *creature,
 			unsigned short from_x, unsigned short from_y, unsigned char from_z,
@@ -231,7 +231,7 @@ void sendMagicEffect(const Position pos, unsigned char type);
 		* \param dir Direction to turn to
 		*/
 	void creatureTurn(Creature *creature, Direction dir);
-	
+
 
 	/**
 	  * Creature wants to say something.
@@ -268,7 +268,7 @@ void sendMagicEffect(const Position pos, unsigned char type);
 	void playerCloseTrade(Player* player);
 	void autoCloseTrade(const Item* item, bool itemMoved = false);
   void autoCloseAttack(Player* player, Creature* target);
-	
+
 	void playerSetAttackedCreature(Player* player, unsigned long creatureid);
 
   void changeOutfitAfter(unsigned long id, int looktype, long time);
@@ -278,45 +278,45 @@ void sendMagicEffect(const Position pos, unsigned char type);
 
 	//void creatureBroadcastTileUpdated(const Position& pos);
 	void teleport(Thing *thing, const Position& newPos);
-      
+
       #ifdef LOOSK_RECORD
 	    int record;
     bool saveRecord();
     void checkRecord();
     bool loadRecord();
 	#endif //LOOSK_RECORD
-	
-  std::vector<Player*> BufferedPlayers;   
+
+  std::vector<Player*> BufferedPlayers;
   void flushSendBuffers();
   void addPlayerBuffer(Player* p);
-  
-  std::vector<Thing*> ToReleaseThings;   
+
+  std::vector<Thing*> ToReleaseThings;
   void FreeThing(Thing* thing);
 
   Thing* getThing(const Position &pos,unsigned char stack,Player* player = NULL);
   void addThing(Player* player,const Position &pos,Thing* thing);
   bool removeThing(Player* player,const Position &pos,Thing* thing, bool setRemoved = true);
   Position getThingMapPos(Player *player, const Position &pos);
-  
+
   void sendAddThing(Player* player,const Position &pos,const Thing* thing);
   void sendRemoveThing(Player* player,const Position &pos,const Thing* thing,const unsigned char stackpos = 1,const bool autoclose = false);
   void sendUpdateThing(Player* player,const Position &pos,const Thing* thing,const unsigned char stackpos = 1);
-		
+
 	Creature* getCreatureByID(unsigned long id);
 	Player* getPlayerByID(unsigned long id);
-    Creature* getCreatureByPosition(int x, int y, int z);  
+    Creature* getCreatureByPosition(int x, int y, int z);
 	Creature* getCreatureByName(const std::string &s);
 	Player* getPlayerByName(const std::string &s);
 
 	std::list<Position> getPathTo(Creature *creature, Position start, Position to, bool creaturesBlock=true);
-	
+
 	enum_game_state getGameState();
 	void setGameState(enum_game_state newstate){game_state = newstate;}
-	
+
 	bool requestAddVip(Player* player, const std::string &vip_name);
 
 	/** Lockvar for Game. */
-  OTSYS_THREAD_LOCKVAR gameLock; 
+  OTSYS_THREAD_LOCKVAR gameLock;
 
 #ifdef CVS_DAY_CYCLE
 	void creatureChangeLight(Player* player, int time, unsigned char lightlevel, unsigned char lightcolor);
@@ -393,7 +393,7 @@ void sendMagicEffect(const Position pos, unsigned char type);
 
 protected:
 	std::map<Item*, unsigned long> tradeItems; //list of items that are in trading state, mapped to the player
-	
+
 	AutoList<Creature> listCreature;
 
 	/*ground -> ground*/
@@ -434,8 +434,8 @@ protected:
 
 	//container/inventory to container/inventory
 	void thingMoveInternal(Player *player,
-			unsigned char from_cid, unsigned char from_slotid, unsigned short itemid, 
-			bool fromInventory,unsigned char to_cid, unsigned char to_slotid, 
+			unsigned char from_cid, unsigned char from_slotid, unsigned short itemid,
+			bool fromInventory,unsigned char to_cid, unsigned char to_slotid,
 			bool toInventory,unsigned char count);
 
 	//container/inventory to ground
@@ -488,7 +488,7 @@ protected:
 
 	struct GameEvent
 	{
-		__int64  tick;
+		int64_t  tick;
 		int      type;
 		void*    data;
 	};
@@ -497,7 +497,7 @@ protected:
 	void checkCreature(unsigned long id);
 	void checkCreatureAttacking(unsigned long id);
 	void checkDecay(int t);
-	
+
 	#define DECAY_INTERVAL  10000
 	void startDecay(Item* item);
 	struct decayBlock{
@@ -505,7 +505,7 @@ protected:
 		std::list<Item*> decayItems;
 	};
 	std::list<decayBlock*> decayVector;
-	
+
 #ifdef CVS_DAY_CYCLE
 	static const unsigned char LIGHT_LEVEL_DAY = 220;
 	static const unsigned char LIGHT_LEVEL_NIGHT = 25;
@@ -528,11 +528,11 @@ protected:
 	enum_world_type worldType;
 
 	Map* map;
-	
+
 	std::vector<std::string> commandTags;
 	void addCommandTag(std::string tag);
 	void resetCommandTag();
-	
+
 	enum_game_state game_state;
 
 	friend class Commands;
@@ -547,10 +547,10 @@ protected:
 template<class ArgType>
 class TCallList : public SchedulerTask {
 public:
-	TCallList(boost::function<int(Game*, ArgType)> f1, boost::function<bool(Game*)> f2, std::list<ArgType>& call_list, __int64 interval) :
+	TCallList(boost::function<int(Game*, ArgType)> f1, boost::function<bool(Game*)> f2, std::list<ArgType>& call_list, int64_t interval) :
 	_f1(f1), _f2(f2), _list(call_list), _interval(interval) {
 	}
-	
+
 	void operator()(Game* arg) {
 		if(_eventid != 0 && !_f2(arg)) {
 			int ret = _f1(arg, _list.front());
@@ -570,11 +570,11 @@ private:
 	boost::function<int(Game*, ArgType)> _f1;
 	boost::function<bool(Game*)>_f2;
 	std::list<ArgType> _list;
-	__int64 _interval;
+	int64_t _interval;
 };
 
 template<class ArgType>
-SchedulerTask* makeTask(__int64 ticks, boost::function<int(Game*, ArgType)> f1, std::list<ArgType>& call_list, __int64 interval, boost::function<bool(Game*)> f2) {
+SchedulerTask* makeTask(int64_t ticks, boost::function<int(Game*, ArgType)> f1, std::list<ArgType>& call_list, int64_t interval, boost::function<bool(Game*)> f2) {
 	TCallList<ArgType> *t = new TCallList<ArgType>(f1, f2, call_list, interval);
 	t->setTicks(ticks);
 	return t;

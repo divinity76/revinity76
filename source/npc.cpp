@@ -1,13 +1,13 @@
 //////////////////////////////////////////////////////////////////////
 // OpenTibia - an opensource roleplaying game
 //////////////////////////////////////////////////////////////////////
-// 
+//
 //////////////////////////////////////////////////////////////////////
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -61,7 +61,7 @@ Npc::Npc(const std::string& name, Game* game) :
 		}
 
 		p = root->children;
-		
+
 		tmp = (char*)xmlGetProp(root, (const xmlChar *)"script");
 		if(tmp){
 			this->scriptname = tmp;
@@ -70,7 +70,7 @@ Npc::Npc(const std::string& name, Game* game) :
 		else{
 			this->scriptname = "";
 		}
-		
+
 		if(tmp = (char*)xmlGetProp(root, (const xmlChar *)"name")) {
 			this->name = tmp;
 			xmlFreeOTSERV(tmp);
@@ -78,7 +78,7 @@ Npc::Npc(const std::string& name, Game* game) :
 		else{
 			this->name = "";
 		}
-		
+
 		if(tmp = (char*)xmlGetProp(root, (const xmlChar *)"access")) {
 			access = atoi(tmp);
 			xmlFreeOTSERV(tmp);
@@ -86,7 +86,7 @@ Npc::Npc(const std::string& name, Game* game) :
 		else{
 			access = 0;
 		}
-		
+
 		if(tmp = (char*)xmlGetProp(root, (const xmlChar *)"level")) {
 			level = atoi(tmp);
 			xmlFreeOTSERV(tmp);
@@ -96,7 +96,7 @@ Npc::Npc(const std::string& name, Game* game) :
 		else{
 			level = 1;
 		}
-		
+
 		if(tmp = (char*)xmlGetProp(root, (const xmlChar *)"maglevel")) {
 			maglevel = atoi(tmp);
 			xmlFreeOTSERV(tmp);
@@ -105,7 +105,7 @@ Npc::Npc(const std::string& name, Game* game) :
 		else{
 			maglevel = 1;
 		}
-		
+
 		while (p)
 		{
 			const char* str = (char*)p->name;
@@ -157,7 +157,7 @@ Npc::Npc(const std::string& name, Game* game) :
 				else{
 					this->lookhead = 10;
 				}
-				
+
 				if(tmp = (char*)xmlGetProp(p, (const xmlChar *)"body")) {
 					this->lookbody = atoi(tmp);
 					xmlFreeOTSERV(tmp);
@@ -165,7 +165,7 @@ Npc::Npc(const std::string& name, Game* game) :
 				else{
 					this->lookbody = 20;
 				}
-				
+
 				if(tmp = (char*)xmlGetProp(p, (const xmlChar *)"legs")) {
 					this->looklegs = atoi(tmp);
 					xmlFreeOTSERV(tmp);
@@ -173,7 +173,7 @@ Npc::Npc(const std::string& name, Game* game) :
 				else{
 					this->looklegs = 30;
 				}
-				
+
 				if(tmp = (char*)xmlGetProp(p, (const xmlChar *)"feet")) {
 					this->lookfeet = atoi(tmp);
 					xmlFreeOTSERV(tmp);
@@ -188,7 +188,7 @@ Npc::Npc(const std::string& name, Game* game) :
 				else{
 					this->lookcorpse = 100;
 				}
-				
+
 			}
 			if(strcmp(str, "attack") == 0){
 				if(tmp = (char*)xmlGetProp(p, (const xmlChar *)"type")){
@@ -213,7 +213,7 @@ Npc::Npc(const std::string& name, Game* game) :
 			if(strcmp(str, "loot") == 0){
 				//TODO implement loot
 			}
-				
+
 			p = p->next;
 		}
 
@@ -235,12 +235,12 @@ Npc::~Npc()
 std::string Npc::getDescription(bool self) const
 {
 	std::stringstream s;
-	std::string str;	
+	std::string str;
 	s << name << ".";
 	str = s.str();
 	return str;
 }
-            
+
 void Npc::onThingMove(const Player *player, const Thing *thing, const Position *oldPos,
 	unsigned char oldstackpos, unsigned char oldcount, unsigned char count){
 	//not yet implemented
@@ -357,24 +357,25 @@ NpcScript::NpcScript(std::string scriptname, Npc* npc){
 	if(scriptname == "")
 		return;
 	luaState = lua_open();
-	luaopen_loadlib(luaState);
+	//luaopen_loadlib(luaState);
+	luaL_openlibs(luaState);
 	luaopen_base(luaState);
 	luaopen_math(luaState);
 	luaopen_string(luaState);
 	luaopen_io(luaState);
-	
+
 	std::string datadir = g_config.getGlobalString("datadir");
-    lua_dofile(luaState, std::string(datadir + "npc/scripts/lib/npc.lua").c_str());
-	
+    luaL_dofile(luaState, std::string(datadir + "npc/scripts/lib/npc.lua").c_str());
+
 	FILE* in=fopen(scriptname.c_str(), "r");
 	if(!in)
 		return;
 	else
 		fclose(in);
-	lua_dofile(luaState, scriptname.c_str());
+	luaL_dofile(luaState, scriptname.c_str());
 	this->loaded=true;
 	this->npc=npc;
-	this->setGlobalNumber("addressOfNpc", (int)npc);
+	this->setGlobalNumber("addressOfNpc", (intptr_t)npc);
 	this->registerFunctions();
 }
 
@@ -505,7 +506,7 @@ int NpcScript::registerFunctions()
 #ifdef YUR_LEARN_SPELLS
 	lua_register(luaState, "learnSpell", NpcScript::luaLearnSpell);
 #endif //YUR_LEARN_SPELLS
-	
+
 	return true;
 }
 
@@ -549,7 +550,7 @@ int NpcScript::luaCreatureGetPos(lua_State *L){
 	lua_pop(L,1);
 	Npc* mynpc = getNpc(L);
 	Creature* c = mynpc->game->getCreatureByID(id);
-	
+
 	if(!c){
 		lua_pushnil(L);
 		lua_pushnil(L);
@@ -644,7 +645,7 @@ int NpcScript::luaBuyItem(lua_State *L)
 
 	if (player)
 	{
-		if (player->getCoins(cost)) 
+		if (player->getCoins(cost))
 		{
 			if (player->removeCoins(cost)) // double check
 			{
@@ -704,7 +705,7 @@ int NpcScript::luaPayMoney(lua_State *L)
 
 	if (player)
 	{
-		if (player->getCoins(cost)) 
+		if (player->getCoins(cost))
 		{
 			if (player->removeCoins(cost)) // double check
 				lua_pushboolean(L, true);
@@ -755,7 +756,7 @@ int NpcScript::luaSetPlayerStorageValue(lua_State* L)
 
 	if (player)
 		player->addStorageValue(key, value);
-	
+
 	return 0;
 }
 
@@ -781,11 +782,11 @@ int NpcScript::luaAddMaxHealth(lua_State *L)
     int cid = (int)lua_tonumber(L, -2);
     unsigned int amount = (unsigned int)lua_tonumber(L, -1);
     lua_pop(L, 2);
-    
+
     Npc* mynpc = getNpc(L);
     Creature* creature = g_game.getCreatureByID(cid);
     Player* player = creature? dynamic_cast<Player*>(creature) : NULL;
-    
+
     if(player){
         if(amount > 0){
              player->healthmax += amount;
@@ -794,7 +795,7 @@ int NpcScript::luaAddMaxHealth(lua_State *L)
         else{
             lua_pushnumber(L, -1);
             std::cout << "addMaxHealth: amount is too low" << std::endl;
-            return 1; 
+            return 1;
         }
     }
     else{
@@ -805,20 +806,20 @@ int NpcScript::luaAddMaxHealth(lua_State *L)
     lua_pushnumber(L, 0);
     return 1;
 }
-   
-   
-   
+
+
+
 
 int NpcScript::luaAddMaxMana(lua_State *L)
 {
     int cid = (int)lua_tonumber(L, -2);
     unsigned int amount = (unsigned int)lua_tonumber(L, -1);
     lua_pop(L, 2);
-    
+
     Npc* mynpc = getNpc(L);
     Creature* creature = g_game.getCreatureByID(cid);
     Player* player = creature? dynamic_cast<Player*>(creature) : NULL;
-    
+
     if(player){
         if(amount > 0){
              player->manamax += amount;
@@ -827,7 +828,7 @@ int NpcScript::luaAddMaxMana(lua_State *L)
         else{
             lua_pushnumber(L, -1);
             std::cout << "addMaxMana: amount is too low" << std::endl;
-            return 1; 
+            return 1;
         }
     }
     else{
@@ -1029,7 +1030,7 @@ int NpcScript::luaLearnSpell(lua_State *L)
 {
 	int cid = (int)lua_tonumber(L, -3);
 	const char* words = lua_tostring(L, -2);
-	int cost = (int)lua_tonumber(L, -1); 
+	int cost = (int)lua_tonumber(L, -1);
 	lua_pop(L,3);
 
 	Npc* mynpc = getNpc(L);
@@ -1042,7 +1043,7 @@ int NpcScript::luaLearnSpell(lua_State *L)
 		{
 			mynpc->doSay("You already know this spell.");
 		}
-		else if (player->getCoins(cost)) 
+		else if (player->getCoins(cost))
 		{
 			if (player->removeCoins(cost)) // double check
 			{

@@ -1,0 +1,953 @@
+# depslib dependency file v1.0
+1125164658 source:/root/Desktop/revinity76/source/account.cpp
+	<algorithm>
+	<functional>
+	<iostream>
+	"definitions.h"
+	"account.h"
+
+1459775763 /root/Desktop/revinity76/source/definitions.h
+	<stdint.h>
+	<inttypes.h>
+
+1114763938 /root/Desktop/revinity76/source/account.h
+	<list>
+	<string>
+
+1459778125 source:/root/Desktop/revinity76/source/actions.cpp
+	"definitions.h"
+	"const76.h"
+	"player.h"
+	"monster.h"
+	"npc.h"
+	"game.h"
+	"item.h"
+	<libxml/xmlmemory.h>
+	<libxml/parser.h>
+	"actions.h"
+
+1168001668 /root/Desktop/revinity76/source/const76.h
+
+1172883122 /root/Desktop/revinity76/source/player.h
+	"definitions.h"
+	"creature.h"
+	"container.h"
+	<vector>
+	<ctime>
+	<algorithm>
+	"templates.h"
+	"map.h"
+	"houses.h"
+	"guilds.h"
+	"luascript.h"
+
+1459776363 /root/Desktop/revinity76/source/creature.h
+	"thing.h"
+	"position.h"
+	"container.h"
+	"magic.h"
+	<vector>
+	"templates.h"
+	"luascript.h"
+
+1126388134 /root/Desktop/revinity76/source/thing.h
+	"definitions.h"
+	"position.h"
+
+1116437198 /root/Desktop/revinity76/source/position.h
+	<stdlib.h>
+	<cmath>
+	<iostream>
+
+1122659228 /root/Desktop/revinity76/source/container.h
+	"item.h"
+
+1459776273 /root/Desktop/revinity76/source/item.h
+	<libxml/xmlmemory.h>
+	<libxml/parser.h>
+	<iostream>
+	<list>
+	<vector>
+	"thing.h"
+	"items.h"
+
+1450762377 /usr/include/libxml2/libxml/xmlmemory.h
+	<stdio.h>
+	<libxml/xmlversion.h>
+	<libxml/threads.h>
+	<libxml/globals.h>
+
+1450762377 /usr/include/libxml2/libxml/xmlversion.h
+	<libxml/xmlexports.h>
+	<ansidecl.h>
+
+1450762377 /usr/include/libxml2/libxml/xmlexports.h
+
+1450762377 /usr/include/libxml2/libxml/threads.h
+	<libxml/xmlversion.h>
+	<libxml/globals.h>
+
+1450762377 /usr/include/libxml2/libxml/globals.h
+	<libxml/xmlversion.h>
+	<libxml/parser.h>
+	<libxml/xmlerror.h>
+	<libxml/SAX.h>
+	<libxml/SAX2.h>
+	<libxml/xmlmemory.h>
+	<libxml/threads.h>
+
+1450762377 /usr/include/libxml2/libxml/parser.h
+	<stdarg.h>
+	<libxml/xmlversion.h>
+	<libxml/tree.h>
+	<libxml/dict.h>
+	<libxml/hash.h>
+	<libxml/valid.h>
+	<libxml/entities.h>
+	<libxml/xmlerror.h>
+	<libxml/xmlstring.h>
+	<libxml/encoding.h>
+	<libxml/xmlIO.h>
+	<libxml/globals.h>
+
+1450762377 /usr/include/libxml2/libxml/tree.h
+	<stdio.h>
+	<limits.h>
+	<libxml/xmlversion.h>
+	<libxml/xmlstring.h>
+	<libxml/xmlregexp.h>
+	<libxml/xmlmemory.h>
+
+1450762377 /usr/include/libxml2/libxml/xmlstring.h
+	<stdarg.h>
+	<libxml/xmlversion.h>
+
+1450762377 /usr/include/libxml2/libxml/xmlregexp.h
+	<libxml/xmlversion.h>
+	<libxml/tree.h>
+	<libxml/dict.h>
+
+1450762377 /usr/include/libxml2/libxml/dict.h
+	<limits.h>
+	<libxml/xmlversion.h>
+	<libxml/tree.h>
+
+1450762377 /usr/include/libxml2/libxml/hash.h
+	<libxml/xmlversion.h>
+	<libxml/parser.h>
+	<libxml/dict.h>
+
+1450762377 /usr/include/libxml2/libxml/valid.h
+	<libxml/xmlversion.h>
+	<libxml/xmlerror.h>
+	<libxml/tree.h>
+	<libxml/list.h>
+	<libxml/xmlautomata.h>
+	<libxml/xmlregexp.h>
+
+1450762377 /usr/include/libxml2/libxml/xmlerror.h
+	<libxml/parser.h>
+
+1450762377 /usr/include/libxml2/libxml/list.h
+	<libxml/xmlversion.h>
+
+1450762377 /usr/include/libxml2/libxml/xmlautomata.h
+	<libxml/xmlversion.h>
+	<libxml/tree.h>
+	<libxml/xmlregexp.h>
+
+1450762377 /usr/include/libxml2/libxml/entities.h
+	<libxml/xmlversion.h>
+	<libxml/tree.h>
+
+1450762377 /usr/include/libxml2/libxml/encoding.h
+	<libxml/xmlversion.h>
+	<iconv.h>
+	<unicode/ucnv.h>
+	<libxml/tree.h>
+
+1450762377 /usr/include/libxml2/libxml/xmlIO.h
+	<stdio.h>
+	<libxml/xmlversion.h>
+	<libxml/globals.h>
+	<libxml/tree.h>
+	<libxml/parser.h>
+	<libxml/encoding.h>
+
+1450762377 /usr/include/libxml2/libxml/SAX.h
+	<stdio.h>
+	<stdlib.h>
+	<libxml/xmlversion.h>
+	<libxml/parser.h>
+	<libxml/xlink.h>
+
+1450762377 /usr/include/libxml2/libxml/xlink.h
+	<libxml/xmlversion.h>
+	<libxml/tree.h>
+
+1450762377 /usr/include/libxml2/libxml/SAX2.h
+	<stdio.h>
+	<stdlib.h>
+	<libxml/xmlversion.h>
+	<libxml/parser.h>
+	<libxml/xlink.h>
+
+1135806436 /root/Desktop/revinity76/source/items.h
+	<ext/hash_map>
+	<hash_map>
+	<string>
+	"const76.h"
+	"itemloader.h"
+
+1135806426 /root/Desktop/revinity76/source/itemloader.h
+	"fileloader.h"
+
+1459776260 /root/Desktop/revinity76/source/fileloader.h
+	<string>
+	<cstring>
+	"stdio.h"
+
+1135864290 /root/Desktop/revinity76/source/magic.h
+	"position.h"
+	"item.h"
+	<map>
+	"const76.h"
+	"tools.h"
+	"creature.h"
+
+1135950650 /root/Desktop/revinity76/source/tools.h
+
+1123235620 /root/Desktop/revinity76/source/templates.h
+	<set>
+	<map>
+	"creature.h"
+	"otsystem.h"
+
+1459776518 /root/Desktop/revinity76/source/otsystem.h
+	"definitions.h"
+	"logger.h"
+	<list>
+	<algorithm>
+	<windows.h>
+	<process.h>
+	<stddef.h>
+	<stdlib.h>
+	<conio.h>
+	<sys/timeb.h>
+	<winsock.h>
+	<pthread.h>
+	<semaphore.h>
+	<time.h>
+	<sys/types.h>
+	<sys/timeb.h>
+	<sys/socket.h>
+	<netinet/in.h>
+	<arpa/inet.h>
+	<netdb.h>
+	<stdint.h>
+	<errno.h>
+
+1137174872 /root/Desktop/revinity76/source/logger.h
+	<string>
+	<map>
+
+1459776526 /root/Desktop/revinity76/source/luascript.h
+	<string>
+	<lua.h>
+	<lauxlib.h>
+	<lualib.h>
+
+1326486980 /usr/include/lua5.1/lua.h
+	<stdarg.h>
+	<stddef.h>
+	"luaconf.h"
+
+1412848069 /usr/include/lua5.1/luaconf.h
+	<limits.h>
+	<stddef.h>
+	"lua5.1-deb-multiarch.h"
+	<unistd.h>
+	<io.h>
+	<stdio.h>
+	<stdio.h>
+	<readline/readline.h>
+	<readline/history.h>
+	<assert.h>
+	<math.h>
+	<unistd.h>
+
+1198760545 /usr/include/lua5.1/lauxlib.h
+	<stddef.h>
+	<stdio.h>
+	"lua.h"
+
+1198760545 /usr/include/lua5.1/lualib.h
+	"lua.h"
+
+1156998680 /root/Desktop/revinity76/source/map.h
+	<queue>
+	<bitset>
+	"position.h"
+	"item.h"
+	"creature.h"
+	"magic.h"
+	"tools.h"
+	"tile.h"
+
+1145227172 /root/Desktop/revinity76/source/tile.h
+	"item.h"
+	"container.h"
+	"magic.h"
+	"definitions.h"
+	"templates.h"
+	"scheduler.h"
+
+1459776518 /root/Desktop/revinity76/source/scheduler.h
+	<boost/function.hpp>
+	<boost/bind.hpp>
+	<functional>
+	"otsystem.h"
+
+1156999912 /root/Desktop/revinity76/source/houses.h
+	"position.h"
+	"map.h"
+	<string>
+	<vector>
+	<map>
+
+1129206534 /root/Desktop/revinity76/source/guilds.h
+	<libxml/xmlmemory.h>
+	<libxml/parser.h>
+	<string>
+	<vector>
+	<map>
+
+1152130336 /root/Desktop/revinity76/source/monster.h
+	"creature.h"
+	"game.h"
+	"tile.h"
+	"templates.h"
+	"monsters.h"
+
+1459776518 /root/Desktop/revinity76/source/game.h
+	<queue>
+	<vector>
+	<set>
+	<libxml/xmlmemory.h>
+	<libxml/parser.h>
+	"spawn.h"
+	"position.h"
+	"item.h"
+	"container.h"
+	"magic.h"
+	"map.h"
+	"templates.h"
+	"loginqueue.h"
+
+1134398128 /root/Desktop/revinity76/source/spawn.h
+	"tile.h"
+	"position.h"
+	"monster.h"
+	"templates.h"
+	<vector>
+	<map>
+
+1126983690 /root/Desktop/revinity76/source/loginqueue.h
+	<time.h>
+	<list>
+	<iterator>
+	<string>
+
+1135798690 /root/Desktop/revinity76/source/monsters.h
+	<string>
+	"creature.h"
+
+1168021772 /root/Desktop/revinity76/source/npc.h
+	"creature.h"
+	"game.h"
+	"luascript.h"
+	"templates.h"
+	<lua.h>
+	<lauxlib.h>
+	<lualib.h>
+
+1153513042 /root/Desktop/revinity76/source/actions.h
+	"position.h"
+	<libxml/xmlmemory.h>
+	<libxml/parser.h>
+	<map>
+	"luascript.h"
+	<lua.h>
+	<lauxlib.h>
+	<lualib.h>
+
+1124742484 source:/root/Desktop/revinity76/source/allocator.cpp
+	"otsystem.h"
+	"allocator.h"
+
+1124388622 /root/Desktop/revinity76/source/allocator.h
+	<memory>
+	<limits>
+	<cstdlib>
+	<map>
+	<fstream>
+	<ctime>
+	<boost/pool/pool.hpp>
+
+1145588198 source:/root/Desktop/revinity76/source/chat.cpp
+	"chat.h"
+	"player.h"
+
+1134759496 /root/Desktop/revinity76/source/chat.h
+	<map>
+	<list>
+	<string>
+	"const76.h"
+
+1459779140 source:/root/Desktop/revinity76/source/commands.cpp
+	<string>
+	<sstream>
+	<fstream>
+	<utility>
+	<string>
+	"commands.h"
+	"player.h"
+	"npc.h"
+	"game.h"
+	"actions.h"
+	"map.h"
+	"status.h"
+	"monsters.h"
+	<libxml/xmlmemory.h>
+	<libxml/parser.h>
+
+1172786510 /root/Desktop/revinity76/source/commands.h
+	<string>
+	<map>
+	"creature.h"
+
+1125649580 /root/Desktop/revinity76/source/status.h
+	<string>
+	"otsystem.h"
+	"definitions.h"
+	"networkmessage.h"
+
+1135806452 /root/Desktop/revinity76/source/networkmessage.h
+	"definitions.h"
+	"otsystem.h"
+	"const76.h"
+
+1125164684 source:/root/Desktop/revinity76/source/container.cpp
+	"container.h"
+
+1172790894 source:/root/Desktop/revinity76/source/creature.cpp
+	"definitions.h"
+	<string>
+	<sstream>
+	<algorithm>
+	"game.h"
+	"creature.h"
+	"tile.h"
+	"otsystem.h"
+	"player.h"
+	"luascript.h"
+
+1459778450 source:/root/Desktop/revinity76/source/database.cpp
+	<iostream>
+	"database.h"
+
+1459778344 /root/Desktop/revinity76/source/database.h
+	<winsock.h>
+	<mysql.h>
+	<mysql/mysql.h>
+	<sstream>
+	<map>
+
+1123235614 source:/root/Desktop/revinity76/source/exception.cpp
+	<iostream>
+	<fstream>
+	<string>
+	<iomanip>
+	<ctime>
+	<stdlib.h>
+	<map>
+	"otsystem.h"
+	"exception.h"
+	"excpt.h"
+	"tlhelp32.h"
+
+1116878442 /root/Desktop/revinity76/source/exception.h
+	<map>
+	<string>
+
+1459778547 source:/root/Desktop/revinity76/source/fileloader.cpp
+	<stdlib.h>
+	"fileloader.h"
+
+1459778657 source:/root/Desktop/revinity76/source/game.cpp
+	"definitions.h"
+	<fstream>
+	<iostream>
+	<string>
+	<sstream>
+	<map>
+	<iostream>
+	<fstream>
+	<boost/config.hpp>
+	<boost/bind.hpp>
+	<stdio.h>
+	"otsystem.h"
+	"items.h"
+	"commands.h"
+	"creature.h"
+	"player.h"
+	"monster.h"
+	"npc.h"
+	"game.h"
+	"tile.h"
+	"spells.h"
+	"actions.h"
+	"ioplayer.h"
+	"chat.h"
+	"status.h"
+	"luascript.h"
+	"templates.h"
+	"houses.h"
+	"summons.h"
+	"pvparena.h"
+	<ctype.h>
+	"exception.h"
+
+1459778560 /root/Desktop/revinity76/source/spells.h
+	"game.h"
+	"luascript.h"
+	"player.h"
+	<lua.h>
+	<lauxlib.h>
+	<lualib.h>
+
+1129800212 /root/Desktop/revinity76/source/ioplayer.h
+	<string>
+	"player.h"
+
+1127582100 /root/Desktop/revinity76/source/summons.h
+	<string>
+	<map>
+
+1135790884 /root/Desktop/revinity76/source/pvparena.h
+	"position.h"
+
+1459778919 source:/root/Desktop/revinity76/source/guilds.cpp
+	"guilds.h"
+	"player.h"
+	"luascript.h"
+	<algorithm>
+	<locale>
+	<string>
+
+1172783506 source:/root/Desktop/revinity76/source/houses.cpp
+	"houses.h"
+	"luascript.h"
+	"game.h"
+	<libxml/xmlmemory.h>
+	<libxml/parser.h>
+	<sstream>
+	<algorithm>
+	<boost/tokenizer.hpp>
+	"player.h"
+
+1134398030 source:/root/Desktop/revinity76/source/ioaccount.cpp
+	"ioaccount.h"
+	"ioaccountsql.h"
+	"ioaccountxml.h"
+	"luascript.h"
+
+1129800212 /root/Desktop/revinity76/source/ioaccount.h
+	<string>
+	"account.h"
+
+1129800212 /root/Desktop/revinity76/source/ioaccountxml.h
+	<string>
+	<libxml/xmlmemory.h>
+	<libxml/parser.h>
+	"definitions.h"
+	"ioaccount.h"
+
+1129800212 source:/root/Desktop/revinity76/source/ioaccountxml.cpp
+	"ioaccountxml.h"
+	<algorithm>
+	<functional>
+	<sstream>
+	<string.h>
+	"luascript.h"
+
+1132498094 source:/root/Desktop/revinity76/source/iomapbin.cpp
+	"iomapbin.h"
+	"spawn.h"
+	<iostream>
+	<stdlib.h>
+
+1125395592 /root/Desktop/revinity76/source/iomapbin.h
+	<string>
+	"iomap.h"
+
+1135704964 /root/Desktop/revinity76/source/iomap.h
+	<string>
+	"tile.h"
+	"item.h"
+	"map.h"
+
+1135788742 source:/root/Desktop/revinity76/source/iomapotbm.cpp
+	"iomapotbm.h"
+	"map.h"
+	"tile.h"
+	"item.h"
+	"container.h"
+	"fileloader.h"
+	"game.h"
+
+1135704920 /root/Desktop/revinity76/source/iomapotbm.h
+	"iomap.h"
+
+1135806424 source:/root/Desktop/revinity76/source/iomapxml.cpp
+	"iomapxml.h"
+	"definitions.h"
+	"game.h"
+	<iostream>
+
+1135704936 /root/Desktop/revinity76/source/iomapxml.h
+	<string>
+	<libxml/xmlmemory.h>
+	<libxml/parser.h>
+	"iomap.h"
+
+1134398046 source:/root/Desktop/revinity76/source/ioplayer.cpp
+	"ioplayer.h"
+	"ioplayersql.h"
+	"ioplayerxml.h"
+	"luascript.h"
+
+1123355558 /root/Desktop/revinity76/source/ioplayerxml.h
+	<string>
+	"ioplayer.h"
+	"player.h"
+	<libxml/xmlmemory.h>
+	<libxml/parser.h>
+
+1459779677 source:/root/Desktop/revinity76/source/ioplayerxml.cpp
+	<sstream>
+	"ioplayer.h"
+	"ioplayerxml.h"
+	"ioaccount.h"
+	"item.h"
+	"luascript.h"
+	<fstream>
+
+1172790894 source:/root/Desktop/revinity76/source/item.cpp
+	"definitions.h"
+	"container.h"
+	"magic.h"
+	"player.h"
+	"tile.h"
+	"actions.h"
+	<iostream>
+	<sstream>
+	<iomanip>
+
+1129977160 source:/root/Desktop/revinity76/source/itemloader.cpp
+	"itemloader.h"
+
+1135806432 source:/root/Desktop/revinity76/source/items.cpp
+	"definitions.h"
+	"items.h"
+	"luascript.h"
+	"spells.h"
+	<libxml/xmlmemory.h>
+	<libxml/parser.h>
+	<iostream>
+
+1132498096 source:/root/Desktop/revinity76/source/logger.cpp
+	"logger.h"
+	<iostream>
+
+1459779821 source:/root/Desktop/revinity76/source/loginqueue.cpp
+	"loginqueue.h"
+	"luascript.h"
+	"player.h"
+	<iostream>
+	<libxml/xmlmemory.h>
+	<libxml/parser.h>
+
+1459779834 source:/root/Desktop/revinity76/source/luascript.cpp
+	<string>
+	<iostream>
+	"luascript.h"
+	"player.h"
+
+1135799264 source:/root/Desktop/revinity76/source/magic.cpp
+	"definitions.h"
+	"creature.h"
+	"monster.h"
+	"player.h"
+	"luascript.h"
+	"magic.h"
+
+1156998680 source:/root/Desktop/revinity76/source/map.cpp
+	"definitions.h"
+	<string>
+	<sstream>
+	<map>
+	<algorithm>
+	<boost/config.hpp>
+	<boost/bind.hpp>
+	"iomap.h"
+	"iomapsql.h"
+	"iomapxml.h"
+	"iomapotbm.h"
+	"otsystem.h"
+	<stdio.h>
+	"items.h"
+	"map.h"
+	"tile.h"
+	"player.h"
+	"tools.h"
+	"npc.h"
+	"spells.h"
+	"luascript.h"
+	<ctype.h>
+
+1121810244 source:/root/Desktop/revinity76/source/md5.cpp
+	<stdio.h>
+	<stdlib.h>
+	"md5.h"
+
+1121805978 /root/Desktop/revinity76/source/md5.h
+
+1137192730 source:/root/Desktop/revinity76/source/mdump.cpp
+	"mdump.h"
+	<cassert>
+	<time.h>
+
+1137173160 /root/Desktop/revinity76/source/mdump.h
+	<windows.h>
+	<dbghelp.h>
+	<string>
+
+1156998680 source:/root/Desktop/revinity76/source/monster.cpp
+	<vector>
+	<string>
+	<sstream>
+	"monster.h"
+	"monsters.h"
+	"spells.h"
+	"player.h"
+
+1459779871 source:/root/Desktop/revinity76/source/monsters.cpp
+	"monsters.h"
+	"spells.h"
+	"luascript.h"
+	<libxml/xmlmemory.h>
+	<libxml/parser.h>
+
+1132498100 source:/root/Desktop/revinity76/source/networkmessage.cpp
+	<string>
+	<iostream>
+	<sstream>
+	"networkmessage.h"
+	"item.h"
+	"container.h"
+	"creature.h"
+	"player.h"
+	"position.h"
+
+1459779972 source:/root/Desktop/revinity76/source/npc.cpp
+	"definitions.h"
+	<algorithm>
+	<functional>
+	<string>
+	<sstream>
+	<fstream>
+	<libxml/xmlmemory.h>
+	<libxml/parser.h>
+	"npc.h"
+	"luascript.h"
+	"player.h"
+	"game.h"
+
+1459786850 source:/root/Desktop/revinity76/source/otserv.cpp
+	"definitions.h"
+	<string>
+	<iostream>
+	<iomanip>
+	<sstream>
+	<ctime>
+	"otsystem.h"
+	"networkmessage.h"
+	"protocol76.h"
+	<stdlib.h>
+	<time.h>
+	"game.h"
+	"ioaccount.h"
+	"ioplayer.h"
+	"status.h"
+	"spells.h"
+	"monsters.h"
+	"actions.h"
+	"commands.h"
+	"luascript.h"
+	"account.h"
+	"tools.h"
+	"md5.h"
+	"summons.h"
+	"pvparena.h"
+	"readables.h"
+	"allocator.h"
+	<fcntl.h>
+	<arpa/inet.h>
+	<signal.h>
+	<errno.h>
+	"mdump.h"
+	"exception.h"
+	"networkmessage.h"
+
+1172790894 /root/Desktop/revinity76/source/protocol76.h
+	"protocol.h"
+	"creature.h"
+	"item.h"
+	"container.h"
+	<string>
+
+1172790894 /root/Desktop/revinity76/source/protocol.h
+	"definitions.h"
+	"game.h"
+	<string>
+	"player.h"
+	"houses.h"
+
+1126986802 /root/Desktop/revinity76/source/readables.h
+
+1172796286 source:/root/Desktop/revinity76/source/player.cpp
+	"definitions.h"
+	<string>
+	<sstream>
+	<iostream>
+	<algorithm>
+	<boost/tokenizer.hpp>
+	<stdlib.h>
+	"protocol.h"
+	"player.h"
+	"luascript.h"
+	"const76.h"
+	"chat.h"
+	"networkmessage.h"
+
+1114345914 source:/root/Desktop/revinity76/source/position.cpp
+	"position.h"
+	<iomanip>
+
+1125164732 source:/root/Desktop/revinity76/source/protocol.cpp
+	"definitions.h"
+	"tile.h"
+	"otsystem.h"
+	<string>
+	"protocol.h"
+
+1172883122 source:/root/Desktop/revinity76/source/protocol76.cpp
+	"definitions.h"
+	"ioplayer.h"
+	<string>
+	<iostream>
+	<sstream>
+	<time.h>
+	<list>
+	"networkmessage.h"
+	"protocol76.h"
+	"items.h"
+	"tile.h"
+	"creature.h"
+	"player.h"
+	"status.h"
+	"chat.h"
+	<stdio.h>
+	"luascript.h"
+	"otsystem.h"
+	"actions.h"
+	"game.h"
+
+1135791134 source:/root/Desktop/revinity76/source/pvparena.cpp
+	"pvparena.h"
+	"game.h"
+	"luascript.h"
+	<libxml/xmlmemory.h>
+	<libxml/parser.h>
+
+1129992242 source:/root/Desktop/revinity76/source/readables.cpp
+	"readables.h"
+	"game.h"
+	"luascript.h"
+	<libxml/xmlmemory.h>
+	<libxml/parser.h>
+
+1459776518 source:/root/Desktop/revinity76/source/scheduler.cpp
+	"scheduler.h"
+
+1135699160 source:/root/Desktop/revinity76/source/spawn.cpp
+	"spawn.h"
+	"game.h"
+	"player.h"
+	"npc.h"
+	<mysql++.h>
+	<boost/tokenizer.hpp>
+	<libxml/xmlmemory.h>
+	<libxml/parser.h>
+
+1459780088 source:/root/Desktop/revinity76/source/spells.cpp
+	"definitions.h"
+	<algorithm>
+	<functional>
+	<string>
+	<fstream>
+	<libxml/xmlmemory.h>
+	<libxml/parser.h>
+	<boost/config.hpp>
+	<boost/bind.hpp>
+	"spells.h"
+
+1145148608 source:/root/Desktop/revinity76/source/status.cpp
+	"status.h"
+	<libxml/xmlmemory.h>
+	<libxml/parser.h>
+	"luascript.h"
+	<sstream>
+	"game.h"
+	"networkmessage.h"
+
+1459780162 source:/root/Desktop/revinity76/source/summons.cpp
+	"summons.h"
+	"luascript.h"
+	<libxml/xmlmemory.h>
+	<libxml/parser.h>
+	<algorithm>
+	<string.h>
+
+1126388134 source:/root/Desktop/revinity76/source/thing.cpp
+	"thing.h"
+	"tile.h"
+
+1145229292 source:/root/Desktop/revinity76/source/tile.cpp
+	"definitions.h"
+	<string>
+	<iostream>
+	"tile.h"
+	"creature.h"
+	"luascript.h"
+
+1459783909 source:/root/Desktop/revinity76/source/tools.cpp
+	<stdio.h>
+	<stdlib.h>
+	<sys/timeb.h>
+	<chrono>
+	<string>
+	<cmath>
+	<sstream>
+

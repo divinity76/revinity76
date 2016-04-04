@@ -69,10 +69,10 @@
 	#define ERROR_EINTR EINTR
 
 	/* Comment below line if you want to execute otserv with root user (NOT RECOMMENDED) */
-	#define _NO_ROOT_PERMISSION_
+	//#define _NO_ROOT_PERMISSION_
 	#define _HOMEDIR_CONF_
-	
-	extern int errno; 
+
+	extern int errno;
 #endif
 
 #ifdef __DEBUG_CRITICALSECTION__
@@ -276,7 +276,7 @@ OTSYS_THREAD_RETURN ConnectionHandler(void *dat)
 			unsigned long accnumber = msg.GetU32();
 			std::string name     = msg.GetString();
 			std::string password = msg.GetString();
-		
+
 			if(version != 760){
 				msg.Reset();
 				msg.AddByte(0x14);
@@ -455,6 +455,8 @@ void ErrorMessage(const char* message) {
 
 int main(int argc, char *argv[])
 {
+chdir("..");
+std::cout << getcwd(NULL,0);exit(EXIT_SUCCESS);
 #ifdef __OTSERV_ALLOCATOR_STATS__
 	OTSYS_CREATE_THREAD(allocatorStatsThread, NULL);
 #endif
@@ -541,7 +543,7 @@ int main(int argc, char *argv[])
     }
     std::cout << "[done]" << std::endl;
 	#endif //LOOSK_RECORD
-	
+
 	//load actions data
 	std::cout << ":: Loading actions.xml...           ";
 	if(!actions.loadFromXml(g_config.getGlobalString("datadir")))

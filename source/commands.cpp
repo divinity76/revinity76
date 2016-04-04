@@ -22,7 +22,7 @@
 #include <sstream>
 #include <fstream>
 #include <utility>
-
+#include <string>//std::to_string
 #include "commands.h"
 #include "player.h"
 #include "npc.h"
@@ -72,7 +72,7 @@ s_defcommands Commands::defined_commands[] = {
 	{"/sex",&Commands::changesex},
 	{"!commands",&Commands::getCommands},
 	{"!comment",&Commands::comment},
-	
+
 #ifdef YUR_CMD_EXT
 	{"/ban",&Commands::banCharacter},
 	{"/up",&Commands::goUp},
@@ -373,9 +373,9 @@ bool Commands::placeMonster(Creature* c, const std::string &cmd, const std::stri
 		return true;
 	}
 	else{
-          
+
 		return true;
-		
+
 	}
 }
 
@@ -767,10 +767,7 @@ bool Commands::showExpForLvl(Creature* c, const std::string &cmd, const std::str
 
 	if (player)
 	{
-		char buf[128];
-		_i64toa(player->getExpForNextLevel(), buf, 10);
-
-		std::string msg = std::string("You need ") + std::string(buf) + std::string(" experience points to gain level.");
+		std::string msg = std::string("You need ") + std::to_string(player->getExpForNextLevel()) + std::string(" experience points to gain level.");
 		player->sendTextMessage(MSG_BLUE_TEXT, msg.c_str());
 	}
 	return true;
@@ -782,10 +779,8 @@ bool Commands::showManaForLvl(Creature* c, const std::string &cmd, const std::st
 
 	if (player)
 	{
-		char buf[36];
-		ltoa((long)player->getManaForNextMLevel(), buf, 10);
 
-		std::string msg = std::string("You need to spent ") + std::string(buf) + std::string(" mana to gain magic level.");
+		std::string msg = std::string("You need to spent ") + std::to_string(player->getManaForNextMLevel()) + std::string(" mana to gain magic level.");
 		player->sendTextMessage(MSG_BLUE_TEXT, msg.c_str());
 	}
 
@@ -1014,7 +1009,7 @@ bool Commands::gmInvisible(Creature* c, const std::string &cmd, const std::strin
 		for(SpectatorVec::iterator it = list.begin(); it != list.end(); ++it)
 			if((*it) != player && (*it)->access == 0)
 				(*it)->onCreatureDisappear(player, osp, true);
-	
+
 		player->sendTextMessage(MSG_INFO, "You are invisible.");
 		game->creatureBroadcastTileUpdated(player->pos);
 	}
@@ -1047,7 +1042,7 @@ bool Commands::showFrags(Creature* c, const std::string &cmd, const std::string 
 	if (player)
 	{
 		std::ostringstream info;
-		info << "You have " << player->skullKills 
+		info << "You have " << player->skullKills
 			<< " unjustified kills. You will lose a frag in " << str(player->absolveTicks) << '.';
 		player->sendTextMessage(MSG_BLUE_TEXT, info.str().c_str());
 	}
@@ -1095,7 +1090,7 @@ bool Commands::cleanMap(Creature* c, const std::string &cmd, const std::string &
 		timer();
 		long count = game->cleanMap();
 		double sec = timer();
-		
+
 		info << "Clean completed. Collected " << count << (count==1? " item." : " items.");
 		player->sendTextMessage(MSG_BLUE_TEXT, info.str().c_str());
 
@@ -1231,24 +1226,24 @@ bool Commands::ipCheck(Creature* creature, const std::string& cmd, const std::st
     Player *player = dynamic_cast<Player*>(creature);
     Player* paramPlayer = game->getPlayerByName(param);
     std::stringstream info;
-        
-    if(paramPlayer && paramPlayer != player){   
+
+    if(paramPlayer && paramPlayer != player){
         info << "This player is currently playing on the following characters: \n";
         for(AutoList<Player>::listiterator it = Player::listPlayer.list.begin(); it != Player::listPlayer.list.end(); ++it){
             if(paramPlayer->lastip == (*it).second->lastip){ // Check if there are players with the same ip.
                 info << (*it).second->getName() << "\n"; //Show the players logged on with that ip. :P
             }
-            else if(paramPlayer->lastip != (*it).second->lastip && (*it).second == paramPlayer) 
+            else if(paramPlayer->lastip != (*it).second->lastip && (*it).second == paramPlayer)
                 info << "This player isn't multiclienting.";
-        }      
+        }
         player->sendTextMessage(MSG_RED_TEXT, info.str().c_str());
     }
     else{
         info << "You cant check yourself.";
-        player->sendTextMessage(MSG_RED_TEXT, info.str().c_str()); 
+        player->sendTextMessage(MSG_RED_TEXT, info.str().c_str());
     }
-       
-    return true;                                     
+
+    return true;
 }
 //End Multi client check
 
@@ -1266,7 +1261,7 @@ if (creature){
 creature->skullType = SKULL_WHITE;
 }
 return true;
-} 
+}
 
 bool Commands::forceHouseSave(Creature* c, const std::string &cmd, const std::string &param)
 {
@@ -1275,7 +1270,7 @@ bool Commands::forceHouseSave(Creature* c, const std::string &cmd, const std::st
 
 	if (player)
 	player->sendTextMessage(MSG_BLUE_TEXT, "Houses have been saved.");
-	
+
 	std::cout << ":: Saving houses...           ";
 	if(game->houseSave())
 	std::cout << "[Done.] Took " << timer() << " seconds." << std::endl;
@@ -1299,27 +1294,27 @@ bool Commands::mcCheckall(Creature* creature, const std::string& cmd, const std:
     Player *player = dynamic_cast<Player*>(creature);
     std::stringstream info;
     unsigned char ip[4];
-        
-    if(player){   
+
+    if(player){
         info << "The following players are multiclienting: \n";
         info << "Name          IP" << "\n";
         for(AutoList<Player>::listiterator it = Player::listPlayer.list.begin(); it != Player::listPlayer.list.end(); ++it){
-            Player* lol = (*it).second;                                                   
+            Player* lol = (*it).second;
             for(AutoList<Player>::listiterator it = Player::listPlayer.list.begin(); it != Player::listPlayer.list.end(); ++it){
                 if((*it).second != lol && (*it).second->lastip == lol->lastip){
                 *(unsigned long*)&ip = (*it).second->lastip;
-                    info << (*it).second->getName() << "      " << (unsigned int)ip[0] << "." << (unsigned int)ip[1] << 
-        "." << (unsigned int)ip[2] << "." << (unsigned int)ip[3] << "\n";       
-                }                                                           
+                    info << (*it).second->getName() << "      " << (unsigned int)ip[0] << "." << (unsigned int)ip[1] <<
+        "." << (unsigned int)ip[2] << "." << (unsigned int)ip[3] << "\n";
+                }
             }
-        }      
-        player->sendTextMessage(MSG_RED_TEXT, info.str().c_str());         
+        }
+        player->sendTextMessage(MSG_RED_TEXT, info.str().c_str());
     }
     else{
         return false;
     }
-       
-    return true;                                     
+
+    return true;
 }
 
 bool Commands::changesex(Creature* c, const std::string &, const std::string &param) {
@@ -1334,14 +1329,14 @@ p->sex = (playersex_t)0;
 p->looktype = 136;
 game->creatureChangeOutfit(p);
 p->sendTextMessage(MSG_ADVANCE,"You change your gender to a girl.");
-		 p->sendMagicEffect(p->pos, NM_ME_MAGIC_ENERGIE); 
+		 p->sendMagicEffect(p->pos, NM_ME_MAGIC_ENERGIE);
 } else {
 p->sex = (playersex_t)1;
 p->looktype = 128;
 game->creatureChangeOutfit(p);
 p->sendTextMessage(MSG_ADVANCE,"You change your gender to a man.");
 		 p->sendMagicEffect(p->pos, NM_ME_MAGIC_ENERGIE);
-        }  
+        }
 return true;
 }
 

@@ -140,7 +140,7 @@ int GameState::applyAmulets(Player* player, int damage, attacktype_t atype)
 			necklace->useCharge();
 		}
  #endif //YUR_DRAINS
- 
+
 
 		if (necklace->getCharges() <= 0)
 			player->removeItemInventory(SLOT_NECKLACE);
@@ -159,7 +159,7 @@ int GameState::applyAmulets(Player* player, int damage, attacktype_t atype)
 	}
 if(player && player->getItem(SLOT_ARMOR) && player->getItem(SLOT_ARMOR)->getID() == ITEM_DSM &&
                      player->getItem(SLOT_HEAD) && player->getItem(SLOT_HEAD)->getID() == ITEM_DSH &&
-                     player->getItem(SLOT_LEGS) && player->getItem(SLOT_LEGS)->getID() == ITEM_DSL && 
+                     player->getItem(SLOT_LEGS) && player->getItem(SLOT_LEGS)->getID() == ITEM_DSL &&
                      (atype & ATTACK_FIRE)){
 			         newDamage *= 0.92; // damage reduction of fire spells(0.92 = 8% lesser dmg from fire attacks).
 		}
@@ -186,7 +186,7 @@ void GameState::onAttack(Creature* attacker, const Position& pos, const MagicEff
 		targetCreature = (*cit);
 		targetPlayer = dynamic_cast<Player*>(targetCreature);
 		bool pvpArena = false;
-		
+
 
 
 #ifdef TR_SUMMONS
@@ -207,7 +207,7 @@ void GameState::onAttack(Creature* attacker, const Position& pos, const MagicEff
 					attackPlayer->pzLocked = true;
 			}
 
-			if(targetCreature->access < g_config.ACCESS_PROTECT && targetPlayer && game->getWorldType() != WORLD_TYPE_NO_PVP) 
+			if(targetCreature->access < g_config.ACCESS_PROTECT && targetPlayer && game->getWorldType() != WORLD_TYPE_NO_PVP)
 			{
 #ifdef YUR_CVS_MODS
 				targetPlayer->inFightTicks = std::max(g_config.PZ_LOCKED, targetPlayer->inFightTicks);
@@ -231,12 +231,12 @@ void GameState::onAttack(Creature* attacker, const Position& pos, const MagicEff
 			}
 		}
 
-		if (damage != 0) 
+		if (damage != 0)
 		{
 #ifdef YUR_DRAINS
 			if (me->attackType & ATTACK_MANADRAIN)
 			{
-				manaDamage = std::min(damage, targetCreature->mana);			
+				manaDamage = std::min(damage, targetCreature->mana);
 				targetCreature->drainMana(manaDamage);
 				damage = 0;
 			}
@@ -558,8 +558,8 @@ void GameState::onAttackedCreature(Tile* tile, Creature *attacker, Creature* att
 		if(lootcontainer) {
 			attackedCreature->dropLoot(lootcontainer);
 		}
-		
-		
+
+
 
 		// if(attackedplayer){
 		//	attackedplayer->onThingDisappear(attackedplayer,stackpos);
@@ -663,7 +663,7 @@ void GameState::onAttackedCreature(Tile* tile, Creature *attacker, Creature* att
 		Item* splash = Item::CreateItem(dead? ITEM_POOL : ITEM_SPLASH, attackedCreature->bloodsplash);
 		game->addThing(NULL, CreaturePos, splash);
 		game->startDecay(splash);
-	} 
+	}
 #else
 	if((drawBlood || attackedCreature->health <= 0) && damage > 0) {
 		Item* splash = Item::CreateItem(ITEM_SPLASH, FLUID_BLOOD);
@@ -1017,7 +1017,7 @@ bool Game::placeCreature(Position &pos, Creature* c
 	Player *p = dynamic_cast<Player*>(c);
 
 #ifdef YUR_LOGIN_QUEUE
-	if (!p || c->access >= g_config.ACCESS_ENTER || 
+	if (!p || c->access >= g_config.ACCESS_ENTER ||
  #ifdef YUR_PREMIUM_PROMOTION
 		(p->isPremium() && !g_config.QUEUE_PREMMY) ||
  #endif //YUR_PREMIUM_PROMOTION
@@ -1198,15 +1198,15 @@ void Game::thingMove(Player *player,
 bool Game::onPrepareMoveThing(Creature* player, const Thing* thing,
 	const Position& fromPos, const Position& toPos, int count)
 {
-	if ((player->access < g_config.ACCESS_REMOTE || dynamic_cast<const Player*>(thing)) && 
-		((abs(player->pos.x - fromPos.x) > 1) || (abs(player->pos.y - fromPos.y) > 1) || (player->pos.z != fromPos.z))) 
+	if ((player->access < g_config.ACCESS_REMOTE || dynamic_cast<const Player*>(thing)) &&
+		((abs(player->pos.x - fromPos.x) > 1) || (abs(player->pos.y - fromPos.y) > 1) || (player->pos.z != fromPos.z)))
 	{
 		player->sendCancel("Too far away...");
 		return false;
 	}
-	else if ((player->access < g_config.ACCESS_REMOTE || dynamic_cast<const Player*>(thing)) && 
+	else if ((player->access < g_config.ACCESS_REMOTE || dynamic_cast<const Player*>(thing)) &&
 		((abs(fromPos.x - toPos.x) > thing->throwRange) || (abs(fromPos.y - toPos.y) > thing->throwRange)
-		|| (fromPos.z != toPos.z) /*TODO: Make it possible to throw items to different floors*/ )) 
+		|| (fromPos.z != toPos.z) /*TODO: Make it possible to throw items to different floors*/ ))
 	{
 		player->sendCancel("Destination is out of reach.");
 		return false;
@@ -1365,15 +1365,15 @@ bool Game::onPrepareMoveThing(Player* player,
 	const Position& fromPos, const Container* fromContainer, const Item* fromItem,
 	const Position& toPos, const Container* toContainer, const Item* toItem, int count)
 {
-	if (player->access < g_config.ACCESS_REMOTE && 
-		((abs(player->pos.x - fromPos.x) > 1) || (abs(player->pos.y - fromPos.y) > 1) || (player->pos.z != fromPos.z))) 
+	if (player->access < g_config.ACCESS_REMOTE &&
+		((abs(player->pos.x - fromPos.x) > 1) || (abs(player->pos.y - fromPos.y) > 1) || (player->pos.z != fromPos.z)))
 	{
 		player->sendCancel("Too far away...");
 		return false;
 	}
-	else if (player->access < g_config.ACCESS_REMOTE && 
+	else if (player->access < g_config.ACCESS_REMOTE &&
 		((abs(fromPos.x - toPos.x) > fromItem->throwRange) || (abs(fromPos.y - toPos.y) > fromItem->throwRange)
-		|| (fromPos.z != toPos.z))) 
+		|| (fromPos.z != toPos.z)))
 	{
 		player->sendCancel("Destination is out of reach.");
 		return false;
@@ -1480,8 +1480,8 @@ bool Game::onPrepareMoveCreature(Creature *creature, const Creature* creatureMov
 bool Game::onPrepareMoveThing(Player *player, const Position& fromPos, const Item *item,
 	slots_t toSlot, int count)
 {
-	if (player->access < g_config.ACCESS_REMOTE &&  
-		((abs(player->pos.x - fromPos.x) > 1) || (abs(player->pos.y - fromPos.y) > 1) || (player->pos.z != fromPos.z))) 
+	if (player->access < g_config.ACCESS_REMOTE &&
+		((abs(player->pos.x - fromPos.x) > 1) || (abs(player->pos.y - fromPos.y) > 1) || (player->pos.z != fromPos.z)))
 	{
 		player->sendCancel("Too far away...");
 		return false;
@@ -2681,15 +2681,15 @@ void Game::thingMoveInternal(Creature *creature, unsigned short from_x, unsigned
 		getSpectators(Range(oldPos, Position(to_x, to_y, to_z)), list);
 
 #ifdef TRS_GM_INVISIBLE
-		if(playerMoving && playerMoving->gmInvisible) 
+		if(playerMoving && playerMoving->gmInvisible)
 		{
 			for(it = list.begin(); it != list.end(); ++it)
 			{
-				if(playerMoving == (*it) || (*it)->access >= playerMoving->access) 
+				if(playerMoving == (*it) || (*it)->access >= playerMoving->access)
 				{
-					if(Player* p = dynamic_cast<Player*>(*it)) 
+					if(Player* p = dynamic_cast<Player*>(*it))
 					{
-						if(p->attackedCreature == creature->getID()) 
+						if(p->attackedCreature == creature->getID())
 						{
 							autoCloseAttack(p, creature);
 						}
@@ -2698,13 +2698,13 @@ void Game::thingMoveInternal(Creature *creature, unsigned short from_x, unsigned
 				}
 			}
 		}
-		else if(playerMoving && !playerMoving->gmInvisible) 
+		else if(playerMoving && !playerMoving->gmInvisible)
 		{
 			for(it = list.begin(); it != list.end(); ++it)
 			{
-				if(Player* p = dynamic_cast<Player*>(*it)) 
+				if(Player* p = dynamic_cast<Player*>(*it))
 				{
-					if(p->attackedCreature == creature->getID()) 
+					if(p->attackedCreature == creature->getID())
 					{
 						autoCloseAttack(p, creature);
 					}
@@ -2712,13 +2712,13 @@ void Game::thingMoveInternal(Creature *creature, unsigned short from_x, unsigned
 				}
 			}
 		}
-		else 
+		else
 		{
 			for(it = list.begin(); it != list.end(); ++it)
 			{
-				if(Player* p = dynamic_cast<Player*>(*it)) 
+				if(Player* p = dynamic_cast<Player*>(*it))
 				{
-					if(p->attackedCreature == creature->getID()) 
+					if(p->attackedCreature == creature->getID())
 					{
 						autoCloseAttack(p, creature);
 					}
@@ -2748,8 +2748,8 @@ void Game::thingMoveInternal(Creature *creature, unsigned short from_x, unsigned
 		}
 
 		autoCloseTrade(item, true);
-		
-		
+
+
 
 		if (playerMoving)
 		{
@@ -2929,21 +2929,21 @@ void Game::creatureSay(Creature *creature, SpeakClasses type, const std::string 
 		Player* player = dynamic_cast<Player*>(creature);
 		if (player)
 			checkSpell(player, type, text);
-			
+
 if (text == "!credits") {
                 std::stringstream text;
                 text << "Credits to Gihow (God Gihow) for the codes, and Ryan (God Gimp) for making a kickass server! \n";
                 text << "And of course all codes of otfans.net";
                 player->onTextDialog(text.str());
-     }   
-     
+     }
+
      if (text == "!website") {
                 std::stringstream text;
                 text << "The Server Website is:\n";
                 text << g_config.getGlobalString("url", "");
                 player->onTextDialog(text.str());
-     }  
-     
+     }
+
         if (text == "!info") {
                 std::stringstream text;
                 text << "\nInformation about "; text << g_config.getGlobalString("worldname", "Divinity");
@@ -3069,28 +3069,28 @@ void Game::teleport(Thing *thing, const Position& newPos) {
 			//players
 			for(it = list.begin(); it != list.end(); ++it)
 			{
-				if(player) 
+				if(player)
 				{
-					if (player->gmInvisible && player == (*it)) 
+					if (player->gmInvisible && player == (*it))
 					{
-						if(Player* p = dynamic_cast<Player*>(*it)) 
+						if(Player* p = dynamic_cast<Player*>(*it))
 						{
-							if(p->attackedCreature == creature->getID()) 
+							if(p->attackedCreature == creature->getID())
 							{
 								autoCloseAttack(p, creature);
 							}
 							(*it)->onTeleport(creature, &oldPos, osp);
 						}
 					}
-					else if (player->gmInvisible && player != (*it) && (*it)->access < player->access) 
+					else if (player->gmInvisible && player != (*it) && (*it)->access < player->access)
 					{
 						// Nothing Because he is invisible...
 					}
-					else 
+					else
 					{
-						if(Player* p = dynamic_cast<Player*>(*it)) 
+						if(Player* p = dynamic_cast<Player*>(*it))
 						{
-							if(p->attackedCreature == creature->getID()) 
+							if(p->attackedCreature == creature->getID())
 							{
 								autoCloseAttack(p, creature);
 							}
@@ -3191,7 +3191,7 @@ void Game::creatureYell(Creature *creature, std::string &text)
 	OTSYS_THREAD_LOCK_CLASS lockClass(gameLock, "Game::creatureYell()");
 	Player* player = dynamic_cast<Player*>(creature);
 
-	if (player && player->access < g_config.ACCESS_PROTECT && player->exhaustedTicks >= 1000) 
+	if (player && player->access < g_config.ACCESS_PROTECT && player->exhaustedTicks >= 1000)
 	{
 		player->exhaustedTicks += g_config.EXHAUSTED_ADD;
 		player->sendTextMessage(MSG_SMALLINFO, "You are exhausted.");
@@ -3234,8 +3234,8 @@ void Game::creatureSpeakTo(Creature *creature, SpeakClasses type,const std::stri
 		player->sendTextMessage(MSG_SMALLINFO, "A player with this name is not online.");
 		return;
 	}
-	
-	
+
+
 	#ifdef UCB_ONOFF_PRIVATE
     if( !(toPlayer->aceitarprivate) && player->access == 0 ){
         if( toPlayer->access > 2 ){
@@ -3499,7 +3499,7 @@ void Game::creatureApplyDamage(Creature *creature, int damage, int &outDamage, i
 	outDamage = damage;
 	outManaDamage = 0;
 
-	if (damage > 0) 
+	if (damage > 0)
 	{
 		if (creature->manaShieldTicks >= 1000 && (damage < creature->mana) ) {
 			outManaDamage = damage;
@@ -3699,7 +3699,7 @@ void Game::creatureMakeDamage(Creature *creature, Creature *attackedCreature, fi
 
 	}
 
-	if (player && player->access < g_config.ACCESS_PROTECT) 
+	if (player && player->access < g_config.ACCESS_PROTECT)
 	{
 #ifdef YUR_CVS_MODS
 		player->inFightTicks = std::max(g_config.PZ_LOCKED, player->inFightTicks);
@@ -3769,13 +3769,15 @@ void Game::creatureMakeDamage(Creature *creature, Creature *attackedCreature, fi
 					dynamic_cast<Player*>(gainexpCreature)->sendStats();
 
 				if(spectator->CanSee(gainexpCreature->pos.x, gainexpCreature->pos.y, gainexpCreature->pos.z)) {
-					char exp[128];
-#ifdef YUR_HIGH_LEVELS	// TODO: format like this: 1,000,000
-					_i64toa(attackedCreature->getGainedExperience(gainexpCreature), exp, 10);
-#else
-					itoa(attackedCreature->getGainedExperience(gainexpCreature), exp, 10);
-#endif //YUR_HIGH_LEVLES
-					spectator->sendAnimatedText(gainexpCreature->pos, 0xD7, exp);
+//					char exp[128];
+//#ifdef YUR_HIGH_LEVELS	// TODO: format like this: 1,000,000
+//					_i64toa(attackedCreature->getGainedExperience(gainexpCreature), exp, 10);
+//#else
+//					itoa(attackedCreature->getGainedExperience(gainexpCreature), exp, 10);
+//#endif //YUR_HIGH_LEVLES
+std::ostringstream oss;
+oss << attackedCreature->getGainedExperience(gainexpCreature);
+					spectator->sendAnimatedText(gainexpCreature->pos, 0xD7, oss.str());
 				}
 			}
 
@@ -3811,7 +3813,7 @@ void Game::creatureMakeDamage(Creature *creature, Creature *attackedCreature, fi
 		}
 	}
 
-	
+
 
 
 }
@@ -4155,7 +4157,7 @@ void Game::checkCreatureAttacking(unsigned long id)
 		Player* player = dynamic_cast<Player*>(creature);
 		if (player)
 			{
-#ifdef SD_BURST_ARROW		
+#ifdef SD_BURST_ARROW
 			if (player->isUsingBurstArrows())
 				burstArrow(player, attackedCreature->pos);
 #endif //SD_BURST_ARROW
@@ -4170,7 +4172,7 @@ void Game::checkCreatureAttacking(unsigned long id)
                         }
 		}
 		#ifdef BD_FOLLOW
-//Player *player = dynamic_cast<Player*>(creature); 
+//Player *player = dynamic_cast<Player*>(creature);
      if(player){
                        if(player->followMode != 0 && attackedCreature && attackedCreature != player->oldAttackedCreature){
                           player->oldAttackedCreature = attackedCreature;
@@ -4194,24 +4196,24 @@ void Game::checkCreatureAttacking(unsigned long id)
                 {
                 case 0:
                     speed = int(g_config.NO_VOC_SPEED * 1000);
-                    break;                             
-                case 1: 
+                    break;
+                case 1:
                     speed = int(g_config.SORC_SPEED * 1000);
-                    break;                    
+                    break;
                 case 2:
                     speed = int(g_config.DRUID_SPEED * 1000);
-                    break; 
+                    break;
                 case 3:
                     speed = int(g_config.PALLY_SPEED * 1000);
-                    break;                      
-                case 4:       
+                    break;
+                case 4:
                     speed = int(g_config.KNIGHT_SPEED * 1000);
-                    break; 
-                           
+                    break;
+
           default:
            speed = 2000;
-           break;                            
-          }    
+           break;
+          }
                 creature->eventCheckAttacking = addEvent(makeTask(speed, std::bind2nd(std::mem_fun(&Game::checkCreatureAttacking), id)));
 				}
 			}
@@ -4522,11 +4524,11 @@ bool Game::playerUseItem(Player *player, const Position& pos, const unsigned cha
 
 	if(player->isRemoved)
 		return false;
-	                  
-    Item* item = dynamic_cast<Item*>(getThing(pos, stackpos, player));  
+
+    Item* item = dynamic_cast<Item*>(getThing(pos, stackpos, player));
     if(itemid == ITEM_SPELL_BOOK){
             if(setSpellbookText(player, item))
-                return true;            
+                return true;
         }
     actions.UseItem(player,pos,stackpos,itemid,index);
 	return true;
@@ -4713,21 +4715,21 @@ void Game::playerAcceptTrade(Player* player)
 			player->sendTextMessage(MSG_SMALLINFO, "Sorry not possible.");
 			tradePartner->sendTextMessage(MSG_SMALLINFO, "Sorry not possible.");
 		}
-		
+
 		std::map<Item*, unsigned long>::iterator it;
-		
+
 		it = tradeItems.find(tradeItem1);
 		if(it != tradeItems.end()) {
 			FreeThing(it->first);
 			tradeItems.erase(it);
 		}
-		
+
 		it = tradeItems.find(tradeItem2);
 		if(it != tradeItems.end()) {
 			FreeThing(it->first);
 			tradeItems.erase(it);
 		}
-		
+
 		player->setAcceptTrade(false);
 		tradePartner->setAcceptTrade(false);
 	}
@@ -5453,12 +5455,12 @@ bool Game::loadNpcs()
 	xmlDocPtr doc;
 	doc = xmlParseFile((g_config.DATA_DIR + "world/npc.xml").c_str());
 	if (!doc)
-		return false; 
+		return false;
 
 	xmlNodePtr root, npcNode;
 	root = xmlDocGetRootElement(doc);
 
-	if (xmlStrcmp(root->name, (const xmlChar*)"npclist")) 
+	if (xmlStrcmp(root->name, (const xmlChar*)"npclist"))
 	{
 		xmlFreeDoc(doc);
 		return false;
@@ -5473,7 +5475,7 @@ bool Game::loadNpcs()
 			int x = atoi((const char*) xmlGetProp(npcNode, (const xmlChar*) "x"));
 			int y = atoi((const char*) xmlGetProp(npcNode, (const xmlChar*) "y"));
 			int z = atoi((const char*) xmlGetProp(npcNode, (const xmlChar*) "z"));
-	
+
 			Npc* mynpc = new Npc(name, this);
 			mynpc->pos = Position(x, y, z);
 
@@ -5487,7 +5489,7 @@ bool Game::loadNpcs()
 			const char* tmp = (const char*)xmlGetProp(npcNode, (const xmlChar*) "dir");
 			if (tmp)
 				mynpc->setDirection((Direction)atoi(tmp));
-		}  
+		}
 		npcNode = npcNode->next;
 	}
 
@@ -5529,7 +5531,7 @@ bool Game::playerSave()
      if((it->second)->access < g_config.ACCESS_PROTECT)
   IOPlayer::instance()->savePlayer(it->second);
   ++it;
- } 
+ }
  return true;
 }
 bool Game::houseSave()
@@ -5537,7 +5539,7 @@ bool Game::houseSave()
  //OTSYS_THREAD_LOCK_CLASS lockClass(gameLock);
  if(Houses::Save(this))
  return true;
- 
+
 return false;
 }
 bool Game::guildSave()
@@ -5545,7 +5547,7 @@ bool Game::guildSave()
  //OTSYS_THREAD_LOCK_CLASS lockClass(gameLock);
  if(Guilds::Save())
  return true;
- 
+
 return false;
 }
 void Game::autoPlayerSave()
@@ -5555,7 +5557,7 @@ void Game::autoPlayerSave()
  std::cout << "[Done]" << std::endl;
  else
  std::cout << "[Failed]" << std::endl;
- 
+
  addEvent(makeTask(g_config.getGlobalNumber("playersave", 1)*60000, std::mem_fun(&Game::autoPlayerSave)));
 }
 void Game::autoHouseSave()
@@ -5565,7 +5567,7 @@ void Game::autoHouseSave()
  std::cout << "[Done]" << std::endl;
  else
  std::cout << "[Failed]" << std::endl;
- 
+
  addEvent(makeTask(g_config.getGlobalNumber("housesave", 1)*60000, std::mem_fun(&Game::autoHouseSave)));
 }
 void Game::autoguildSave()
@@ -5575,7 +5577,7 @@ void Game::autoguildSave()
  std::cout << "[Done]" << std::endl;
  else
  std::cout << "[Failed]" << std::endl;
- 
+
  addEvent(makeTask(g_config.getGlobalNumber("guildSave", 1)*60000, std::mem_fun(&Game::autoguildSave)));
 }
 #endif //TLM_SERVER_SAVE
@@ -5684,7 +5686,7 @@ void Game::checkSpell(Player* player, SpeakClasses type, std::string text)
 	}
 	else if (text == "!buyhouse" || text == "!buyhome")
  {
-  unsigned long money = player->getMoney(); 
+  unsigned long money = player->getMoney();
   bool last = false;
   for (int x = player->pos.x-1; x <= player->pos.x+1 && !last; x++)
   {
@@ -5693,7 +5695,7 @@ void Game::checkSpell(Player* player, SpeakClasses type, std::string text)
     Position doorPos(x, y, player->pos.z);
     Tile* tile = getTile(doorPos);
     House* house = tile? tile->getHouse() : NULL;
-    
+
     if (house && house->getPlayerRights(player->getName()) == HOUSE_OWNER){
               player->sendTextMessage(MSG_ADVANCE, "You own this house.");
               return;
@@ -5814,7 +5816,7 @@ void Game::checkSpell(Player* player, SpeakClasses type, std::string text)
 #endif //TLM_HOUSE_SYSTEM
 
 #ifdef TR_SUMMONS
-	else if (text.substr(0, 11) == "utevo res \"" && 
+	else if (text.substr(0, 11) == "utevo res \"" &&
 		(!g_config.LEARN_SPELLS || player->knowsSpell("utevo res")))
 	{
 		if (player->vocation == VOCATION_DRUID || player->vocation == VOCATION_SORCERER ||
@@ -5989,7 +5991,7 @@ void Game::checkSpell(Player* player, SpeakClasses type, std::string text)
 	{
 		const int REQ_MANA = 20;
 		Tile* tile = getTile(player->pos);
-	
+
 		if (!(tile && (tile->ground->getID() == ITEM_ROPE_SPOT1 || tile->ground->getID() == ITEM_ROPE_SPOT2)))
 		{
 			player->sendMagicEffect(player->pos, NM_ME_PUFF);
@@ -6008,7 +6010,7 @@ void Game::checkSpell(Player* player, SpeakClasses type, std::string text)
 		else if (player->exhaustedTicks >= 1000 && player->access < g_config.ACCESS_PROTECT)
 		{
 			player->sendMagicEffect(player->pos, NM_ME_PUFF);
-			player->sendTextMessage(MSG_SMALLINFO, "You are exhausted.");  
+			player->sendTextMessage(MSG_SMALLINFO, "You are exhausted.");
 		}
 		else
 		{
@@ -6334,7 +6336,7 @@ void Game::creatureChangeLight(Player* player, int time, unsigned char lightleve
 
 	player->setLightLevel(lightlevel, lightcolor);
 	SpectatorVec list;
-	getSpectators(Range(player->pos), list); 
+	getSpectators(Range(player->pos), list);
 
 	for (SpectatorVec::iterator iter = list.begin(); iter != list.end(); ++iter)
 	{
@@ -6348,18 +6350,18 @@ void Game::checkLight(int t)
 {
 	OTSYS_THREAD_LOCK_CLASS lockClass(gameLock, "Game::checkLight()");
 	addEvent(makeTask(10000, boost::bind(&Game::checkLight, this, 10000)));
-	
+
 	light_hour = light_hour + light_hour_delta;
 	if(light_hour > 1440)
 		light_hour = light_hour - 1440;
-	
+
 	if(std::abs(light_hour - SUNRISE) < 2*light_hour_delta){
 		light_state = LIGHT_STATE_SUNRISE;
 	}
 	else if(std::abs(light_hour - SUNSET) < 2*light_hour_delta){
 		light_state = LIGHT_STATE_SUNSET;
 	}
-	
+
 	int newlightlevel = lightlevel;
 	switch(light_state){
 	case LIGHT_STATE_SUNRISE:
@@ -6369,7 +6371,7 @@ void Game::checkLight(int t)
 		newlightlevel -= (LIGHT_LEVEL_DAY - LIGHT_LEVEL_NIGHT)/30;
 		break;
 	}
-	
+
 	if(newlightlevel <= LIGHT_LEVEL_NIGHT){
 		lightlevel = LIGHT_LEVEL_NIGHT;
 		light_state = LIGHT_STATE_NIGHT;
@@ -6390,7 +6392,7 @@ unsigned char Game::getLightLevel(){
 
 
 #ifdef JD_WANDS
-void Game::useWand(Creature *creature, Creature *attackedCreature, int wandid) 
+void Game::useWand(Creature *creature, Creature *attackedCreature, int wandid)
 {
 	OTSYS_THREAD_LOCK_CLASS lockClass(gameLock, "Game::useWand()");
 
@@ -6402,14 +6404,14 @@ void Game::useWand(Creature *creature, Creature *attackedCreature, int wandid)
 	MagicEffectAreaNoExhaustionClass runeAreaSpell;
 	runeAreaSpell.drawblood = true;
 	runeAreaSpell.offensive = true;
-	runeAreaSpell.direction = 1; 
+	runeAreaSpell.direction = 1;
 
-	if (wandid == ITEM_QUAGMIRE_ROD && player->vocation == VOCATION_DRUID && 
-		player->mana >= g_config.MANA_QUAGMIRE && player->getLevel() >= 26) 
+	if (wandid == ITEM_QUAGMIRE_ROD && player->vocation == VOCATION_DRUID &&
+		player->mana >= g_config.MANA_QUAGMIRE && player->getLevel() >= 26)
 	{
 		dist = g_config.RANGE_QUAGMIRE;
-		if (abs(player->pos.x - attackedCreature->pos.x) > dist || 
-			abs(player->pos.y - attackedCreature->pos.y) > dist) 
+		if (abs(player->pos.x - attackedCreature->pos.x) > dist ||
+			abs(player->pos.y - attackedCreature->pos.y) > dist)
 			return;
 
 		runeAreaSpell.attackType = ATTACK_POISON;
@@ -6417,17 +6419,17 @@ void Game::useWand(Creature *creature, Creature *attackedCreature, int wandid)
 		runeAreaSpell.hitEffect = NM_ME_POISEN_RINGS;
 		runeAreaSpell.areaEffect = NM_ME_POISEN_RINGS;
 		runeAreaSpell.animationColor = 0x60;
-	
+
 		runeAreaSpell.minDamage = 40;
 		runeAreaSpell.maxDamage = 50;
 		mana = g_config.MANA_QUAGMIRE;
 	}
-	else if (wandid == ITEM_SNAKEBITE_ROD && player->vocation == VOCATION_DRUID && 
+	else if (wandid == ITEM_SNAKEBITE_ROD && player->vocation == VOCATION_DRUID &&
 		player->mana >= g_config.MANA_SNAKEBITE && player->getLevel() >= 7)
 	{
 		dist = g_config.RANGE_SNAKEBITE;
-		if (abs(player->pos.x - attackedCreature->pos.x) > dist || 
-			abs(player->pos.y - attackedCreature->pos.y) > dist) 
+		if (abs(player->pos.x - attackedCreature->pos.x) > dist ||
+			abs(player->pos.y - attackedCreature->pos.y) > dist)
 			return;
 
 		runeAreaSpell.attackType = ATTACK_POISON;
@@ -6435,17 +6437,17 @@ void Game::useWand(Creature *creature, Creature *attackedCreature, int wandid)
 		runeAreaSpell.hitEffect = NM_ME_POISEN_RINGS;
 		runeAreaSpell.areaEffect = NM_ME_POISEN_RINGS;
 		runeAreaSpell.animationColor = 0x60;
-		
+
 		runeAreaSpell.minDamage = 8;
 		runeAreaSpell.maxDamage = 18;
 		mana = g_config.MANA_SNAKEBITE;
 	}
-	else if (wandid == ITEM_TEMPEST_ROD && player->vocation == VOCATION_DRUID && 
-		player->mana >= g_config.MANA_TEMPEST && player->getLevel() >= 33) 
+	else if (wandid == ITEM_TEMPEST_ROD && player->vocation == VOCATION_DRUID &&
+		player->mana >= g_config.MANA_TEMPEST && player->getLevel() >= 33)
 	{
 		dist = g_config.RANGE_TEMPEST;
-		if (abs(player->pos.x - attackedCreature->pos.x) > dist || 
-			abs(player->pos.y - attackedCreature->pos.y) > dist) 
+		if (abs(player->pos.x - attackedCreature->pos.x) > dist ||
+			abs(player->pos.y - attackedCreature->pos.y) > dist)
 			return;
 
 		runeAreaSpell.attackType = ATTACK_ENERGY;
@@ -6453,17 +6455,17 @@ void Game::useWand(Creature *creature, Creature *attackedCreature, int wandid)
 		runeAreaSpell.hitEffect = NM_ME_ENERGY_DAMAGE;
 		runeAreaSpell.areaEffect = NM_ME_ENERGY_AREA;
 		runeAreaSpell.animationColor = 0x49;
-		
+
 		runeAreaSpell.minDamage = 60;
 		runeAreaSpell.maxDamage = 70;
 		mana = g_config.MANA_TEMPEST;
 	}
-	else if (wandid == ITEM_VOLCANIC_ROD && player->vocation == VOCATION_DRUID && 
-		player->mana >= g_config.MANA_VOLCANIC && player->getLevel() >= 19) 
+	else if (wandid == ITEM_VOLCANIC_ROD && player->vocation == VOCATION_DRUID &&
+		player->mana >= g_config.MANA_VOLCANIC && player->getLevel() >= 19)
 	{
 		dist = g_config.RANGE_VOLCANIC;
-		if (abs(player->pos.x - attackedCreature->pos.x) > dist || 
-			abs(player->pos.y - attackedCreature->pos.y) > dist) 
+		if (abs(player->pos.x - attackedCreature->pos.x) > dist ||
+			abs(player->pos.y - attackedCreature->pos.y) > dist)
 			return;
 
 		runeAreaSpell.attackType = ATTACK_FIRE;
@@ -6471,17 +6473,17 @@ void Game::useWand(Creature *creature, Creature *attackedCreature, int wandid)
 		runeAreaSpell.hitEffect = NM_ME_FIRE_AREA;
 		runeAreaSpell.areaEffect = NM_ME_FIRE_AREA;
 		runeAreaSpell.animationColor = 0xC7;
-		
-		runeAreaSpell.minDamage = 25;   
+
+		runeAreaSpell.minDamage = 25;
 		runeAreaSpell.maxDamage = 35;
 		mana = g_config.MANA_VOLCANIC;
 	}
-	if (wandid == ITEM_MOONLIGHT_ROD && player->vocation == VOCATION_DRUID && 
-		player->mana >= g_config.MANA_MOONLIGHT && player->getLevel() >= 13) 
+	if (wandid == ITEM_MOONLIGHT_ROD && player->vocation == VOCATION_DRUID &&
+		player->mana >= g_config.MANA_MOONLIGHT && player->getLevel() >= 13)
 	{
 		dist = g_config.RANGE_MOONLIGHT;
-		if (abs(player->pos.x - attackedCreature->pos.x) > dist || 
-			abs(player->pos.y - attackedCreature->pos.y) > dist) 
+		if (abs(player->pos.x - attackedCreature->pos.x) > dist ||
+			abs(player->pos.y - attackedCreature->pos.y) > dist)
 			return;
 
 		runeAreaSpell.attackType = ATTACK_ENERGY;
@@ -6489,35 +6491,35 @@ void Game::useWand(Creature *creature, Creature *attackedCreature, int wandid)
 		runeAreaSpell.hitEffect = NM_ME_ENERGY_DAMAGE;
 		runeAreaSpell.areaEffect = NM_ME_ENERGY_AREA;
 		runeAreaSpell.animationColor = 0x47;
-		
+
 		runeAreaSpell.minDamage = 14;
 		runeAreaSpell.maxDamage = 24;
 		mana = g_config.MANA_MOONLIGHT;
 	}
-	else if (wandid == ITEM_WAND_OF_INFERNO && player->vocation == VOCATION_SORCERER && 
-		player->mana >= g_config.MANA_INFERNO && player->getLevel() >= 33) 
-	{ 
+	else if (wandid == ITEM_WAND_OF_INFERNO && player->vocation == VOCATION_SORCERER &&
+		player->mana >= g_config.MANA_INFERNO && player->getLevel() >= 33)
+	{
 		dist = g_config.RANGE_INFERNO;
-		if (abs(player->pos.x - attackedCreature->pos.x) > dist || 
-			abs(player->pos.y - attackedCreature->pos.y) > dist) 
+		if (abs(player->pos.x - attackedCreature->pos.x) > dist ||
+			abs(player->pos.y - attackedCreature->pos.y) > dist)
 			return;
 
 		runeAreaSpell.attackType = ATTACK_FIRE;
 		runeAreaSpell.animationEffect = NM_ANI_FIRE;
 		runeAreaSpell.hitEffect = NM_ME_FIRE_AREA;
 		runeAreaSpell.areaEffect = NM_ME_FIRE_AREA;
-		runeAreaSpell.animationColor = 0xC7;	
+		runeAreaSpell.animationColor = 0xC7;
 
 		runeAreaSpell.minDamage = 60;
 		runeAreaSpell.maxDamage = 70;
 		mana = g_config.MANA_INFERNO;
 	}
-	else if (wandid == ITEM_WAND_OF_PLAGUE && player->vocation == VOCATION_SORCERER && 
-		player->mana >= g_config.MANA_PLAGUE && player->getLevel() >= 19) 
+	else if (wandid == ITEM_WAND_OF_PLAGUE && player->vocation == VOCATION_SORCERER &&
+		player->mana >= g_config.MANA_PLAGUE && player->getLevel() >= 19)
 	{
 		dist = g_config.RANGE_PLAGUE;
-		if (abs(player->pos.x - attackedCreature->pos.x) > dist || 
-			abs(player->pos.y - attackedCreature->pos.y) > dist) 
+		if (abs(player->pos.x - attackedCreature->pos.x) > dist ||
+			abs(player->pos.y - attackedCreature->pos.y) > dist)
 			return;
 
 		runeAreaSpell.attackType = ATTACK_POISON;
@@ -6525,17 +6527,17 @@ void Game::useWand(Creature *creature, Creature *attackedCreature, int wandid)
 		runeAreaSpell.hitEffect = NM_ME_POISEN_RINGS;
 		runeAreaSpell.areaEffect = NM_ME_POISEN_RINGS;
 		runeAreaSpell.animationColor = 0x60;
-		
-		runeAreaSpell.minDamage = 25;   
+
+		runeAreaSpell.minDamage = 25;
 		runeAreaSpell.maxDamage = 35;
 		mana = g_config.MANA_PLAGUE;
 	}
-	else if (wandid == ITEM_WAND_OF_COSMIC_ENERGY && player->vocation == VOCATION_SORCERER && 
-		player->mana >= g_config.MANA_COSMIC && player->getLevel() >= 26) 
-	{ 
+	else if (wandid == ITEM_WAND_OF_COSMIC_ENERGY && player->vocation == VOCATION_SORCERER &&
+		player->mana >= g_config.MANA_COSMIC && player->getLevel() >= 26)
+	{
 		dist = g_config.RANGE_COSMIC;
-		if (abs(player->pos.x - attackedCreature->pos.x) > dist || 
-			abs(player->pos.y - attackedCreature->pos.y) > dist) 
+		if (abs(player->pos.x - attackedCreature->pos.x) > dist ||
+			abs(player->pos.y - attackedCreature->pos.y) > dist)
 			return;
 
 		runeAreaSpell.attackType = ATTACK_ENERGY;
@@ -6543,17 +6545,17 @@ void Game::useWand(Creature *creature, Creature *attackedCreature, int wandid)
 		runeAreaSpell.hitEffect = NM_ME_ENERGY_DAMAGE;
 		runeAreaSpell.areaEffect = NM_ME_ENERGY_AREA;
 		runeAreaSpell.animationColor = 0x47;
-		
-		runeAreaSpell.minDamage = 40;   
+
+		runeAreaSpell.minDamage = 40;
 		runeAreaSpell.maxDamage = 50;
 		mana = g_config.MANA_COSMIC;
 	}
-	else if (wandid == ITEM_WAND_OF_VORTEX && player->vocation == VOCATION_SORCERER && 
+	else if (wandid == ITEM_WAND_OF_VORTEX && player->vocation == VOCATION_SORCERER &&
 		player->mana >= g_config.MANA_VORTEX && player->getLevel() >= 7)
-	{ 
+	{
 		dist = g_config.RANGE_VORTEX;
 		if (abs(player->pos.x - attackedCreature->pos.x) > dist ||
-			abs(player->pos.y - attackedCreature->pos.y) > dist) 
+			abs(player->pos.y - attackedCreature->pos.y) > dist)
 			return;
 
 		runeAreaSpell.attackType = ATTACK_ENERGY;
@@ -6561,17 +6563,17 @@ void Game::useWand(Creature *creature, Creature *attackedCreature, int wandid)
 		runeAreaSpell.hitEffect = NM_ME_ENERGY_DAMAGE;
 		runeAreaSpell.areaEffect = NM_ME_ENERGY_AREA;
 		runeAreaSpell.animationColor = 0x47;
-		
-		runeAreaSpell.minDamage = 8;   
+
+		runeAreaSpell.minDamage = 8;
 		runeAreaSpell.maxDamage = 18;
 		mana = g_config.MANA_VORTEX;
 	}
-	else if (wandid == ITEM_WAND_OF_DRAGONBREATH && player->vocation == VOCATION_SORCERER && 
+	else if (wandid == ITEM_WAND_OF_DRAGONBREATH && player->vocation == VOCATION_SORCERER &&
 		player->mana >= g_config.MANA_DRAGONBREATH && player->getLevel() >= 13)
 	{
 		dist = g_config.RANGE_DRAGONBREATH;
-		if (abs(player->pos.x - attackedCreature->pos.x) > dist || 
-			abs(player->pos.y - attackedCreature->pos.y) > dist) 
+		if (abs(player->pos.x - attackedCreature->pos.x) > dist ||
+			abs(player->pos.y - attackedCreature->pos.y) > dist)
 			return;
 
 		runeAreaSpell.attackType = ATTACK_FIRE;
@@ -6579,8 +6581,8 @@ void Game::useWand(Creature *creature, Creature *attackedCreature, int wandid)
 		runeAreaSpell.hitEffect = NM_ME_FIRE_AREA;
 		runeAreaSpell.areaEffect = NM_ME_FIRE_AREA;
 		runeAreaSpell.animationColor = 0xC7;
-		
-		runeAreaSpell.minDamage = 14;   
+
+		runeAreaSpell.minDamage = 14;
 		runeAreaSpell.maxDamage = 24;
 		mana = g_config.MANA_DRAGONBREATH;
 	}
@@ -6588,7 +6590,7 @@ void Game::useWand(Creature *creature, Creature *attackedCreature, int wandid)
 	if (mana > 0)
 	{
 		std::vector<unsigned char> col;
-				
+
 		col.push_back(0);
 		col.push_back(0);
 		col.push_back(0);
@@ -6603,7 +6605,7 @@ void Game::useWand(Creature *creature, Creature *attackedCreature, int wandid)
 		col.push_back(0);
 		col.push_back(0);
 		runeAreaSpell.areaVec.push_back(col);
-			  
+
 		creatureThrowRune(player, attackedCreature->pos, runeAreaSpell);
 		player->addManaSpent(mana);
 		player->mana -= mana;
@@ -6667,8 +6669,8 @@ playerFollow(player, followCreature);
 }
 #endif //BD_FOLLOW
 #ifdef TLM_BEDS
-bool Game::loadBeds(std::string file) 
-{ 
+bool Game::loadBeds(std::string file)
+{
   xmlDocPtr doc;
   doc = xmlParseFile(file.c_str());
   if (doc){
@@ -6678,17 +6680,17 @@ bool Game::loadBeds(std::string file)
      xmlFreeDoc(doc);
      return -1;
    }
-    tmp = root->children; 
+    tmp = root->children;
     int x,y,z,id;
-    while(tmp){ 
-      if (strcmp((char*) tmp->name, "bed")==0){     
-        x = atoi((const char*) xmlGetProp(tmp, (const xmlChar*) "x")); 
-        y = atoi((const char*) xmlGetProp(tmp, (const xmlChar*) "y")); 
-        z = atoi((const char*) xmlGetProp(tmp, (const xmlChar*) "z")); 
+    while(tmp){
+      if (strcmp((char*) tmp->name, "bed")==0){
+        x = atoi((const char*) xmlGetProp(tmp, (const xmlChar*) "x"));
+        y = atoi((const char*) xmlGetProp(tmp, (const xmlChar*) "y"));
+        z = atoi((const char*) xmlGetProp(tmp, (const xmlChar*) "z"));
         id = atoi((const char*) xmlGetProp(tmp, (const xmlChar*) "id"));
         Position mainPos(x, y, z);
-        Item *mainItem = Item::CreateItem(id);  
-        Tile *mainTile = getTile(mainPos.x, mainPos.y, mainPos.z); 
+        Item *mainItem = Item::CreateItem(id);
+        Tile *mainTile = getTile(mainPos.x, mainPos.y, mainPos.z);
         if (mainTile && mainItem){
           Position nextPos(x, y, z);
           Item *nextItem = Item::CreateItem(id+1);
@@ -6698,7 +6700,7 @@ bool Game::loadBeds(std::string file)
           else if(id == 1756 || id == 1760 || id == 1764 || id == 1768){
             nextPos.x++;
           }
-          Tile *nextTile = getTile(nextPos.x, nextPos.y, nextPos.z);    
+          Tile *nextTile = getTile(nextPos.x, nextPos.y, nextPos.z);
           if (nextTile && nextItem){
             mainTile->addThing(mainItem);
             mainItem->pos = mainPos;
@@ -6706,11 +6708,11 @@ bool Game::loadBeds(std::string file)
             nextItem->pos = nextPos;
           }
         }
-      } 
+      }
       tmp = tmp->next;
-    }     
+    }
     xmlFreeDoc(doc);
-    return 0; 
+    return 0;
   }
   return -1;
 }
@@ -6721,25 +6723,25 @@ std::string Game::getBedSleeper(const Position pos)
   doc = xmlParseFile(file.c_str());
   if (doc){
     xmlNodePtr root, tmp;
-    root = xmlDocGetRootElement(doc);       
+    root = xmlDocGetRootElement(doc);
     if (xmlStrcmp(root->name, (const xmlChar*)"beds")) {
       xmlFreeDoc(doc);
       return "Someone";
-    } 
-    tmp = root->children; 
+    }
+    tmp = root->children;
     while(tmp){
       if (strcmp((const char*) tmp->name, "bed")==0){
-        int x = atoi((const char*) xmlGetProp(tmp, (const xmlChar*) "x")); 
-        int y = atoi((const char*) xmlGetProp(tmp, (const xmlChar*) "y")); 
+        int x = atoi((const char*) xmlGetProp(tmp, (const xmlChar*) "x"));
+        int y = atoi((const char*) xmlGetProp(tmp, (const xmlChar*) "y"));
         int z = atoi((const char*) xmlGetProp(tmp, (const xmlChar*) "z"));
         if (x == pos.x && y == pos.y && z == pos.z){
           return (const char*)xmlGetProp(tmp, (const xmlChar *)"name");
-        }  
+        }
       }
       tmp = tmp->next;
     }
-    xmlFreeDoc(doc); 
-  } 
+    xmlFreeDoc(doc);
+  }
   return "Someone";
 }
 unsigned int Game::getBedID(const Position pos)
@@ -6749,25 +6751,25 @@ unsigned int Game::getBedID(const Position pos)
   doc = xmlParseFile(file.c_str());
   if (doc){
     xmlNodePtr root, tmp;
-    root = xmlDocGetRootElement(doc);       
+    root = xmlDocGetRootElement(doc);
     if (xmlStrcmp(root->name, (const xmlChar*)"beds")) {
       xmlFreeDoc(doc);
       return 0;
-    } 
-    tmp = root->children; 
+    }
+    tmp = root->children;
     while(tmp){
       if (strcmp((const char*) tmp->name, "bed")==0){
-        int x = atoi((const char*) xmlGetProp(tmp, (const xmlChar*) "x")); 
-        int y = atoi((const char*) xmlGetProp(tmp, (const xmlChar*) "y")); 
+        int x = atoi((const char*) xmlGetProp(tmp, (const xmlChar*) "x"));
+        int y = atoi((const char*) xmlGetProp(tmp, (const xmlChar*) "y"));
         int z = atoi((const char*) xmlGetProp(tmp, (const xmlChar*) "z"));
         if (x == pos.x && y == pos.y && z == pos.z){
           return atoi((const char*) xmlGetProp(tmp, (const xmlChar*) "id"));
-        }  
+        }
       }
       tmp = tmp->next;
     }
-    xmlFreeDoc(doc); 
-  } 
+    xmlFreeDoc(doc);
+  }
   return 0;
 }
 
@@ -6785,7 +6787,7 @@ bool Game::changeBed(const Position pos, unsigned int oldid, std::string sleepna
     }
     Tile *nexttile = getTile(tilePos.x,tilePos.y,tilePos.z);
     Item *nextitem = dynamic_cast<Item*>(nexttile->getThingByStackPos(maintile->getThingCount()-1));
-    if (nextitem && nexttile->isHouse()){  
+    if (nextitem && nexttile->isHouse()){
       if (oldid == 1754 || oldid == 1758){
         mainitem->setID(oldid+8);
       }
@@ -6805,7 +6807,7 @@ bool Game::changeBed(const Position pos, unsigned int oldid, std::string sleepna
         mainitem->setID(1756);
       }
       nextitem->setID(mainitem->getID()+1);
-     
+
                 SpectatorVec list;
           SpectatorVec::iterator it;
           getSpectators(Range(tilePos, true), list);
@@ -6817,21 +6819,21 @@ bool Game::changeBed(const Position pos, unsigned int oldid, std::string sleepna
                     }
 				}
 
-				
+
           //Player *player = dynamic_cast<Player*>(player);
           //player->onTileUpdated(pos);
           //player->onTileUpdated(tilePos);
-           
+
            std::string file="data/beds.xml";
            xmlDocPtr doc;
            doc = xmlParseFile(file.c_str());
            if (doc){
                xmlNodePtr root, tmp;
-               root = xmlDocGetRootElement(doc);             
+               root = xmlDocGetRootElement(doc);
                if (xmlStrcmp(root->name, (const xmlChar*)"beds")) {
                   xmlFreeDoc(doc);
                   return false;
-               }  
+               }
                Position bedPos[1000];// 1000 = number of beds
                unsigned int id[1000];
                std::string name[1000];
@@ -6840,11 +6842,11 @@ bool Game::changeBed(const Position pos, unsigned int oldid, std::string sleepna
                while(tmp){
                    if (strcmp((const char*) tmp->name, "bed")==0){
                        i++;
-                       bedPos[i].x = atoi((const char*) xmlGetProp(tmp, (const xmlChar*) "x"   )); 
-                       bedPos[i].y = atoi((const char*) xmlGetProp(tmp, (const xmlChar*) "y"   )); 
+                       bedPos[i].x = atoi((const char*) xmlGetProp(tmp, (const xmlChar*) "x"   ));
+                       bedPos[i].y = atoi((const char*) xmlGetProp(tmp, (const xmlChar*) "y"   ));
                        bedPos[i].z = atoi((const char*) xmlGetProp(tmp, (const xmlChar*) "z"   ));
                        id[i]       = atoi((const char*) xmlGetProp(tmp, (const xmlChar*) "id"  ));
-                      name[i]     = (const char*) xmlGetProp(tmp, (const xmlChar*) "name");  
+                      name[i]     = (const char*) xmlGetProp(tmp, (const xmlChar*) "name");
                        if (bedPos[i] == pos){
                            id[i]   = mainitem->getID();
                            name[i] = sleepname;
@@ -6855,9 +6857,9 @@ bool Game::changeBed(const Position pos, unsigned int oldid, std::string sleepna
                doc = xmlNewDoc((const xmlChar*)"1.0");
                doc->children = xmlNewDocNode(doc, NULL, (const xmlChar*)"beds", NULL);
             root = doc->children;
-         
+
                std::stringstream sb;
-               for(int x = 1; x <= i; x++){  
+               for(int x = 1; x <= i; x++){
                    tmp = xmlNewNode(NULL,(const xmlChar*)"bed");
                    sb << bedPos[x].x; xmlSetProp(tmp, (const xmlChar*) "x" ,   (const xmlChar*)sb.str().c_str()); sb.str("");
                    sb << bedPos[x].y; xmlSetProp(tmp, (const xmlChar*) "y" ,   (const xmlChar*)sb.str().c_str()); sb.str("");
@@ -6867,7 +6869,7 @@ bool Game::changeBed(const Position pos, unsigned int oldid, std::string sleepna
                    xmlAddChild(root, tmp);
                }
             xmlSaveFile(file.c_str(), doc);
-            xmlFreeDoc(doc); 
+            xmlFreeDoc(doc);
                return true;
            }
 return false;
@@ -6881,26 +6883,26 @@ Position Game::getBedPos(std::string name)
    doc = xmlParseFile(file.c_str());
    if (doc){
        xmlNodePtr root, tmp;
-      root = xmlDocGetRootElement(doc);             
+      root = xmlDocGetRootElement(doc);
        if (xmlStrcmp(root->name, (const xmlChar*)"beds")) {
           xmlFreeDoc(doc);
           return Position(0xFFFF,0xFFFF,0xFF);
-       } 
-       tmp = root->children; 
+       }
+       tmp = root->children;
        while(tmp){
            if (strcmp((const char*) tmp->name, "bed")==0){
                std::string sleepname = (const char*)xmlGetProp(tmp, (const xmlChar *)"name");
                if (sleepname == name){
-                   int x = atoi((const char*) xmlGetProp(tmp, (const xmlChar*) "x")); 
-                   int y = atoi((const char*) xmlGetProp(tmp, (const xmlChar*) "y")); 
+                   int x = atoi((const char*) xmlGetProp(tmp, (const xmlChar*) "x"));
+                   int y = atoi((const char*) xmlGetProp(tmp, (const xmlChar*) "y"));
                    int z = atoi((const char*) xmlGetProp(tmp, (const xmlChar*) "z"));
                    return Position(x,y,z);
-               }    
+               }
            }
            tmp = tmp->next;
        }
-       xmlFreeDoc(doc); 
-   } 
+       xmlFreeDoc(doc);
+   }
    return Position(0xFFFF,0xFFFF,0xFF);
 }
 
@@ -6913,7 +6915,7 @@ void Game::sendMagicEffect(const Position pos, unsigned char type)
     Player* spectator = dynamic_cast<Player*>(*it);
     if (spectator){
       spectator->sendMagicEffect(pos, type);
-    } 
+    }
   }
 }
 #endif //TLM_BEDS
@@ -6943,7 +6945,7 @@ bool Game::loadRecord()
     if (doc)
     {
         xmlNodePtr root, tmp;
-        root = xmlDocGetRootElement(doc); 
+        root = xmlDocGetRootElement(doc);
 
         if (xmlStrcmp(root->name, (const xmlChar*)"record"))
         {
@@ -7004,9 +7006,9 @@ bool Game::setSpellbookText(Player* player, Item* item)
                 }
             }
         }
-    }   
+    }
     item->setText(text.str());
     player->sendTextWindow(item, strlen(text.str().c_str()), true);
-    return true; 
+    return true;
 }
 

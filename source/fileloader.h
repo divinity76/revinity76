@@ -1,13 +1,13 @@
 //////////////////////////////////////////////////////////////////////
 // OpenTibia - an opensource roleplaying game
 //////////////////////////////////////////////////////////////////////
-// 
+//
 //////////////////////////////////////////////////////////////////////
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -22,6 +22,7 @@
 #define __OTSERV_FILELOADER_H__
 
 #include <string>
+#include <cstring>//memcpy
 #include "stdio.h"
 
 typedef unsigned long NODE;
@@ -76,7 +77,7 @@ protected:
 	inline bool safeTell(long &pos);
 	//inline bool writeData(void* data, int size, bool unescape);
 public:
-	inline bool FileLoader::writeData(const void* data, int size, bool unescape){
+	inline bool writeData(const void* data, int size, bool unescape){
 		for(int i = 0; i < size; ++i) {
 			unsigned char c = *(((unsigned char*)data) + i);
 			if(unescape && (c == NODE_START || c == NODE_END || c == ESCAPE_CHAR)) {
@@ -139,7 +140,7 @@ public:
 		p = p + sizeof(T);
 		return true;
 	}
-	
+
 	template <typename T>
 	inline bool GET_VALUE(T &ret){
 		if(size() < sizeof(T)){
@@ -149,23 +150,23 @@ public:
 		p = p + sizeof(T);
 		return true;
 	}
-	
+
 	inline bool GET_ULONG(unsigned long &ret){
 		return GET_VALUE(ret);
 	}
-	
+
 	inline bool GET_USHORT(unsigned short &ret){
 		return GET_VALUE(ret);
 	}
-	
+
 	inline bool GET_UCHAR(unsigned char &ret){
 		return GET_VALUE(ret);
 	}
-	
+
 	inline bool GET_STRING(std::string &ret){
 		char* str;
 		unsigned short str_len;
-		
+
 		if(!GET_USHORT(str_len)){
 			return false;
 		}
@@ -180,8 +181,8 @@ public:
 		p = p + str_len;
 		return true;
 	}
-	
-	
+
+
 protected:
 	long size(){return long(end - p);};
 	char* p;

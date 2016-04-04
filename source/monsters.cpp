@@ -1,13 +1,13 @@
 //////////////////////////////////////////////////////////////////////
 // OpenTibia - an opensource roleplaying game
 //////////////////////////////////////////////////////////////////////
-// 
+//
 //////////////////////////////////////////////////////////////////////
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -49,7 +49,7 @@ void MonsterType::reset()
 	base_speed = 200;
 	level = 1;
 	maglevel = 1;
-	
+
 	health = 100;
 	health_max = 100;
 	lookhead = 10;
@@ -60,7 +60,7 @@ void MonsterType::reset()
 	lookcorpse = 1000;
 	lookmaster = 10;
 	immunities = 0;
-	
+
 	for(std::map<PhysicalAttackClass*, TimeProbabilityClass>::iterator it = physicalAttacks.begin(); it != physicalAttacks.end(); ++it) {
 		delete it->first;
 	}
@@ -74,7 +74,7 @@ void MonsterType::reset()
 #ifdef TJ_MONSTER_BLOOD
 	bloodeffect = EFFECT_RED;
 	bloodcolor = COLOR_RED;
-	bloodsplash = SPLASH_RED; 
+	bloodsplash = SPLASH_RED;
 #endif //TJ_MONSTER_BLOOD
 }
 
@@ -122,7 +122,7 @@ Item* MonsterType::createLootItem(const LootBlock& lootBlock)
 			else{
 				//if chancemax < randvalue < chance1
 				n = (unsigned char)(randvalue % lootBlock.countmax + 1);
-			}		
+			}
 			tmpItem = Item::CreateItem(lootBlock.id, (unsigned short)n);
 		}
 	}
@@ -162,15 +162,15 @@ Monsters::Monsters()
 }
 
 bool Monsters::loadFromXml(const std::string &_datadir,bool reloading /*= false*/)
-{	
+{
 	this->loaded = false;
-	
+
 	datadir = _datadir;
-	
+
 	std::string filename = datadir + "monster/monsters.xml";
 	std::transform(filename.begin(), filename.end(), filename.begin(), tolower);
 	xmlDocPtr doc = xmlParseFile(filename.c_str());
-	
+
 	if(doc){
 		this->loaded = true;
 		xmlNodePtr root, p;
@@ -183,19 +183,19 @@ bool Monsters::loadFromXml(const std::string &_datadir,bool reloading /*= false*
 			return false;
 		}
 		p = root->children;
-        
+
 		while (p){
 			const char* str = (char*)p->name;
 			if(strcmp(str, "monster") == 0){
 				char* monsterfile = (char*)xmlGetProp(p, (const xmlChar *)"file");
 				char* name = (char*)xmlGetProp(p, (const xmlChar *)"name");
-								
+
 				if(monsterfile && name){
 					std::string file = datadir + "monster/" + monsterfile;
 					std::transform(file.begin(), file.end(), file.begin(), tolower);
 					std::string monster_name = name;
 						std::transform(monster_name.begin(), monster_name.end(), monster_name.begin(), tolower);
-						
+
 					MonsterType* mType = loadMonster(file,name,reloading);
 					if(mType){
 						id++;
@@ -206,7 +206,7 @@ bool Monsters::loadFromXml(const std::string &_datadir,bool reloading /*= false*
 			}
 			p = p->next;
 		}
-		
+
 		xmlFreeDoc(doc);
 	}
 	return this->loaded;
@@ -222,7 +222,7 @@ MonsterType* Monsters::loadMonster(const std::string& file,const std::string& mo
 	bool monsterLoad;
 	MonsterType* mType;
 	bool new_mType = true;
-	
+
 	if(reloading){
 		unsigned long id = getIdByName(monster_name);
 		if(id != 0){
@@ -236,7 +236,7 @@ MonsterType* Monsters::loadMonster(const std::string& file,const std::string& mo
 	if(new_mType){
 		mType = new MonsterType;
 	}
-	
+
 	monsterLoad = true;
 	xmlDocPtr doc = xmlParseFile(file.c_str());
 	if(doc){
@@ -261,7 +261,7 @@ MonsterType* Monsters::loadMonster(const std::string& file,const std::string& mo
 		nodeValue = (char*)xmlGetProp(root, (const xmlChar *)"experience");
 		if(nodeValue){
 #ifdef YUR_HIGH_LEVELS
-			mType->experience = _atoi64(nodeValue);
+			mType->experience = atoll(nodeValue);
 #else
 			mType->experience = atoi(nodeValue);
 #endif //YUR_HIGH_LEVELS
@@ -364,7 +364,7 @@ MonsterType* Monsters::loadMonster(const std::string& file,const std::string& mo
 				}
 				else
 					mType->bloodeffect = EFFECT_RED;
-					
+
 				nodeValue = (char*)xmlGetProp(p, (const xmlChar *)"splash");
 				if(nodeValue) {
 					mType->bloodsplash = atoi(nodeValue);
@@ -372,7 +372,7 @@ MonsterType* Monsters::loadMonster(const std::string& file,const std::string& mo
 				}
 				else
 					mType->bloodsplash = SPLASH_RED;
-			} 
+			}
 #endif //TJ_MONSTER_BLOOD
 			if(strcmp(str, "combat") == 0){
 				nodeValue = (char*)xmlGetProp(p, (const xmlChar *)"targetdistance");
@@ -714,17 +714,17 @@ bool Monsters::loadLootItem(xmlNodePtr node, LootBlock& lootBlock)
 		lootBlock.id = atoi(nodeValue);
 		xmlFreeOTSERV(nodeValue);
 	}
-	
+
 	if(lootBlock.id == 0){
 		return false;
 	}
-	
+
 	if(Item::items[lootBlock.id].stackable == true){
 		char* nodeValue = (char*)xmlGetProp(node, (const xmlChar *) "countmax");
 		if(nodeValue){
 			lootBlock.countmax = atoi(nodeValue);
 			xmlFreeOTSERV(nodeValue);
-				
+
 			if(lootBlock.countmax > 100){
 				lootBlock.countmax = 100;
 			}
@@ -733,12 +733,12 @@ bool Monsters::loadLootItem(xmlNodePtr node, LootBlock& lootBlock)
 			std::cout << "missing countmax for loot id = "<< lootBlock.id << std::endl;
 			lootBlock.countmax = 1;
 		}
-			
+
 		nodeValue = (char*)xmlGetProp(node, (xmlChar*)"chancemax");
 		if(nodeValue){
 			lootBlock.chancemax = atoi(nodeValue);
 			xmlFreeOTSERV(nodeValue);
-				
+
 			if(lootBlock.chancemax > CHANCE_MAX){
 				lootBlock.chancemax = 0;
 			}
@@ -752,11 +752,11 @@ bool Monsters::loadLootItem(xmlNodePtr node, LootBlock& lootBlock)
 		if(nodeValue){
 			lootBlock.chance1 = atoi(nodeValue);
 			xmlFreeOTSERV(nodeValue);
-							
+
 			if(lootBlock.chance1 > CHANCE_MAX){
 				lootBlock.chance1 = CHANCE_MAX;
 			}
-			
+
 			if(lootBlock.chance1 <= lootBlock.chancemax){
 				std::cout << "Wrong chance for loot id = "<< lootBlock.id << std::endl;
 				return false;
@@ -772,7 +772,7 @@ bool Monsters::loadLootItem(xmlNodePtr node, LootBlock& lootBlock)
 		if(nodeValue){
 			lootBlock.chance1 = atoi(nodeValue);
 			xmlFreeOTSERV(nodeValue);
-			
+
 			if(lootBlock.chance1 > CHANCE_MAX){
 				lootBlock.chance1 = CHANCE_MAX;
 			}
@@ -781,9 +781,9 @@ bool Monsters::loadLootItem(xmlNodePtr node, LootBlock& lootBlock)
 			std::cout << "missing chance for loot id = "<< lootBlock.id << std::endl;
 			lootBlock.chance1 = CHANCE_MAX;
 		}
-	}	
+	}
 
-	
+
 	if(Item::items[lootBlock.id].isContainer()){
 		loadLootContainer(node, lootBlock);
 	}
@@ -794,7 +794,7 @@ bool Monsters::loadLootContainer(xmlNodePtr node, LootBlock& lBlock)
 {
 	xmlNodePtr tmp,p;
 	char* nodeValue = NULL;
-	
+
 	if(node == NULL){
 		return false;
 	}
@@ -816,7 +816,7 @@ bool Monsters::loadLootContainer(xmlNodePtr node, LootBlock& lBlock)
 		}//inside
 		tmp = tmp->next;
 	}
-	return false;	
+	return false;
 }
 
 MonsterType* Monsters::getMonsterType(unsigned long mid)

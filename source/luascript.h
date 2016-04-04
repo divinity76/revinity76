@@ -33,7 +33,7 @@ extern "C"
 extern "C" struct lua_State;
 
 #ifdef YUR_HIGH_LEVELS
-typedef __int64 exp_t;
+typedef int64_t exp_t;
 #else
 typedef unsigned long exp_t;
 #endif //YUR_HIGH_LEVELS
@@ -170,7 +170,7 @@ public:
 
   int OpenFile(const char* file);
   int getField (const char *key);
-  void LuaScript::setField (const char *index, int value);
+  void setField (const char *index, int value);
   //static version
   static int getField (lua_State *L , const char *key);
   static void setField (lua_State *L, const char *index, int val);

@@ -119,7 +119,7 @@ public:
 	void clearSpecialDescription();
 	void setText(std::string desc);
 	void clearText();
-	std::string Item::getText();
+	std::string getText();
 
 	virtual int unserialize(xmlNodePtr p);
 	virtual xmlNodePtr serialize();
@@ -149,7 +149,7 @@ public:
 	 */
 	virtual Item* decay();
 	bool isDecaying;
-#ifdef TLM_BEDS	
+#ifdef TLM_BEDS
     bool isBed();
     bool isBed2();
 #endif //TLM_BEDS

@@ -7,7 +7,7 @@
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -54,7 +54,7 @@ bool IOPlayerXML::loadPlayer(Player* player, std::string name){
 	out.close();
 	std::transform (filename.begin(),filename.end(), filename.begin(), tolower);
 
-	xmlDocPtr doc;	
+	xmlDocPtr doc;
 	xmlMutexLock(xmlmutex);
 	doc = xmlParseFile(filename.c_str());
 
@@ -74,16 +74,16 @@ bool IOPlayerXML::loadPlayer(Player* player, std::string name){
 
 		nodeValue = (char*)xmlGetProp(root, (const xmlChar *) "account");
 		int account = atoi(nodeValue);
-		
+
 		//need to unlock and relock in order to load xml account (both share the same mutex)
 		xmlMutexUnlock(xmlmutex);
 		Account a = IOAccount::instance()->loadAccount(account);
 		xmlMutexLock(xmlmutex);
-		
+
 		player->password = a.password;
 		if (a.accnumber == 0 || a.accnumber != (unsigned long)account) {
-		  xmlFreeDoc(doc);		  
-		  xmlMutexUnlock(xmlmutex);		  
+		  xmlFreeDoc(doc);
+		  xmlMutexUnlock(xmlmutex);
 		  return false;
 		}
 
@@ -114,7 +114,7 @@ bool IOPlayerXML::loadPlayer(Player* player, std::string name){
 		nodeValue = (char*)xmlGetProp(root, (const xmlChar *) "exp");
 		if(nodeValue) {
 #ifdef YUR_HIGH_LEVELS
-			player->experience=_atoi64(nodeValue);
+			player->experience=atoll(nodeValue);//_atoi64(nodeValue);
 #else
 			player->experience=atoi(nodeValue);
 #endif //YUR_HIGH_LEVELS
@@ -122,7 +122,7 @@ bool IOPlayerXML::loadPlayer(Player* player, std::string name){
 		}
 		else
 			isLoaded = false;
-		        
+
 		nodeValue = (char*)xmlGetProp(root, (const xmlChar *) "level");
 		if(nodeValue) {
 			player->level=atoi(nodeValue);
@@ -200,7 +200,7 @@ bool IOPlayerXML::loadPlayer(Player* player, std::string name){
 			isLoaded = false;
 
 		player->setNormalSpeed();
-		
+
 		nodeValue = (char*)xmlGetProp(root, (const xmlChar *) "lastlogin");
 		if(nodeValue){
 			player->lastLoginSaved = atoi(nodeValue);
@@ -209,7 +209,7 @@ bool IOPlayerXML::loadPlayer(Player* player, std::string name){
 		else{
 			player->lastLoginSaved = 0;
 		}
-		
+
 		//level percent
 		player->level_percent  = (unsigned char)(100*(player->experience-player->getExpForLv(player->level))/(1.*player->getExpForLv(player->level+1)-player->getExpForLv(player->level)));
 		while (p)
@@ -252,7 +252,7 @@ bool IOPlayerXML::loadPlayer(Player* player, std::string name){
 				}
 				else
 					isLoaded = false;
-				
+
 				nodeValue = (char*)xmlGetProp(p, (const xmlChar *) "max");
 				if(nodeValue) {
 					player->healthmax=atoi(nodeValue);
@@ -280,7 +280,7 @@ bool IOPlayerXML::loadPlayer(Player* player, std::string name){
 					isLoaded = false;
 
 				player->lookmaster = player->looktype;
-				
+
 				nodeValue = (char*)xmlGetProp(p, (const xmlChar *) "head");
 				if(nodeValue) {
 					player->lookhead=atoi(nodeValue);
@@ -348,7 +348,7 @@ bool IOPlayerXML::loadPlayer(Player* player, std::string name){
 				}
 				else
 					isLoaded = false;
-				
+
 				nodeValue = (char*)xmlGetProp(p, (const xmlChar *) "y");
 				if(nodeValue) {
 					player->masterPos.y=atoi(nodeValue);
@@ -375,7 +375,7 @@ bool IOPlayerXML::loadPlayer(Player* player, std::string name){
 				}
 				else
 					isLoaded = false;
-				
+
 				nodeValue = (char*)xmlGetProp(p, (const xmlChar *) "kills");
 				if(nodeValue) {
 					player->skullKills=atoi(nodeValue);
@@ -412,7 +412,7 @@ bool IOPlayerXML::loadPlayer(Player* player, std::string name){
 				}
 				else
 					isLoaded = false;
-				
+
 				nodeValue = (char*)xmlGetProp(p, (const xmlChar *) "rank");
 				if(nodeValue) {
 					player->guildRank=nodeValue;
@@ -420,7 +420,7 @@ bool IOPlayerXML::loadPlayer(Player* player, std::string name){
 				}
 				else
 					isLoaded = false;
-				
+
 				nodeValue = (char*)xmlGetProp(p, (const xmlChar *) "nick");
 				if(nodeValue) {
 					player->guildNick=nodeValue;
@@ -428,7 +428,7 @@ bool IOPlayerXML::loadPlayer(Player* player, std::string name){
 				}
 				else
 					isLoaded = false;
-				
+
 				nodeValue = (char*)xmlGetProp(p, (const xmlChar *) "id");
 				if(nodeValue) {
 					player->guildId=atoi(nodeValue);
@@ -508,7 +508,7 @@ bool IOPlayerXML::loadPlayer(Player* player, std::string name){
 				tmp = p->children;
 				while (tmp)
 				{
-					if (strcmp((const char*)tmp->name, "death") == 0) 
+					if (strcmp((const char*)tmp->name, "death") == 0)
 					{
 						Death death;
 
@@ -571,7 +571,7 @@ bool IOPlayerXML::loadPlayer(Player* player, std::string name){
 						//we dont want to sendinventory before login
 						player->addItemInventory(myitem, sl_id, true);
 						Container* default_container = dynamic_cast<Container*>(myitem);
-						if(default_container){							
+						if(default_container){
 							LoadContainer(slot->children,default_container);
 						}
 					}
@@ -587,7 +587,7 @@ bool IOPlayerXML::loadPlayer(Player* player, std::string name){
 					{
 						int dp_id = 0;
 						unsigned int id = 0;
-						
+
 						nodeValue = (char*)xmlGetProp(slot, (const xmlChar *)"depotid");
 						if(nodeValue) {
 							dp_id = atoi(nodeValue);
@@ -607,13 +607,13 @@ bool IOPlayerXML::loadPlayer(Player* player, std::string name){
 						Item* myitem = Item::CreateItem(id);
 						myitem->unserialize(slot->children);
 						Container* default_container = dynamic_cast<Container*>(myitem);
-						if(default_container){							
+						if(default_container){
 							player->addDepot(default_container , dp_id);
 							LoadContainer(slot->children,default_container);
 						}
 						else{
 							delete myitem;
-						}							
+						}
 					}
 				slot=slot->next;
 				}
@@ -626,7 +626,7 @@ bool IOPlayerXML::loadPlayer(Player* player, std::string name){
 						unsigned long key = 0;
 						long value = 0;
 
-						nodeValue = (char*)xmlGetProp(slot, (const xmlChar *)"key"); 
+						nodeValue = (char*)xmlGetProp(slot, (const xmlChar *)"key");
 						if(nodeValue) {
 							key = atoi(nodeValue);
 							xmlFreeOTSERV(nodeValue);
@@ -660,8 +660,8 @@ bool IOPlayerXML::loadPlayer(Player* player, std::string name){
 			return false;
 #endif //ELEM_VIP_LIST
 		return isLoaded;
-	}	
-	xmlMutexUnlock(xmlmutex);	
+	}
+	xmlMutexUnlock(xmlmutex);
 	return false;
 }
 
@@ -678,7 +678,7 @@ bool IOPlayerXML::LoadContainer(xmlNodePtr nodeitem,Container* ccontainer)
 	if(tmp==NULL){
 		return false;
 	}
-                  
+
 	if (strcmp((const char*)tmp->name, "inside") == 0){
 		char* nodeValue = NULL;
 		//load items
@@ -693,9 +693,9 @@ bool IOPlayerXML::LoadContainer(xmlNodePtr nodeitem,Container* ccontainer)
 			}
 
 			Item* myitem = Item::CreateItem(id);
-			myitem->unserialize(p);			
+			myitem->unserialize(p);
 			ccontainer->addItem(myitem);
-			
+
 			Container* in_container = dynamic_cast<Container*>(myitem);
 			if(in_container){
 				LoadContainer(p,in_container);
@@ -735,9 +735,9 @@ bool IOPlayerXML::savePlayer(Player* player){
 	std::string filename = datadir + "players/" + player->getName() + ".xml";
 	std::transform (filename.begin(),filename.end(), filename.begin(), tolower);
     std::stringstream sb;
-    
-    xmlDocPtr doc;        
-    xmlMutexLock(xmlmutex);    
+
+    xmlDocPtr doc;
+    xmlMutexLock(xmlmutex);
 	xmlNodePtr nn, sn, pn, root;
 	doc = xmlNewDoc((const xmlChar*)"1.0");
 	doc->children = xmlNewDocNode(doc, NULL, (const xmlChar*)"player", NULL);
@@ -747,32 +747,32 @@ bool IOPlayerXML::savePlayer(Player* player){
 
 	sb << player->getName();  	       xmlSetProp(root, (const xmlChar*) "name", (const xmlChar*)sb.str().c_str());     sb.str("");
 	sb << player->accountNumber;       xmlSetProp(root, (const xmlChar*) "account", (const xmlChar*)sb.str().c_str());	sb.str("");
-	sb << player->sex;                 xmlSetProp(root, (const xmlChar*) "sex", (const xmlChar*)sb.str().c_str());     	sb.str("");	
+	sb << player->sex;                 xmlSetProp(root, (const xmlChar*) "sex", (const xmlChar*)sb.str().c_str());     	sb.str("");
 	sb << player->getDirection();
     if (sb.str() == "North"){sb.str(""); sb << "0";}
 	if (sb.str() == "East") {sb.str(""); sb << "1";}
 	if (sb.str() == "South"){sb.str(""); sb << "2";}
 	if (sb.str() == "West") {sb.str(""); sb << "3";}
 	xmlSetProp(root, (const xmlChar*) "lookdir", (const xmlChar*)sb.str().c_str());                             sb.str("");
-	
+
 #ifdef YUR_HIGH_LEVELS
-	char buf[128];
-	_i64toa(player->experience, buf, 10);
-	xmlSetProp(root, (const xmlChar*) "exp", (const xmlChar*) buf);
+	//char buf[128];
+	//_i64toa(player->experience, buf, 10);
+	xmlSetProp(root, (const xmlChar*) "exp", (const xmlChar*) std::to_string(player->experience).c_str());
 #else
-	sb << player->experience;         xmlSetProp(root, (const xmlChar*) "exp", (const xmlChar*)sb.str().c_str());       sb.str("");	
+	sb << player->experience;         xmlSetProp(root, (const xmlChar*) "exp", (const xmlChar*)sb.str().c_str());       sb.str("");
 #endif //YUR_HIGH_LEVELS
 
 	sb << (int)player->vocation;      xmlSetProp(root, (const xmlChar*) "voc", (const xmlChar*)sb.str().c_str());       sb.str("");
-	sb << player->level;              xmlSetProp(root, (const xmlChar*) "level", (const xmlChar*)sb.str().c_str());     sb.str("");	
-	sb << player->access;             xmlSetProp(root, (const xmlChar*) "access", (const xmlChar*)sb.str().c_str());	sb.str("");	
+	sb << player->level;              xmlSetProp(root, (const xmlChar*) "level", (const xmlChar*)sb.str().c_str());     sb.str("");
+	sb << player->access;             xmlSetProp(root, (const xmlChar*) "access", (const xmlChar*)sb.str().c_str());	sb.str("");
 	//sb << player->cap;    	        xmlSetProp(root, (const xmlChar*) "cap", (const xmlChar*)sb.str().c_str());       sb.str("");
 	sb << player->getCapacity();      xmlSetProp(root, (const xmlChar*) "cap", (const xmlChar*)sb.str().c_str());       sb.str("");
 	sb << player->maglevel;	          xmlSetProp(root, (const xmlChar*) "maglevel", (const xmlChar*)sb.str().c_str());  sb.str("");
 	sb << (long)player->lastlogin;	        xmlSetProp(root, (const xmlChar*) "lastlogin", (const xmlChar*)sb.str().c_str());  sb.str("");
-#ifdef TLM_BEDS  
+#ifdef TLM_BEDS
     sb << player->lastlogout;		 xmlSetProp(root, (const xmlChar*) "lastlogout", (const xmlChar*)sb.str().c_str()); sb.str("");
-#endif //TLM_BEDS 
+#endif //TLM_BEDS
 #ifdef YUR_PREMIUM_PROMOTION
 	sb << player->premiumTicks;  xmlSetProp(root, (const xmlChar*) "premticks", (const xmlChar*)sb.str().c_str()); sb.str("");
 	sb << player->promoted;  xmlSetProp(root, (const xmlChar*) "promoted", (const xmlChar*)sb.str().c_str()); sb.str("");
@@ -786,7 +786,7 @@ bool IOPlayerXML::savePlayer(Player* player){
 	sb << player->pos.y;  	xmlSetProp(pn, (const xmlChar*) "y", (const xmlChar*)sb.str().c_str());        sb.str("");
 	sb << player->pos.z; 	xmlSetProp(pn, (const xmlChar*) "z", (const xmlChar*)sb.str().c_str());	       sb.str("");
 	xmlAddChild(root, pn);
-	
+
 	pn = xmlNewNode(NULL,(const xmlChar*)"temple");
 	sb << player->masterPos.x;  xmlSetProp(pn, (const xmlChar*) "x", (const xmlChar*)sb.str().c_str());        sb.str("");
 	sb << player->masterPos.y;  xmlSetProp(pn, (const xmlChar*) "y", (const xmlChar*)sb.str().c_str());        sb.str("");
@@ -801,20 +801,20 @@ bool IOPlayerXML::savePlayer(Player* player){
 	sb << player->absolveTicks; xmlSetProp(pn, (const xmlChar*) "absolve", (const xmlChar*)sb.str().c_str()); sb.str("");
 	xmlAddChild(root , pn);
 #endif //TLM_SKULLS_PARTY
-	
+
 	pn = xmlNewNode(NULL,(const xmlChar*)"health");
 	sb << player->health;     xmlSetProp(pn, (const xmlChar*) "now", (const xmlChar*)sb.str().c_str());        sb.str("");
 	sb << player->healthmax;  xmlSetProp(pn, (const xmlChar*) "max", (const xmlChar*)sb.str().c_str());        sb.str("");
 	sb << player->food;  	  xmlSetProp(pn, (const xmlChar*) "food", (const xmlChar*)sb.str().c_str());       sb.str("");
-	                     
+
 	xmlAddChild(root, pn);
-	
+
 	pn = xmlNewNode(NULL,(const xmlChar*)"mana");
 	sb << player->mana;      xmlSetProp(pn, (const xmlChar*) "now", (const xmlChar*)sb.str().c_str());        sb.str("");
 	sb << player->manamax;   xmlSetProp(pn, (const xmlChar*) "max", (const xmlChar*)sb.str().c_str());        sb.str("");
     sb << player->manaspent; xmlSetProp(pn, (const xmlChar*) "spent", (const xmlChar*)sb.str().c_str());      sb.str("");
 	xmlAddChild(root, pn);
-    	               
+
 	pn = xmlNewNode(NULL,(const xmlChar*)"look");
     sb << player->lookmaster;       xmlSetProp(pn, (const xmlChar*) "type", (const xmlChar*)sb.str().c_str());        sb.str("");
 	sb << player->lookhead;         xmlSetProp(pn, (const xmlChar*) "head", (const xmlChar*)sb.str().c_str());        sb.str("");
@@ -822,17 +822,17 @@ bool IOPlayerXML::savePlayer(Player* player){
 	sb << player->looklegs;         xmlSetProp(pn, (const xmlChar*) "legs", (const xmlChar*)sb.str().c_str());        sb.str("");
 	sb << player->lookfeet;         xmlSetProp(pn, (const xmlChar*) "feet", (const xmlChar*)sb.str().c_str());        sb.str("");
 	xmlAddChild(root, pn);
-    
+
 #ifdef CVS_GUILD_SYSTEM
     	pn = xmlNewNode(NULL,(const xmlChar*)"guild");
 	sb << player->guildName;     xmlSetProp(pn, (const xmlChar*) "name", (const xmlChar*)sb.str().c_str());        sb.str("");
 	sb << player->guildRank;  xmlSetProp(pn, (const xmlChar*) "rank", (const xmlChar*)sb.str().c_str());        sb.str("");
 	sb << player->guildNick;  	  xmlSetProp(pn, (const xmlChar*) "nick", (const xmlChar*)sb.str().c_str());       sb.str("");
 	sb << player->guildId;  	  xmlSetProp(pn, (const xmlChar*) "id", (const xmlChar*)sb.str().c_str());       sb.str("");
-	
+
 	xmlAddChild(root, pn);
 #endif //CVS_GUILD_SYSTEM
-    	      
+
 	sn = xmlNewNode(NULL,(const xmlChar*)"skills");
 	for (int i = 0; i <= 6; i++)
 	  {
@@ -845,7 +845,7 @@ bool IOPlayerXML::savePlayer(Player* player){
    xmlAddChild(root, sn);
 
 #ifdef YUR_LEARN_SPELLS
-	sn = xmlNewNode(NULL,(const xmlChar*)"spells"); 
+	sn = xmlNewNode(NULL,(const xmlChar*)"spells");
 	for (StringVector::iterator it = player->learnedSpells.begin(); it != player->learnedSpells.end(); ++it)
 	{
 		pn = xmlNewNode(NULL,(const xmlChar*)"spell");
@@ -867,7 +867,7 @@ bool IOPlayerXML::savePlayer(Player* player){
 	}
 	xmlAddChild(root, sn);
 #endif //JD_DEATH_LIST
-	
+
 	sn = xmlNewNode(NULL,(const xmlChar*)"inventory");
 	for (int i = 1; i <= 10; i++)
 	  {
@@ -877,61 +877,61 @@ bool IOPlayerXML::savePlayer(Player* player){
     	  sb << i;
           xmlSetProp(pn, (const xmlChar*) "slotid", (const xmlChar*)sb.str().c_str());
           sb.str("");
-          
+
 		nn = player->items[i]->serialize();
           Container* is_container = dynamic_cast<Container*>(player->items[i]);
           if(is_container){
                SaveContainer(nn,is_container);
           }
-          
+
 	      xmlAddChild(pn, nn);
 	      xmlAddChild(sn, pn);
           }
       }
    xmlAddChild(root, sn);
-	
+
 	sn = xmlNewNode(NULL,(const xmlChar*)"depots");
-	
+
 	for(DepotMap::reverse_iterator it = player->depots.rbegin(); it !=player->depots.rend()  ;++it){
     	  pn = xmlNewNode(NULL,(const xmlChar*)"depot");
     	  sb << it->first;
           xmlSetProp(pn, (const xmlChar*) "depotid", (const xmlChar*)sb.str().c_str());
           sb.str("");
-          
+
 		nn = (it->second)->serialize();
           Container* is_container = dynamic_cast<Container*>(it->second);
           if(is_container){
                SaveContainer(nn,is_container);
           }
-          
+
 	      xmlAddChild(pn, nn);
 	      xmlAddChild(sn, pn);
 		}
-      
+
    xmlAddChild(root, sn);
-   
+
 	sn = xmlNewNode(NULL,(const xmlChar*)"storage");
 	for(StorageMap::const_iterator cit = player->getStorageIteratorBegin(); cit != player->getStorageIteratorEnd();cit++){
 		pn = xmlNewNode(NULL,(const xmlChar*)"data");
     	sb << cit->first;
         xmlSetProp(pn, (const xmlChar*) "key", (const xmlChar*)sb.str().c_str());
         sb.str("");
-          
+
 		sb << cit->second;
         xmlSetProp(pn, (const xmlChar*) "value", (const xmlChar*)sb.str().c_str());
         sb.str("");
-        
+
 		xmlAddChild(sn, pn);
 	}
     xmlAddChild(root, sn);
-	
+
 	//Save the character
     if (xmlSaveFile(filename.c_str(), doc))
        {
        #ifdef __DEBUG__
        std::cout << "\tSaved character succefully!\n";
        #endif
-       xmlFreeDoc(doc);       
+       xmlFreeDoc(doc);
        xmlMutexUnlock(xmlmutex);
 #ifdef ELEM_VIP_LIST
 	   return SaveVIP(player);
@@ -942,8 +942,8 @@ bool IOPlayerXML::savePlayer(Player* player){
     else
        {
        std::cout << "\tCouldn't save character =(\n";
-       xmlFreeDoc(doc);       
-       xmlMutexUnlock(xmlmutex);       
+       xmlFreeDoc(doc);
+       xmlMutexUnlock(xmlmutex);
 	   return false;
        }
 }
@@ -977,23 +977,23 @@ bool IOPlayerXML::LoadVIP(Player* player)
 	while (vipNode)
 	{
 		if (strcmp((char*)vipNode->name, "vip") == 0)
-			player->vip[i++] = (const char*)xmlGetProp(vipNode, (const xmlChar *)"name");	           
+			player->vip[i++] = (const char*)xmlGetProp(vipNode, (const xmlChar *)"name");
 		vipNode = vipNode->next;
 	}
 
-	xmlFreeDoc(doc);  
-	xmlMutexUnlock(xmlmutex);  
+	xmlFreeDoc(doc);
+	xmlMutexUnlock(xmlmutex);
 	return true;
 }
 
-bool IOPlayerXML::SaveVIP(Player* player) 
+bool IOPlayerXML::SaveVIP(Player* player)
 {
 	std::string datadir = g_config.getGlobalString("datadir");
 	std::stringstream filename;
 	filename << datadir << "vip/" << player->accountNumber << ".xml";
-	   
-	xmlDocPtr doc;        
-	xmlMutexLock(xmlmutex);    
+
+	xmlDocPtr doc;
+	xmlMutexLock(xmlmutex);
 	xmlNodePtr root, vipNode;
 
 	doc = xmlNewDoc((const xmlChar*)"1.0");
@@ -1004,24 +1004,24 @@ bool IOPlayerXML::SaveVIP(Player* player)
 		if(!player->vip[i].empty())
 		{
 			vipNode = xmlNewNode(NULL,(const xmlChar*)"vip");
-			xmlSetProp(vipNode, (const xmlChar*) "name", (const xmlChar*)player->vip[i].c_str()); 
+			xmlSetProp(vipNode, (const xmlChar*) "name", (const xmlChar*)player->vip[i].c_str());
 			xmlAddChild(root, vipNode);
-		}    
+		}
 
 	if (xmlSaveFile(filename.str().c_str(), doc))
 	{
 #ifdef __DEBUG__
 		std::cout << "\tSaved the vip " << player->getName() << " succefully!" << std::endl;
 #endif
-		xmlFreeDoc(doc);      
-		xmlMutexUnlock(xmlmutex);      
+		xmlFreeDoc(doc);
+		xmlMutexUnlock(xmlmutex);
 		return true;
 	}
 	else
 	{
 		std::cout << "Couldn't save the vip of " << player->getName() << std::endl;
-		xmlFreeDoc(doc);      
-		xmlMutexUnlock(xmlmutex);      
+		xmlFreeDoc(doc);
+		xmlMutexUnlock(xmlmutex);
 		return false;
 	}
 }

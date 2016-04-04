@@ -7,7 +7,7 @@
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -23,7 +23,7 @@
 #include "luascript.h"
 #include <algorithm>
 #include <locale>
-
+#include <string>
 extern LuaScript g_config;
 extern xmlMutexPtr xmlmutex;
 std::vector<Guilds::Guild*> Guilds::guilds;
@@ -115,12 +115,12 @@ bool Guilds::Guild::reloadGuildInfo(Player* player)
 void Guilds::Guild::save(xmlNodePtr guildNode)
 {
 	xmlNodePtr memberNode;
-	char buf[36];
+	//char buf[36];
 
 	for (size_t i = 0; i < members.size(); i++)
 	{
 		memberNode = xmlNewNode(NULL, (const xmlChar*)"member");
-		xmlSetProp(memberNode, (const xmlChar*) "status", (const xmlChar*)itoa(members[i].status, buf, 10));
+		xmlSetProp(memberNode, (const xmlChar*) "status", (const xmlChar*)std::to_string(members[i].status).c_str());
 		xmlSetProp(memberNode, (const xmlChar*) "name", (const xmlChar*)members[i].name.c_str());
 		xmlSetProp(memberNode, (const xmlChar*) "rank", (const xmlChar*)members[i].rank.c_str());
 		xmlSetProp(memberNode, (const xmlChar*) "nick", (const xmlChar*)members[i].nick.c_str());
@@ -140,7 +140,7 @@ bool Guilds::Load()
 
 	xmlNodePtr root, guildNode, memberNode;
 	root = xmlDocGetRootElement(doc);
-	if (xmlStrcmp(root->name, (const xmlChar*)"guilds")) 
+	if (xmlStrcmp(root->name, (const xmlChar*)"guilds"))
 	{
 		xmlFreeDoc(doc);
 		xmlMutexUnlock(xmlmutex);
@@ -170,7 +170,7 @@ bool Guilds::Load()
 						nick = std::string(tmp);
 					else
 						nick = (const char*)xmlGetProp(memberNode, (const xmlChar *) "title");	// old
-					
+
 					guild->addMember(name, status, rank, nick);
 				}
 				memberNode = memberNode->next;
@@ -183,7 +183,7 @@ bool Guilds::Load()
 
 	xmlFreeDoc(doc);
 	xmlMutexUnlock(xmlmutex);
-	return true;	
+	return true;
 }
 
 bool Guilds::Save()
