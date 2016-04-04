@@ -42,7 +42,7 @@ int LuaScript::OpenFile(const char *filename)
 {
 	luaState = lua_open();
 
-	if (luaL_dofile(luaState, filename))
+	if (lua_dofile(luaState, filename))
 		return false;
 
 	NO_VOC_SPEED = atof(getGlobalStringField("speed", 1, "2.0").c_str());

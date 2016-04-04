@@ -7,7 +7,7 @@
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -30,7 +30,7 @@ typedef boost::tokenizer<boost::char_separator<char> > tokenizer;
 #endif
 
 #include <libxml/xmlmemory.h>
-#include <libxml/parser.h> 
+#include <libxml/parser.h>
 
 extern LuaScript g_config;
 
@@ -77,19 +77,19 @@ bool SpawnManager::loadSpawnsXML(std::string filename)
 		xmlNodePtr root, p;
 		char* nodeValue = NULL;
 		root = xmlDocGetRootElement(doc);
-		
+
 		root = xmlDocGetRootElement(doc);
-		
-		if (xmlStrcmp(root->name,(const xmlChar*) "spawns")){			
+
+		if (xmlStrcmp(root->name,(const xmlChar*) "spawns")){
 			xmlFreeDoc(doc);
 			return false;
 		}
 
 		p = root->children;
-            
+
 		while (p) {
 			const char* str = (char*)p->name;
-			
+
 			if (strcmp(str, "spawn") == 0) {
 				Position centerpos;
 				int radius;
@@ -223,7 +223,7 @@ bool SpawnManager::loadSpawnsXML(std::string filename)
 	return false;
 }
 
-#ifdef ENABLESQLMAPSUPPORT	
+#ifdef ENABLESQLMAPSUPPORT
 bool SpawnManager::loadSpawnsSQL(std::string identifier)
 {
 	std::string host = g_config.getGlobalString("map_host");
@@ -233,30 +233,30 @@ bool SpawnManager::loadSpawnsSQL(std::string identifier)
 
 #ifdef __DEBUG__
 	std::cout "host" << host << "user" << user << "pass" << pass << "db" << db << std::endl;
-#endif     
+#endif
 	mysqlpp::Connection con;
 
 	try{
-		con.connect(db.c_str(), host.c_str(), user.c_str(), pass.c_str()); 
+		con.connect(db.c_str(), host.c_str(), user.c_str(), pass.c_str());
 	}
 	catch(mysqlpp::BadQuery e){
 		std::cout << "MYSQL-ERROR: " << e.error << std::endl;
 		return false;
 	}
-	
+
 	mysqlpp::Result res;
-	
+
 	//Monsters
 
-	//Try & Find the Monter's	
+	//Try & Find the Monter's
 	try{
      mysqlpp::Query query = con.query();
 		query << "SELECT * FROM " << identifier << "_monsters WHERE name !=''";
-	 
+
 #ifdef __DEBUG__
 	std::cout << query.preview() << std::endl;
-#endif	
-	
+#endif
+
 	 res = query.store();
 	} //End Try
 	catch(mysqlpp::BadQuery e){
@@ -280,7 +280,7 @@ bool SpawnManager::loadSpawnsSQL(std::string identifier)
           query.reset();
           query << "SELECT * FROM " << identifier << "_monsters WHERE id = '" << i <<"' and id != ''";
           Monster = query.store();
-          mysqlpp::Row row = *Monster.begin();          
+          mysqlpp::Row row = *Monster.begin();
           //Get the Monster's Position on Map
           std::string pos = std::string(row.lookup_by_name("spawnpos"));
           boost::char_separator<char> sep(";");
@@ -302,19 +302,19 @@ bool SpawnManager::loadSpawnsSQL(std::string identifier)
 			catch(mysqlpp::BadQuery e){
 				std::cout << "MYSQL-ERROR: " << e.error << std::endl;
 				return false;
-			}//End Catch    
+			}//End Catch
 		}
-	
-	//NPC's	
-	//Try & Find the NPC's	
+
+	//NPC's
+	//Try & Find the NPC's
 	try{
 		mysqlpp::Query query = con.query();
 		query << "SELECT * FROM " << identifier << "_npcs WHERE name !=''";
-	 
+
 #ifdef __DEBUG__
 		std::cout << query.preview() << std::endl;
-#endif	
-	
+#endif
+
 	 res = query.store();
 	}//End Try
 	catch(mysqlpp::BadQuery e){
@@ -338,7 +338,7 @@ bool SpawnManager::loadSpawnsSQL(std::string identifier)
           query.reset();
           query << "SELECT * FROM " << identifier << "_npcs WHERE id = '" << i <<"' and id != ''";
           Monster = query.store();
-          mysqlpp::Row row = *Monster.begin();          
+          mysqlpp::Row row = *Monster.begin();
           //Get the NPC's Position on Map
           std::string pos = std::string(row.lookup_by_name("pos"));
           boost::char_separator<char> sep(";");
@@ -352,31 +352,31 @@ bool SpawnManager::loadSpawnsSQL(std::string identifier)
           if(std::string(row.lookup_by_name("name")) != ""){name = std::string(row.lookup_by_name("name"));}
           int dir = row.lookup_by_name("dir");
           Npc* npc = new Npc(name, game);
-          
+
           npc->pos = npcpos;
           switch(dir){
              case 1:
                 npc->direction=(NORTH);
                 break;
-             
+
              case 2:
                 npc->direction=(SOUTH);
                 break;
-             
+
              case 3:
                 npc->direction=(WEST);
                 break;
-             
+
              case 4:
                 npc->direction=(EAST);
                 break;
-             
+
              default:
               //  std::cout << "Invalid direction for " << name << "  " <<x<<" "<<y<<" "<<z<<".";
                 return false;
                 break;
           }
-					
+
 					if(!game->placeCreature(npc->pos, npc)){
 						delete npc;
 					}
@@ -386,8 +386,8 @@ bool SpawnManager::loadSpawnsSQL(std::string identifier)
 			catch(mysqlpp::BadQuery e){
 				std::cout << "MYSQL-ERROR: " << e.error << std::endl;
 				return false;
-			}//End Catch    
-    
+			}//End Catch
+
 		}
     return true;
 }
@@ -448,13 +448,13 @@ bool Spawn::addMonster(std::string name, Direction dir, int x, int y, int spawnt
 	si.spawntime = spawntime;
 	si.lastspawn = 0;
 
-	unsigned long spawnid = (int)spawnmap.size() + 1;
+	uint32_t spawnid = (int)spawnmap.size() + 1;
 	spawnmap[spawnid] = si;
 
 	return true;
 }
 
-Monster* Spawn::respawn(unsigned long spawnid, Position &pos, std::string &name, Direction dir)
+Monster* Spawn::respawn(uint32_t spawnid, Position &pos, std::string &name, Direction dir)
 {
 	//Monster *monster = new Monster(name, game);
 	Monster* monster = Monster::createMonster(name, game);
@@ -505,7 +505,7 @@ void Spawn::idle(int t)
 		else
 			++it;
 	}
-	
+
 	for(SpawnMap::iterator sit = spawnmap.begin(); sit != spawnmap.end(); ++sit) {
 
 		if(spawnedmap.count(sit->first) == 0) {
@@ -525,7 +525,7 @@ void Spawn::idle(int t)
 						break;
 					}
 				}
-				
+
 				if(playerFound) {
 					sit->second.lastspawn = OTSYS_TIME();
 					continue;

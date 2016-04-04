@@ -14,7 +14,7 @@
 	<list>
 	<string>
 
-1459778125 source:/root/Desktop/revinity76/source/actions.cpp
+1459789156 source:/root/Desktop/revinity76/source/actions.cpp
 	"definitions.h"
 	"const76.h"
 	"player.h"
@@ -199,7 +199,7 @@
 	"const76.h"
 	"itemloader.h"
 
-1135806426 /root/Desktop/revinity76/source/itemloader.h
+1459794152 /root/Desktop/revinity76/source/itemloader.h
 	"fileloader.h"
 
 1459776260 /root/Desktop/revinity76/source/fileloader.h
@@ -480,8 +480,9 @@
 	<map>
 	<string>
 
-1459778547 source:/root/Desktop/revinity76/source/fileloader.cpp
+1459793806 source:/root/Desktop/revinity76/source/fileloader.cpp
 	<stdlib.h>
+	<iostream>
 	"fileloader.h"
 
 1459778657 source:/root/Desktop/revinity76/source/game.cpp
@@ -657,7 +658,7 @@
 1129977160 source:/root/Desktop/revinity76/source/itemloader.cpp
 	"itemloader.h"
 
-1135806432 source:/root/Desktop/revinity76/source/items.cpp
+1459791436 source:/root/Desktop/revinity76/source/items.cpp
 	"definitions.h"
 	"items.h"
 	"luascript.h"
@@ -678,7 +679,7 @@
 	<libxml/xmlmemory.h>
 	<libxml/parser.h>
 
-1459779834 source:/root/Desktop/revinity76/source/luascript.cpp
+1459789197 source:/root/Desktop/revinity76/source/luascript.cpp
 	<string>
 	<iostream>
 	"luascript.h"
@@ -760,7 +761,7 @@
 	"player.h"
 	"position.h"
 
-1459779972 source:/root/Desktop/revinity76/source/npc.cpp
+1459789254 source:/root/Desktop/revinity76/source/npc.cpp
 	"definitions.h"
 	<algorithm>
 	<functional>
@@ -774,7 +775,7 @@
 	"player.h"
 	"game.h"
 
-1459786850 source:/root/Desktop/revinity76/source/otserv.cpp
+1459794087 source:/root/Desktop/revinity76/source/otserv.cpp
 	"definitions.h"
 	<string>
 	<iostream>
@@ -901,7 +902,7 @@
 	<libxml/xmlmemory.h>
 	<libxml/parser.h>
 
-1459780088 source:/root/Desktop/revinity76/source/spells.cpp
+1459789284 source:/root/Desktop/revinity76/source/spells.cpp
 	"definitions.h"
 	<algorithm>
 	<functional>
@@ -950,4 +951,16 @@
 	<string>
 	<cmath>
 	<sstream>
+
+1150375112 /usr/include/lua50/lua.h
+	<stdarg.h>
+	<stddef.h>
+
+1049376934 /usr/include/lua50/lauxlib.h
+	<stddef.h>
+	<stdio.h>
+	"lua.h"
+
+1047990266 /usr/include/lua50/lualib.h
+	"lua.h"
 

@@ -408,7 +408,7 @@ std::list<Position> Map::getPathToEx(Creature *creature, Position start, Positio
 	startNode->x = start.x;
 	startNode->y = start.y;
 
-	while(!found && nodes.countClosedNodes() < (unsigned long)maxNodSize){
+	while(!found && nodes.countClosedNodes() < (uint32_t)maxNodSize){
 		AStarNode* current = nodes.getBestNode();
 		if(!current)
 			return path; //no path
@@ -416,94 +416,94 @@ std::list<Position> Map::getPathToEx(Creature *creature, Position start, Positio
 		nodes.closeNode(current);
 
 		for(int dx=-1; dx <= 1; dx++){
-			for(int dy=-1; dy <= 1; dy++){				  
+			for(int dy=-1; dy <= 1; dy++){
 				if(1 == 1/*std::abs(dx) != std::abs(dy)*/){
-					
+
 					int x = current->x + dx;
 					int y = current->y + dy;
-					
+
 					if(dx == -1 && dy == -1)
 					{
-						Tile *ctest1 = getTile(x+1, y, z);							
+						Tile *ctest1 = getTile(x+1, y, z);
 						Tile *ctest2 = getTile(x, y+1, z);
 						if(ctest1 && ctest2) {
-							
+
 							ReturnValue ctest1er = ctest1->isBlocking(BLOCK_SOLID | BLOCK_PATHFIND, !creaturesBlock, ignoreMoveableBlockingItems);
 							ReturnValue ctest2er = ctest2->isBlocking(BLOCK_SOLID | BLOCK_PATHFIND, !creaturesBlock, ignoreMoveableBlockingItems);
-							
+
 							if(ctest1er == RET_CREATUREBLOCK && ctest1->getCreature() == creature && ctest1->creatures.size() == 1)
 								ctest1er = RET_NOERROR;
 							if(ctest2er == RET_CREATUREBLOCK && ctest2->getCreature() == creature && ctest2->creatures.size() == 1)
 								ctest2er = RET_NOERROR;
-	
+
 							if(ctest1er == RET_NOERROR || ctest2er == RET_NOERROR) {
 								continue;
 						}
-						}	
-						
+						}
+
 					}
-					
+
 					if(dx == 1 && dy == -1)
 					{
-						Tile *ctest1 = getTile(x-1, y, z);							
+						Tile *ctest1 = getTile(x-1, y, z);
 						Tile *ctest2 = getTile(x, y+1, z);
 						if(ctest1 && ctest2) {
-							
+
 							ReturnValue ctest1er = ctest1->isBlocking(BLOCK_SOLID | BLOCK_PATHFIND, !creaturesBlock, ignoreMoveableBlockingItems);
 							ReturnValue ctest2er = ctest2->isBlocking(BLOCK_SOLID | BLOCK_PATHFIND, !creaturesBlock, ignoreMoveableBlockingItems);
-							
+
 							if(ctest1er == RET_CREATUREBLOCK && ctest1->getCreature() == creature && ctest1->creatures.size() == 1)
 								ctest1er = RET_NOERROR;
 							if(ctest2er == RET_CREATUREBLOCK && ctest2->getCreature() == creature && ctest2->creatures.size() == 1)
 								ctest2er = RET_NOERROR;
-	
+
 							if(ctest1er == RET_NOERROR || ctest2er == RET_NOERROR) {
 								continue;
 						}
-						}	
-						
+						}
+
 					}
 
 					if(dx == 1 && dy == 1)
 					{
-						Tile *ctest1 = getTile(x-1, y, z);							
+						Tile *ctest1 = getTile(x-1, y, z);
 						Tile *ctest2 = getTile(x, y-1, z);
 						if(ctest1 && ctest2) {
-							
+
 							ReturnValue ctest1er = ctest1->isBlocking(BLOCK_SOLID | BLOCK_PATHFIND, !creaturesBlock, ignoreMoveableBlockingItems);
 							ReturnValue ctest2er = ctest2->isBlocking(BLOCK_SOLID | BLOCK_PATHFIND, !creaturesBlock, ignoreMoveableBlockingItems);
-							
+
 							if(ctest1er == RET_CREATUREBLOCK && ctest1->getCreature() == creature && ctest1->creatures.size() == 1)
 								ctest1er = RET_NOERROR;
 							if(ctest2er == RET_CREATUREBLOCK && ctest2->getCreature() == creature && ctest2->creatures.size() == 1)
 								ctest2er = RET_NOERROR;
-	
+
 							if(ctest1er == RET_NOERROR || ctest2er == RET_NOERROR) {
 								continue;
 						}
-						}	
-						
+						}
+
 					}
 
 					if(dx == -1 && dy == 1)
 					{
-						Tile *ctest1 = getTile(x-1, y, z);							
+						Tile *ctest1 = getTile(x-1, y, z);
 						Tile *ctest2 = getTile(x, y+1, z);
 						if(ctest1 && ctest2) {
-							
+
 							ReturnValue ctest1er = ctest1->isBlocking(BLOCK_SOLID | BLOCK_PATHFIND, !creaturesBlock, ignoreMoveableBlockingItems);
 							ReturnValue ctest2er = ctest2->isBlocking(BLOCK_SOLID | BLOCK_PATHFIND, !creaturesBlock, ignoreMoveableBlockingItems);
-							
+
 							if(ctest1er == RET_CREATUREBLOCK && ctest1->getCreature() == creature && ctest1->creatures.size() == 1)
 								ctest1er = RET_NOERROR;
 							if(ctest2er == RET_CREATUREBLOCK && ctest2->getCreature() == creature && ctest2->creatures.size() == 1)
 								ctest2er = RET_NOERROR;
-	
+
 							if(ctest1er == RET_NOERROR || ctest2er == RET_NOERROR) {
 								continue;
 						}
-						}	
-						
+						}
+
 					}
 
 					Tile *t = getTile(x, y, z);
@@ -568,7 +568,7 @@ std::list<Position> Map::getPathTo(Creature *creature, Position start, Position 
 	startNode->x = start.x;
 	startNode->y = start.y;
 
-	while(!found && nodes.countClosedNodes() < (unsigned long)maxNodSize){
+	while(!found && nodes.countClosedNodes() < (uint32_t)maxNodSize){
 		AStarNode* current = nodes.getBestNode();
 		if(!current)
 			return path; //no path
@@ -640,7 +640,7 @@ AStarNode* AStarNodes::createOpenNode()
 	if(curNode >= MAX_NODES)
 		return NULL;
 
-	unsigned long ret_node = curNode;
+	uint32_t ret_node = curNode;
 	curNode++;
 	openNodes[ret_node] = 1;
 	return &nodes[ret_node];
@@ -652,14 +652,14 @@ AStarNode* AStarNodes::getBestNode()
 		return NULL;
 
 	int best_node_h;
-	unsigned long best_node;
+	uint32_t best_node;
 	bool found;
 
 	best_node_h = 100000;
 	best_node = 0;
 	found = false;
 
-	for(unsigned long i = 0; i < curNode; i++){
+	for(uint32_t i = 0; i < curNode; i++){
 		if(nodes[i].h < best_node_h && openNodes[i] == 1){
 			found = true;
 			best_node_h = nodes[i].h;
@@ -676,7 +676,7 @@ AStarNode* AStarNodes::getBestNode()
 
 void AStarNodes::closeNode(AStarNode* node)
 {
-	unsigned long pos = (unsigned long)GET_NODE_INDEX(node);
+	uint32_t pos = (uint32_t)GET_NODE_INDEX(node);
 	if(pos < 0 || pos >= MAX_NODES){
 		std::cout << "AStarNodes. trying to close node out of range" << std::endl;
 		return;
@@ -684,10 +684,10 @@ void AStarNodes::closeNode(AStarNode* node)
 	openNodes[pos] = 0;
 }
 
-unsigned long AStarNodes::countClosedNodes()
+uint32_t AStarNodes::countClosedNodes()
 {
-	unsigned long counter = 0;
-	for(unsigned long i = 0; i < curNode; i++){
+	uint32_t counter = 0;
+	for(uint32_t i = 0; i < curNode; i++){
 		if(openNodes[i] == 0){
 			counter++;
 		}
@@ -695,10 +695,10 @@ unsigned long AStarNodes::countClosedNodes()
 	return counter;
 }
 
-unsigned long AStarNodes::countOpenNodes()
+uint32_t AStarNodes::countOpenNodes()
 {
-	unsigned long counter = 0;
-	for(unsigned long i = 0; i < curNode; i++){
+	uint32_t counter = 0;
+	for(uint32_t i = 0; i < curNode; i++){
 		if(openNodes[i] == 1){
 			counter++;
 		}
@@ -707,7 +707,7 @@ unsigned long AStarNodes::countOpenNodes()
 }
 
 
-bool AStarNodes::isInList(unsigned long x, unsigned long y)
+bool AStarNodes::isInList(uint32_t x, uint32_t y)
 {
 	for(unsigned i = 0; i < curNode; i++){
 		if(nodes[i].x == x && nodes[i].y == y){

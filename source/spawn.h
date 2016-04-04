@@ -7,7 +7,7 @@
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -54,7 +54,7 @@ private:
 	int radius;
 
 	bool isInSpawnRange(const Position &pos);
-	Monster* respawn(unsigned long spawnid, Position &pos, std::string &name, Direction dir);
+	Monster* respawn(uint32_t spawnid, Position &pos, std::string &name, Direction dir);
 
 	struct spawninfo {
 		Position pos;
@@ -65,11 +65,11 @@ private:
 	};
 
 	//List of monsters in the spawn
-	typedef std::map<unsigned long, struct spawninfo> SpawnMap;
+	typedef std::map<uint32_t, struct spawninfo> SpawnMap;
 	SpawnMap spawnmap;
 
 	//For spawned monsters
-	typedef std::multimap<unsigned long, Monster*, std::less<unsigned long> > SpawnedMap;
+	typedef std::multimap<uint32_t, Monster*, std::less<uint32_t> > SpawnedMap;
 	typedef SpawnedMap::value_type spawned_pair;
 	SpawnedMap spawnedmap;
 };
@@ -78,7 +78,7 @@ class SpawnManager {
 public:
 	SpawnManager();
 	~SpawnManager();
-	
+
 	static SpawnManager* instance();
 	static bool initialize(Game *igame);
 	static bool addSpawn(Spawn* spawn);

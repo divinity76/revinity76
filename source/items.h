@@ -7,7 +7,7 @@
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -148,34 +148,34 @@ public:
 };
 
 #ifdef __GNUC__
-typedef __gnu_cxx::hash_map<unsigned long, unsigned long> ReverseItemMap;
+typedef __gnu_cxx::hash_map<uint32_t, uint32_t> ReverseItemMap;
 #else
-typedef stdext::hash_map<unsigned long, unsigned long> ReverseItemMap;
+typedef stdext::hash_map<uint32_t, uint32_t> ReverseItemMap;
 #endif
 
 class Items {
 public:
 	Items();
 	~Items();
-	
+
 	int loadFromOtb(std::string);
 	bool loadXMLInfos(std::string);
 
 	const ItemType& operator[](int id);
-	
-	static unsigned long reverseLookUp(unsigned long id);
-	
+
+	static uint32_t reverseLookUp(uint32_t id);
+
 	static long dwMajorVersion;
 	static long dwMinorVersion;
 	static long dwBuildNumber;
-	
+
 protected:
 	#ifdef __GNUC__
 	typedef __gnu_cxx::hash_map<unsigned short, ItemType*> ItemMap;
 	#else
 	typedef stdext::hash_map<unsigned short, ItemType*> ItemMap;
 	#endif
-	
+
 	ItemMap items;
 	static ReverseItemMap revItems;
 

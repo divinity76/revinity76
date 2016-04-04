@@ -7,7 +7,7 @@
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -23,7 +23,7 @@
 #include <string>
 #include <iomanip>
 #include <ctime>
-#include <stdlib.h> 
+#include <stdlib.h>
 #include <map>
 
 #include "otsystem.h"
@@ -34,8 +34,8 @@
 #include "tlhelp32.h"
 #endif
 
-unsigned long max_off;
-unsigned long min_off;
+uint32_t max_off;
+uint32_t min_off;
 FunctionMap functionMap;
 bool maploaded = false;
 OTSYS_THREAD_LOCKVAR maploadlock;
@@ -48,7 +48,7 @@ EXCEPTION_DISPOSITION
      struct _CONTEXT *ContextRecord,
      void * DispatcherContext
      );
-void printPointer(std::ostream* output,unsigned long p);
+void printPointer(std::ostream* output,uint32_t p);
 #endif
 
 #ifdef __GNUC__
@@ -121,15 +121,15 @@ EXCEPTION_DISPOSITION
      void * DispatcherContext
      ){
 	//
-	unsigned long *esp;
-	unsigned long *next_ret;
-	unsigned long stack_val;
-	unsigned long *stacklimit;
-	unsigned long *stackstart;
-	unsigned long nparameters = 0;
-	unsigned long file,foundRetAddress = 0;
+	uintptr_t *esp;
+	uintptr_t *next_ret;
+	uintptr_t stack_val;
+	uintptr_t *stacklimit;
+	uintptr_t *stackstart;
+	uint32_t nparameters = 0;
+	uintptr_t file,foundRetAddress = 0;
 	_MEMORY_BASIC_INFORMATION mbi;
-	
+
 	std::ostream *outdriver;
 	std::cout << "Error: generating report file..." <<std::endl;
 	std::ofstream output("report.txt",std::ios_base::app);
@@ -141,20 +141,20 @@ EXCEPTION_DISPOSITION
 		file = true;
 		outdriver = &output;
 	}
-	
+
 	time_t rawtime;
 	time(&rawtime);
 	*outdriver << "*****************************************************" << std::endl;
 	*outdriver << "Error report - " << std::ctime(&rawtime) << std::endl;
 	*outdriver << "Compiler info - " << COMPILER_STRING << std::endl;
 	*outdriver << "Compilation Date - " << COMPILATION_DATE << std::endl << std::endl;
-	
+
 	//system and process info
 	//- global memory information
 	MEMORYSTATUS mstate;
 	GlobalMemoryStatus(&mstate);
 	*outdriver << "Memory load: " << mstate.dwMemoryLoad << std::endl <<
-		"Total phys: " << mstate.dwTotalPhys/1024 << " K availble phys: " << 
+		"Total phys: " << mstate.dwTotalPhys/1024 << " K availble phys: " <<
 		mstate.dwAvailPhys/1024 << " K" << std::endl;
 	//-process info
 	FILETIME FTcreation,FTexit,FTkernel,FTuser;
@@ -162,12 +162,12 @@ EXCEPTION_DISPOSITION
 	GetProcessTimes(GetCurrentProcess(),&FTcreation,&FTexit,&FTkernel,&FTuser);
 	// creation time
 	FileTimeToSystemTime(&FTcreation,&systemtime);
-	*outdriver << "Start time: " << systemtime.wDay << "-" << 
+	*outdriver << "Start time: " << systemtime.wDay << "-" <<
 		systemtime.wMonth << "-" << systemtime.wYear << "  " <<
-		systemtime.wHour << ":" << systemtime.wMinute << ":" << 
+		systemtime.wHour << ":" << systemtime.wMinute << ":" <<
 		systemtime.wSecond << std::endl;
 	// kernel time
-	unsigned long miliseconds;
+	uint32_t miliseconds;
 	miliseconds = FTkernel.dwHighDateTime * 429497 + FTkernel.dwLowDateTime/10000;
 	*outdriver << "Kernel time: " << miliseconds/3600000;
 	miliseconds = miliseconds - (miliseconds/3600000)*3600000;
@@ -185,8 +185,8 @@ EXCEPTION_DISPOSITION
 	*outdriver << ":" << miliseconds/1000;
 	miliseconds = miliseconds - (miliseconds/1000)*1000;
 	*outdriver << "." << miliseconds << std::endl;
-	
-	
+
+
 	// n threads
 	PROCESSENTRY32 uProcess;
 	HANDLE lSnapShot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS,0);
@@ -205,17 +205,17 @@ EXCEPTION_DISPOSITION
 		}
 		CloseHandle (lSnapShot);
 	}
-	
+
 	*outdriver << std::endl;
 	//exception header type and eip
 	outdriver->flags(std::ios::hex | std::ios::showbase);
-	*outdriver << "Exception: " << (unsigned long)ExceptionRecord->ExceptionCode << 
-		" at eip = " << (unsigned long)ExceptionRecord->ExceptionAddress;
+	*outdriver << "Exception: " << (uintptr_t)ExceptionRecord->ExceptionCode <<
+		" at eip = " << (uintptr_t)ExceptionRecord->ExceptionAddress;
 	FunctionMap::iterator functions;
-	if((unsigned long)(ExceptionRecord->ExceptionAddress) >= min_off &&
-		(unsigned long)(ExceptionRecord->ExceptionAddress) <= max_off){
+	if((uintptr_t)(ExceptionRecord->ExceptionAddress) >= min_off &&
+		(uintptr_t)(ExceptionRecord->ExceptionAddress) <= max_off){
 		for(functions = functionMap.begin(); functions != functionMap.end(); ++functions) {
-			if(functions->first > (unsigned long)(ExceptionRecord->ExceptionAddress) && 
+			if(functions->first > (uintptr_t)(ExceptionRecord->ExceptionAddress) &&
 					functions != functionMap.begin()) {
 				functions--;
 				*outdriver << "(" <<functions->second << ")" ;
@@ -224,7 +224,7 @@ EXCEPTION_DISPOSITION
 		}
 	}
 	*outdriver << std::endl ;
-	
+
 	//registers
 	*outdriver << "eax = ";printPointer(outdriver,ContextRecord->Eax);*outdriver << std::endl;
 	*outdriver << "ebx = ";printPointer(outdriver,ContextRecord->Ebx);*outdriver << std::endl;
@@ -236,24 +236,24 @@ EXCEPTION_DISPOSITION
 	*outdriver << "esp = ";printPointer(outdriver,ContextRecord->Esp);*outdriver << std::endl;
 	*outdriver << "efl = " << ContextRecord->EFlags << std::endl;
 	*outdriver << std::endl;
-	
+
 	//stack dump
-	esp = (unsigned long *)(ContextRecord->Esp);
+	esp = (uintptr_t *)(ContextRecord->Esp);
 	VirtualQuery(esp, &mbi, sizeof(mbi));
-	stacklimit = (unsigned long*)((unsigned long)(mbi.BaseAddress) + mbi.RegionSize);
-	
+	stacklimit = (uintptr_t*)((uintptr_t)(mbi.BaseAddress) + mbi.RegionSize);
+
 	*outdriver << "---Stack Trace---" << std::endl;
-	*outdriver << "From: " << (unsigned long)esp <<
-		" to: " << (unsigned long)stacklimit << std::endl;
-	
+	*outdriver << "From: " << (uintptr_t)esp <<
+		" to: " << (uintptr_t)stacklimit << std::endl;
+
 	stackstart = esp;
-	next_ret = (unsigned long*)(ContextRecord->Ebp);
+	next_ret = (uintptr_t*)(ContextRecord->Ebp);
 	while(esp<stacklimit){
 		stack_val = *esp;
 		if(foundRetAddress)
 			nparameters++;
 		if(esp - stackstart < 20 || nparameters < 10 || std::abs(esp - next_ret) < 10){
-			*outdriver  << (unsigned long)esp << " | ";
+			*outdriver  << (uintptr_t)esp << " | ";
 			printPointer(outdriver,stack_val);
 			if(esp == next_ret){
 				*outdriver << " \\\\\\\\\\\\ stack frame //////";
@@ -262,7 +262,7 @@ EXCEPTION_DISPOSITION
 				*outdriver << " <-- ret" ;
 			}
 			else if(esp - next_ret == 9){
-				next_ret = (unsigned long*)*(esp - 9);
+				next_ret = (uintptr_t*)*(esp - 9);
 			}
 			*outdriver<< std::endl;
 		}
@@ -273,7 +273,7 @@ EXCEPTION_DISPOSITION
 			for(functions = functionMap.begin(); functions != functionMap.end(); ++functions) {
 				if(functions->first > stack_val && functions != functionMap.begin()) {
 					functions--;
-					*outdriver  << (unsigned long)esp << "  " << 
+					*outdriver  << (uintptr_t)esp << "  " <<
 					functions->second <<"("  << stack_val <<")" << std::endl;
 					break;
 				}
@@ -290,10 +290,10 @@ EXCEPTION_DISPOSITION
 	return ExceptionContinueSearch;
 }
 
-void printPointer(std::ostream* output,unsigned long p){
+void printPointer(std::ostream* output,uintptr_t p){
 	*output << p;
 	if(IsBadReadPtr((void*)p,4) == 0){
-		*output << " -> " << *(unsigned long*)p;
+		*output << " -> " << *(uintptr_t*)p;
 	}
 }
 
@@ -323,11 +323,11 @@ bool ExceptionHandler::LoadMap(){
 		if(line.substr(0,5) == ".text")
 			break;
 	}
-     
+
 	if(input.eof()){
 		return false;
 	}
-	
+
 	std::string tofind = "0x";
     std::string space = " ";
     std::string lib = ".a(";
@@ -340,7 +340,7 @@ bool ExceptionHandler::LoadMap(){
 			//read hex offset
 			std::string hexnumber = line.substr(pos,10);
 			char *pEnd;
-			unsigned long offset = strtol(hexnumber.c_str(),&pEnd,0);
+			uintptr_t offset = strtol(hexnumber.c_str(),&pEnd,0);
 			if(offset){
 				//read function name
 				std::string::size_type pos2 = line.find_first_not_of(space,pos+10);

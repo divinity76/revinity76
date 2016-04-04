@@ -8,7 +8,7 @@
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -31,7 +31,7 @@
 /*
 class MovePlayer : public std::binary_function<Game*, Direction, int> {
 public:
-	MovePlayer(unsigned long playerid) : _pid(playerid) {}
+	MovePlayer(uint32_t playerid) : _pid(playerid) {}
 
 	virtual result_type operator()(const first_argument_type& game, const second_argument_type& dir) const
 	{
@@ -49,7 +49,7 @@ public:
 	    OTSYS_THREAD_UNLOCK(game->gameLock)
 		  return 1;
     }
-		       
+
 		Position pos = player->pos;
 		switch (dir) {
 			case NORTH:
@@ -99,13 +99,13 @@ public:
 	}
 
 protected:
-	unsigned long _pid;
+	uint32_t _pid;
 };
 
 class StopMovePlayer : public std::unary_function<Game*, bool> {
 public:
-		StopMovePlayer(unsigned long playerid) : _pid(playerid) { }
-		
+		StopMovePlayer(uint32_t playerid) : _pid(playerid) { }
+
 		virtual result_type operator()(const argument_type& game) const {
 			// get the player we want to move...
 			Creature* creature = game->getCreatureByID(_pid);
@@ -125,7 +125,7 @@ public:
 		}
 
 protected:
-	unsigned long _pid;
+	uint32_t _pid;
 
 };
 */

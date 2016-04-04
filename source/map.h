@@ -7,7 +7,7 @@
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -47,10 +47,10 @@ class Game;
 #elif _M4K_
  #define MAP_WIDTH    4096
  #define MAP_HEIGHT   4096
-#else       
+#else
  #define MAP_WIDTH    512
  #define MAP_HEIGHT   512
-#endif   
+#endif
 
 #define MAP_LAYER     16
 
@@ -66,11 +66,11 @@ class Map;
 
 class Range {
 public:
-	
+
 	Range(Position centerpos, bool multilevel = false) {
 		setRange(centerpos, multilevel);
 	}
-	
+
 	//Creates a union of 2 positions
 	//Should only be used when a player makes a move.
 	Range(const Position& pos1, const Position& pos2)
@@ -101,7 +101,7 @@ public:
 	Position minRange;
 	Position maxRange;
 
-	int zstep;	
+	int zstep;
 	bool multilevel;
 
 private:
@@ -112,15 +112,15 @@ private:
 	void setRange(Position pos, bool multilevel = false)
 	{
 		centerpos = pos;
-		
+
 		//This is the maximum view that the viewer AND the viewers that is seeing the viewer :o
 		minRange.x = -9; //minRange.x = -8;
 		minRange.y = -7; //minRange.y = -6;
-		
+
 		//just the visible ones
 		maxRange.x = 9; //maxRange.x = 8;
 		maxRange.y = 7; //maxRange.y = 6;
-		
+
 		zstep = 1;
 
 		if(multilevel) {
@@ -170,13 +170,13 @@ public:
 	AStarNode* createOpenNode();
 	AStarNode* getBestNode();
 	void closeNode(AStarNode* node);
-	unsigned long countClosedNodes();
-	unsigned long countOpenNodes();
-	bool isInList(unsigned long x, unsigned long y);
+	uint32_t countClosedNodes();
+	uint32_t countOpenNodes();
+	bool isInList(uint32_t x, uint32_t y);
 private:
 	AStarNode nodes[MAX_NODES];
 	std::bitset<MAX_NODES> openNodes;
-	unsigned long curNode;
+	uint32_t curNode;
 };
 
 template<class T> class lessPointer : public std::binary_function<T*, T*, bool> {
@@ -197,7 +197,7 @@ class Map {
   public:
     Map();
     ~Map();
-    
+
 	/**
 	  * Load a map.
 	  * \param filename Mapfile to load
@@ -212,7 +212,7 @@ class Map {
 	  */
     Tile* getTile(unsigned short _x, unsigned short _y, unsigned char _z);
     Tile* getTile(const Position &pos);
-    
+
 	/**
 	  * Set a single tile.
 	  * \param groundId Ground kind (ID)
@@ -228,7 +228,7 @@ class Map {
 	  * \param c Creature pointer to the creature to place
 	  */
     bool placeCreature(Position &pos, Creature* c);
-	
+
 	/**
 	  * Remove a creature from the map.
 	  * \param c Creature pointer to the creature to remove
@@ -262,21 +262,21 @@ class Map {
 		std::list<Position> getPathToEx(Creature* creature, Position start, Position to,
 		bool creaturesBlock = true, bool ignoreMoveableBlockingItems = false, int maxNodSize = 100);
 
-	
+
 	/* Map Width and Height - for Info purposes */
 	int mapwidth, mapheight;
 
 #ifdef YUR_CLEAN_MAP
 	long clean();
 #endif //YUR_CLEAN_MAP
-	
-  protected:    
+
+  protected:
     /**
 	  * Get the Creatures within a specific Range */
 	void getSpectators(const Range& range, SpectatorVec& list);
-    
-    typedef std::map<unsigned long, Tile*> TileMap;
-	//TileMap tileMaps[32][32][MAP_LAYER];	
+
+    typedef std::map<uint32_t, Tile*> TileMap;
+	//TileMap tileMaps[32][32][MAP_LAYER];
 	//TileMap tileMaps[256][256];
 	TileMap tileMaps[128][128];
 

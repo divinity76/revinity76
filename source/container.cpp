@@ -7,7 +7,7 @@
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -40,7 +40,7 @@ Container::~Container()
     		container->setParent(NULL);
     	(*cit)->releaseThing();
   	}
-    
+
 	lcontained.clear();
 }
 
@@ -56,7 +56,7 @@ bool Container::addItem(Item *newitem) {
 		newitem->pos.x = 0xFFFF;
 
 		//FIXME: is this correct? i dont get what it does. tliff
-		Container* container = dynamic_cast<Container*>(newitem); 
+		Container* container = dynamic_cast<Container*>(newitem);
 		if(container) {
 			container->setParent(this);
 		}
@@ -76,7 +76,7 @@ bool Container::removeItem(Item* item)
 	for (ContainerList::iterator cit = lcontained.begin(); cit != lcontained.end(); cit++) {
 		if((*cit) == item) {
 
-			Container* container = dynamic_cast<Container*>(*cit); 
+			Container* container = dynamic_cast<Container*>(*cit);
 			if(container) {
 				container->setParent(NULL);
 			}
@@ -104,9 +104,9 @@ void Container::moveItem(unsigned char from_slot, unsigned char to_slot)
 	}
 }
 
-Item* Container::getItem(unsigned long slot_num)
+Item* Container::getItem(uint32_t slot_num)
 {
-	size_t n = 0;			
+	size_t n = 0;
 	for (ContainerList::const_iterator cit = getItems(); cit != getEnd(); ++cit) {
 		if(n == slot_num)
 			return *cit;
@@ -117,9 +117,9 @@ Item* Container::getItem(unsigned long slot_num)
 	return NULL;
 }
 
-const Item* Container::getItem(unsigned long slot_num) const
+const Item* Container::getItem(uint32_t slot_num) const
 {
-	size_t n = 0;			
+	size_t n = 0;
 	for (ContainerList::const_iterator cit = getItems(); cit != getEnd(); ++cit) {
 		if(n == slot_num)
 			return *cit;
@@ -132,7 +132,7 @@ const Item* Container::getItem(unsigned long slot_num) const
 
 unsigned char Container::getSlotNumberByItem(const Item* item) const
 {
-	unsigned char n = 0;			
+	unsigned char n = 0;
 	for (ContainerList::const_iterator cit = getItems(); cit != getEnd(); ++cit) {
 		if(*cit == item)
 			return n;
@@ -149,7 +149,7 @@ long Container::getItemHoldingCount() const
 
 	std::list<const Container*> stack;
 	stack.push_back(this);
-	
+
 	ContainerList::const_iterator it;
 
 	while(stack.size() > 0) {
@@ -173,7 +173,7 @@ bool Container::isHoldingItem(const Item* item) const
 {
 	std::list<const Container*> stack;
 	stack.push_back(this);
-	
+
 	ContainerList::const_iterator it;
 
 	while(stack.size() > 0) {
@@ -203,7 +203,7 @@ double Container::getWeight() const
 
 	ContainerList::const_iterator it;
 	stack.push_back(this);
-	
+
 	while(stack.size() > 0) {
 		const Container *container = stack.front();
 		stack.pop_front();

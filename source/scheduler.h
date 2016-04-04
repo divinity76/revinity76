@@ -46,11 +46,11 @@ public:
 
 	virtual void operator()(Game* arg) = 0;
 
-	virtual void setEventId(unsigned long id) {
+	virtual void setEventId(uint32_t id) {
 		_eventid = id;
 	}
 
-	inline unsigned long getEventId() const {
+	inline uint32_t getEventId() const {
 		return _eventid;
 	}
 
@@ -63,7 +63,7 @@ public:
 	}
 
 protected:
-	unsigned long _eventid;
+	uint32_t _eventid;
 	int64_t _cycle;
 };
 

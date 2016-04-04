@@ -18,6 +18,7 @@
 // Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 //////////////////////////////////////////////////////////////////////
 #include <stdlib.h>//abs()
+#include <iostream>//std::cerr
 #include "fileloader.h"
 
 #ifndef min
@@ -63,23 +64,26 @@ bool FileLoader::openFile(const char* filename, bool write, bool caching /*= fal
 	if(write) {
 		m_file = fopen(filename, "wb");
 		if(m_file) {
-				unsigned long version = 0;
+				uint32_t version = 0;
 				writeData(&version, sizeof(version), false);
 				return true;
 		}
 		else{
+
+		std::cout << "Warning: FileLoader::openFile failed to open " << filename << " for writing!" << std::endl;
 			m_lastError = ERROR_CAN_NOT_CREATE;
 			return false;
 		}
 	}
 	else {
-		unsigned long version;
+		uint32_t version;
 		m_file = fopen(filename, "rb");
 		if(m_file){
-			fread(&version, sizeof(unsigned long), 1, m_file);
+			fread(&version, sizeof(version), 1, m_file);
 			if(version > 0){
 				fclose(m_file);
 				m_file=NULL;
+				std::cerr << "Error: ERROR_INVALID_FILE_VERSION. expected" << ERROR_INVALID_FILE_VERSION << std::endl;
 				m_lastError = ERROR_INVALID_FILE_VERSION;
 				return false;
 			}
@@ -94,13 +98,14 @@ bool FileLoader::openFile(const char* filename, bool write, bool caching /*= fal
 			}
 		}
 		else{
+				std::cerr << "Warning: FileLoader::openFile failed to open " << filename << " for reading!" << std::endl;
 			m_lastError = ERROR_CAN_NOT_OPEN;
 			return false;
 		}
 	}
 }
 
-const unsigned char* FileLoader::getProps(const NODE node, unsigned long &size)
+const unsigned char* FileLoader::getProps(const NODE node, uint32_t &size)
 {
 	if(!checks(node))
 		return NULL;
@@ -149,7 +154,7 @@ const unsigned char* FileLoader::getProps(const NODE node, unsigned long &size)
 
 bool FileLoader::getProps(const NODE node, PropStream &props)
 {
-	unsigned long size;
+	uint32_t size;
 	const unsigned char* a = getProps(node, size);
 	if(!a){
 		props.init(NULL, 0);
@@ -183,7 +188,7 @@ void FileLoader::endNode()
 	writeData(&nodeEnd, sizeof(nodeEnd), false);
 }
 
-const NODE FileLoader::getChildNode(const NODE parent, unsigned long &type)
+const NODE FileLoader::getChildNode(const NODE parent, uint32_t &type)
 {
 	if(!checks(1))
 		return NO_NODE;
@@ -254,7 +259,7 @@ const NODE FileLoader::getChildNode(const NODE parent, unsigned long &type)
 
 }
 
-const NODE FileLoader::getNextNode(const NODE prev, unsigned long &type)
+const NODE FileLoader::getNextNode(const NODE prev, uint32_t &type)
 {
 	if(!checks(prev))
 		return NO_NODE;
@@ -327,7 +332,7 @@ inline bool FileLoader::readByte(int &value)
 			m_lastError = ERROR_CACHE_ERROR;
 			return false;
 		}
-		if((unsigned long)m_cache_offset >= m_cached_data[m_cache_index].size){
+		if((uint32_t)m_cache_offset >= m_cached_data[m_cache_index].size){
 			long pos = m_cache_offset + m_cached_data[m_cache_index].base;
 			long tmp = getCacheBlock(pos);
 			if(tmp < 0)
@@ -389,7 +394,7 @@ inline bool FileLoader::checks(const NODE node)
 	return true;
 }
 
-inline bool FileLoader::safeSeek(unsigned long pos)
+inline bool FileLoader::safeSeek(uint32_t pos)
 {
 	if(m_use_cache){
 		long i = getCacheBlock(pos);
@@ -434,7 +439,7 @@ inline bool FileLoader::safeTell(long &pos)
 	}
 }
 
-inline long FileLoader::getCacheBlock(unsigned long pos)
+inline long FileLoader::getCacheBlock(uint32_t pos)
 {
 	bool found = false;
 	long i;
@@ -453,7 +458,7 @@ inline long FileLoader::getCacheBlock(unsigned long pos)
 	return i;
 }
 
-long FileLoader::loadCacheBlock(unsigned long pos)
+long FileLoader::loadCacheBlock(uint32_t pos)
 {
 	long i;
 	long loading_cache = -1;
@@ -466,7 +471,7 @@ long FileLoader::loadCacheBlock(unsigned long pos)
 	}
 	if(loading_cache == -1){
 		for(i = 0; i < CACHE_BLOCKS; i++){
-			if((unsigned long)abs(m_cached_data[i].base - base_pos) > 2*m_cache_size){
+			if((uint32_t)abs(m_cached_data[i].base - base_pos) > 2*m_cache_size){
 				loading_cache = i;
 				break;
 			}

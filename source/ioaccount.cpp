@@ -7,7 +7,7 @@
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -35,7 +35,7 @@ IOAccount* IOAccount::_instance = NULL;
 IOAccount* IOAccount::instance(){
 	if(!_instance){
 #ifdef __USE_MYSQL__
-    if(g_config.getGlobalString("sourcedata") == "SQL")   
+    if(g_config.getGlobalString("sourcedata") == "SQL")
 	_instance = (IOAccount*)new IOAccountSQL;
 	else //if(g_config.getGlobalString("sourcedata") == "XML") //fallback to xml
 #endif
@@ -47,12 +47,12 @@ IOAccount* IOAccount::instance(){
 	return _instance;
 }
 
-Account IOAccount::loadAccount(unsigned long accno){
+Account IOAccount::loadAccount(uint32_t accno){
 	Account acc;
 	return acc;
 }
 
-bool IOAccount::getPassword(unsigned long accno, const std::string &name, std::string &password)
+bool IOAccount::getPassword(uint32_t accno, const std::string &name, std::string &password)
 {
 	return false;
 }

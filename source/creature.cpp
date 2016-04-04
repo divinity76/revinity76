@@ -37,7 +37,7 @@ extern LuaScript g_config;
 using namespace std;
 
 OTSYS_THREAD_LOCKVAR AutoID::autoIDLock;
-unsigned long AutoID::count = 1000;
+uint32_t AutoID::count = 1000;
 AutoID::list_type AutoID::list;
 
 extern Game g_game;
@@ -143,7 +143,7 @@ void Creature::drainMana(int damage)
 	mana -= min(mana, damage);
 }
 
-//void Creature::setAttackedCreature(unsigned long id)
+//void Creature::setAttackedCreature(uint32_t id)
 void Creature::setAttackedCreature(const Creature* creature)
 {
 	std::list<Creature*>::iterator cit;
@@ -203,7 +203,7 @@ void Creature::addInflictedDamage(Creature* attacker, int damage)
 	if(damage <= 0)
 		return;
 
-	unsigned long id = 0;
+	uint32_t id = 0;
 	if(attacker) {
 		id = attacker->getID();
 	}
@@ -216,7 +216,7 @@ exp_t Creature::getLostExperience() {
 	return 0;
 }
 
-int Creature::getInflicatedDamage(unsigned long id)
+int Creature::getInflicatedDamage(uint32_t id)
 {
 	int ret = 0;
 	std::map<long, DamageList >::const_iterator tdIt = totaldamagelist.find(id);
@@ -231,7 +231,7 @@ int Creature::getInflicatedDamage(unsigned long id)
 
 int Creature::getInflicatedDamage(Creature* attacker)
 {
-	unsigned long id = 0;
+	uint32_t id = 0;
 	if(attacker) {
 		id = attacker->getID();
 	}

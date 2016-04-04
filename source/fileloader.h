@@ -25,7 +25,7 @@
 #include <cstring>//memcpy
 #include "stdio.h"
 
-typedef unsigned long NODE;
+typedef uint32_t NODE;
 
 #define NO_NODE 0
 
@@ -52,10 +52,10 @@ public:
 	virtual ~FileLoader();
 
 	bool openFile(const char* filename, bool write, bool caching = false);
-	const unsigned char* getProps(const NODE, unsigned long &size);
+	const unsigned char* getProps(const NODE, uint32_t &size);
 	bool getProps(const NODE, PropStream& props);
-	const NODE getChildNode(const NODE parent, unsigned long &type);
-	const NODE getNextNode(const NODE prev, unsigned long &type);
+	const NODE getChildNode(const NODE parent, uint32_t &type);
+	const NODE getNextNode(const NODE prev, uint32_t &type);
 
 	void startNode(unsigned char type);
 	void endNode();
@@ -73,7 +73,7 @@ protected:
 
 	inline bool readByte(int &value);
 	inline bool checks(const NODE node);
-	inline bool safeSeek(unsigned long pos);
+	inline bool safeSeek(uint32_t pos);
 	inline bool safeTell(long &pos);
 	//inline bool writeData(void* data, int size, bool unescape);
 public:
@@ -100,23 +100,23 @@ public:
 protected:
 	FILE* m_file;
 	FILELOADER_ERRORS m_lastError;
-	unsigned long m_buffer_size;
+	uint32_t m_buffer_size;
 	unsigned char* m_buffer;
 
 	bool m_use_cache;
 	struct _cache{
-		unsigned long loaded;
-		unsigned long base;
-		unsigned long size;
+		uint32_t loaded;
+		uint32_t base;
+		uint32_t size;
 		unsigned char* data;
 	};
 	#define CACHE_BLOCKS 3
-	unsigned long m_cache_size;
+	uint32_t m_cache_size;
 	_cache m_cached_data[CACHE_BLOCKS];
 	long m_cache_index;
 	long m_cache_offset;
-	inline long getCacheBlock(unsigned long pos);
-	long loadCacheBlock(unsigned long pos);
+	inline long getCacheBlock(uint32_t pos);
+	long loadCacheBlock(uint32_t pos);
 };
 
 
@@ -125,7 +125,7 @@ public:
 	PropStream(){end = NULL; p = NULL;}
 	~PropStream(){};
 
-	void init(char* a, unsigned long size){
+	void init(char* a, uint32_t size){
 		p = a;
 		end = a + size;
 	}
@@ -151,7 +151,7 @@ public:
 		return true;
 	}
 
-	inline bool GET_ULONG(unsigned long &ret){
+	inline bool GET_ULONG(uint32_t &ret){
 		return GET_VALUE(ret);
 	}
 

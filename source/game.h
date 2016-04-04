@@ -258,23 +258,23 @@ void sendMagicEffect(const Position pos, unsigned char type);
 	bool playerUseItemEx(Player *player, const Position& posFrom,const unsigned char  stack_from,
 		const Position &posTo,const unsigned char stack_to, const unsigned short itemid);
 	bool playerUseItem(Player *player, const Position& pos, const unsigned char stackpos, const unsigned short itemid, const unsigned char index);
-	bool playerUseBattleWindow(Player *player, Position &posFrom, unsigned char stackpos, unsigned short itemid, unsigned long creatureid);
+	bool playerUseBattleWindow(Player *player, Position &posFrom, unsigned char stackpos, unsigned short itemid, uint32_t creatureid);
 	bool playerRotateItem(Player *player, const Position& pos, const unsigned char stackpos, const unsigned short itemid);
 
 	void playerRequestTrade(Player *player, const Position& pos,
-		const unsigned char stackpos, const unsigned short itemid, unsigned long playerid);
+		const unsigned char stackpos, const unsigned short itemid, uint32_t playerid);
 	void playerAcceptTrade(Player* player);
 	void playerLookInTrade(Player* player, bool lookAtCounterOffer, int index);
 	void playerCloseTrade(Player* player);
 	void autoCloseTrade(const Item* item, bool itemMoved = false);
   void autoCloseAttack(Player* player, Creature* target);
 
-	void playerSetAttackedCreature(Player* player, unsigned long creatureid);
+	void playerSetAttackedCreature(Player* player, uint32_t creatureid);
 
-  void changeOutfitAfter(unsigned long id, int looktype, long time);
-  void changeSpeed(unsigned long id, unsigned short speed);
-	unsigned long addEvent(SchedulerTask*);
-	bool stopEvent(unsigned long eventid);
+  void changeOutfitAfter(uint32_t id, int looktype, long time);
+  void changeSpeed(uint32_t id, unsigned short speed);
+	uint32_t addEvent(SchedulerTask*);
+	bool stopEvent(uint32_t eventid);
 
 	//void creatureBroadcastTileUpdated(const Position& pos);
 	void teleport(Thing *thing, const Position& newPos);
@@ -302,8 +302,8 @@ void sendMagicEffect(const Position pos, unsigned char type);
   void sendRemoveThing(Player* player,const Position &pos,const Thing* thing,const unsigned char stackpos = 1,const bool autoclose = false);
   void sendUpdateThing(Player* player,const Position &pos,const Thing* thing,const unsigned char stackpos = 1);
 
-	Creature* getCreatureByID(unsigned long id);
-	Player* getPlayerByID(unsigned long id);
+	Creature* getCreatureByID(uint32_t id);
+	Player* getPlayerByID(uint32_t id);
     Creature* getCreatureByPosition(int x, int y, int z);
 	Creature* getCreatureByName(const std::string &s);
 	Player* getPlayerByName(const std::string &s);
@@ -344,9 +344,9 @@ void sendMagicEffect(const Position pos, unsigned char type);
 	bool isPlayer(std::string name);
 #endif //ELEM_VIP_LIST
 #ifdef BD_FOLLOW
-   void checkCreatureFollow(unsigned long id);
+   void checkCreatureFollow(uint32_t id);
    void playerFollow(Player* player, Creature *followCreature);
-   void playerSetFollowCreature(Player* player, unsigned long creatureid);
+   void playerSetFollowCreature(Player* player, uint32_t creatureid);
 #endif //BD_FOLLOW
 #ifdef YUR_LOGIN_QUEUE
 	LoginQueue loginQueue;
@@ -363,7 +363,7 @@ void sendMagicEffect(const Position pos, unsigned char type);
 #ifdef TLM_SKULLS_PARTY
 	void onPvP(Creature* creature, Creature* attacked, bool murder = false);
 	void Skull(Player* player);
-	void disbandParty(unsigned long partyID);
+	void disbandParty(uint32_t partyID);
 	void LeaveParty(Player *player);
 #endif //TLM_SKULLS_PARTY
 
@@ -392,7 +392,7 @@ void sendMagicEffect(const Position pos, unsigned char type);
 	void checkSpell(Player* player, SpeakClasses type, std::string text);
 
 protected:
-	std::map<Item*, unsigned long> tradeItems; //list of items that are in trading state, mapped to the player
+	std::map<Item*, uint32_t> tradeItems; //list of items that are in trading state, mapped to the player
 
 	AutoList<Creature> listCreature;
 
@@ -456,7 +456,7 @@ protected:
       unsigned char stackPos,unsigned short itemid,
 			unsigned short to_x, unsigned short to_y, unsigned char to_z, unsigned char count);
 
-	void changeOutfit(unsigned long id, int looktype);
+	void changeOutfit(uint32_t id, int looktype);
 	bool creatureOnPrepareAttack(Creature *creature, Position pos);
 	void creatureMakeDamage(Creature *creature, Creature *attackedCreature, fight_t damagetype);
 
@@ -493,9 +493,9 @@ protected:
 		void*    data;
 	};
 
-	void checkPlayerWalk(unsigned long id);
-	void checkCreature(unsigned long id);
-	void checkCreatureAttacking(unsigned long id);
+	void checkPlayerWalk(uint32_t id);
+	void checkCreature(uint32_t id);
+	void checkCreatureAttacking(uint32_t id);
 	void checkDecay(int t);
 
 	#define DECAY_INTERVAL  10000
@@ -521,8 +521,8 @@ protected:
 
 	void checkSpawns(int t);
 	std::priority_queue<SchedulerTask*, std::vector<SchedulerTask*>, lessSchedTask > eventList;
-	std::map<unsigned long, SchedulerTask*> eventIdMap;
-	unsigned long eventIdCount;
+	std::map<uint32_t, SchedulerTask*> eventIdMap;
+	uint32_t eventIdCount;
 
 	uint32_t max_players;
 	enum_world_type worldType;

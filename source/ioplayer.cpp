@@ -7,7 +7,7 @@
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -35,7 +35,7 @@ IOPlayer* IOPlayer::_instance = NULL;
 IOPlayer* IOPlayer::instance(){
 	if(!_instance){
 #ifdef __USE_MYSQL__
-        if(g_config.getGlobalString("sourcedata") == "SQL") 
+        if(g_config.getGlobalString("sourcedata") == "SQL")
 		_instance = (IOPlayer*)new IOPlayerSQL;
 		else // if(g_config.getGlobalString("sourcedata") == "XML") //fallback to xml
 #endif
@@ -44,7 +44,7 @@ IOPlayer* IOPlayer::instance(){
 	}
     #ifdef __DEBUG__
 	printf("%s \n", _instance->getSourceDescription());
-	#endif 
+	#endif
 	return _instance;
 }
 
@@ -56,12 +56,12 @@ bool IOPlayer::savePlayer(Player* player){
 	return false;
 }
 
-bool IOPlayer::getGuidByName(unsigned long &guid, unsigned long &alvl, std::string &name)
+bool IOPlayer::getGuidByName(uint32_t &guid, uint32_t &alvl, std::string &name)
 {
 	return false;
 }
 
-bool IOPlayer::getNameByGuid(unsigned long guid, std::string &name)
+bool IOPlayer::getNameByGuid(uint32_t guid, std::string &name)
 {
 	return false;
 }

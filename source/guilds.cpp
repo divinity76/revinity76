@@ -27,7 +27,7 @@
 extern LuaScript g_config;
 extern xmlMutexPtr xmlmutex;
 std::vector<Guilds::Guild*> Guilds::guilds;
-unsigned long Guilds::Guild::counter = 0x10;
+uint32_t Guilds::Guild::counter = 0x10;
 
 Guilds::Guild::Guild(std::string name)
 {

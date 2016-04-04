@@ -7,7 +7,7 @@
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -44,10 +44,10 @@ class IOPlayer {
 	  * \param player the player to save
 	  */
 	virtual bool savePlayer(Player* player);
-	
-	virtual bool getGuidByName(unsigned long &guid, unsigned long &alvl, std::string &name);
-	virtual bool getNameByGuid(unsigned long guid, std::string &name);
-	
+
+	virtual bool getGuidByName(uint32_t &guid, uint32_t &alvl, std::string &name);
+	virtual bool getNameByGuid(uint32_t guid, std::string &name);
+
   protected:
 	IOPlayer(){};
 	virtual ~IOPlayer(){};

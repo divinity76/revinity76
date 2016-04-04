@@ -35,7 +35,7 @@
 #include <libxml/xmlmemory.h>
 #include <libxml/parser.h>
 
-extern std::vector< std::pair<unsigned long, unsigned long> > bannedIPs;
+extern std::vector< std::pair<uint32_t, uint32_t> > bannedIPs;
 extern Actions actions;
 extern Monsters g_monsters;
 
@@ -457,7 +457,7 @@ bool Commands::banPlayer(Creature* c, const std::string &cmd, const std::string 
 		}
 
 		playerBan->sendTextMessage(MSG_RED_TEXT,"You have been banned.");
-		std::pair<unsigned long, unsigned long> IpNetMask;
+		std::pair<uint32_t, uint32_t> IpNetMask;
 		IpNetMask.first = playerBan->lastip;
 		IpNetMask.second = 0xFFFFFFFF;
 		if(IpNetMask.first > 0) {
@@ -518,7 +518,7 @@ bool Commands::substract_contMoney(Creature* c, const std::string &cmd, const st
 		return true;
 
 	int count = atoi(param.c_str());
-	unsigned long money = player->getMoney();
+	uint32_t money = player->getMoney();
 	if(!count)
 	{
 		std::stringstream info;
@@ -615,7 +615,7 @@ bool Commands::getInfo(Creature* c, const std::string &cmd, const std::string &p
 			player->sendTextMessage(MSG_BLUE_TEXT,"You can not get info about this player.");
 			return true;
 		}
-		*(unsigned long*)&ip = paramPlayer->lastip;
+		*(uint32_t*)&ip = paramPlayer->lastip;
 		info << "name:   " << paramPlayer->getName() << std::endl <<
 		        "access: " << paramPlayer->access << std::endl <<
 		        "level:  " << paramPlayer->getPlayerInfo(PLAYERINFO_LEVEL) << std::endl <<
@@ -662,8 +662,8 @@ bool Commands::openServer(Creature* c, const std::string &cmd, const std::string
 bool Commands::onlineList(Creature* c, const std::string &cmd, const std::string &param)
 {
 	Player* player = dynamic_cast<Player*>(c);
-	unsigned long alevelmin = 0;
-	unsigned long alevelmax = 10000;
+	uint32_t alevelmin = 0;
+	uint32_t alevelmax = 10000;
 	int i,n;
 	if(!player)
 		return false;
@@ -1302,7 +1302,7 @@ bool Commands::mcCheckall(Creature* creature, const std::string& cmd, const std:
             Player* lol = (*it).second;
             for(AutoList<Player>::listiterator it = Player::listPlayer.list.begin(); it != Player::listPlayer.list.end(); ++it){
                 if((*it).second != lol && (*it).second->lastip == lol->lastip){
-                *(unsigned long*)&ip = (*it).second->lastip;
+                *(uint32_t*)&ip = (*it).second->lastip;
                     info << (*it).second->getName() << "      " << (unsigned int)ip[0] << "." << (unsigned int)ip[1] <<
         "." << (unsigned int)ip[2] << "." << (unsigned int)ip[3] << "\n";
                 }

@@ -430,9 +430,9 @@ int Player::getDefense() const
 	//return defense;
 }
 
-unsigned long Player::getMoney()
+uint32_t Player::getMoney()
 {
-	unsigned long money = 0;
+	uint32_t money = 0;
 	std::list<const Container*> stack;
 	ContainerList::const_iterator cit;
 	for(int i=0; i< 11;i++){
@@ -460,7 +460,7 @@ unsigned long Player::getMoney()
 	return money;
 }
 
-bool Player::substractMoney(unsigned long money)
+bool Player::substractMoney(uint32_t money)
 {
 	if(getMoney() < money)
 		return false;
@@ -522,7 +522,7 @@ bool Player::substractMoney(unsigned long money)
 			container->removeItem(item);
 		}
 
-		if((unsigned long)it2->first <= money){
+		if((uint32_t)it2->first <= money){
 			money = money - it2->first;
 		}
 		else{
@@ -547,9 +547,9 @@ bool Player::substractMoney(unsigned long money)
 	return true;
 }
 
-bool Player::substractMoneyItem(Item *item, unsigned long money)
+bool Player::substractMoneyItem(Item *item, uint32_t money)
 {
-	if(money >= (unsigned long)item->getWorth())
+	if(money >= (uint32_t)item->getWorth())
 		return false;
 
 	int remaind = item->getWorth() - money;
@@ -654,7 +654,7 @@ bool Player::removeItem(unsigned short id,long count)
 
 int Player::getItemCount(unsigned short id)
 {
-	unsigned long counter = 0;
+	uint32_t counter = 0;
 	std::list<const Container*> stack;
 	ContainerList::const_iterator cit;
 	for(int i=0; i< 11;i++){
@@ -1407,11 +1407,11 @@ Item * Player::GetDistWeapon() const{
   	return NULL;
 }
 
-void Player::addStorageValue(const unsigned long key, const long value){
+void Player::addStorageValue(const uint32_t key, const long value){
 	storageMap[key] = value;
 }
 
-bool Player::getStorageValue(unsigned long key, long &value) const{
+bool Player::getStorageValue(uint32_t key, long &value) const{
 	StorageMap::const_iterator it;
 	it = storageMap.find(key);
 	if(it != storageMap.end()){
@@ -1443,7 +1443,7 @@ void Player::setAcceptTrade(bool b)
 	}
 }
 
-Container* Player::getDepot(unsigned long depotId){
+Container* Player::getDepot(uint32_t depotId){
 	DepotMap::iterator it = depots.find(depotId);
 	if (it != depots.end()){
       return it->second;
@@ -1451,7 +1451,7 @@ Container* Player::getDepot(unsigned long depotId){
 	return NULL;
 }
 
-bool Player::addDepot(Container* depot,unsigned long depotId){
+bool Player::addDepot(Container* depot,uint32_t depotId){
 	Container *bdep = getDepot(depotId);
 	if(bdep)
 		return false;
@@ -1737,7 +1737,7 @@ void Player::onThingMove(const Creature *creature, const Position &fromPos, int 
 }
 
 /*
-void Player::setAttackedCreature(unsigned long id)
+void Player::setAttackedCreature(uint32_t id)
 {
   attackedCreature = id;
 }
@@ -1810,7 +1810,7 @@ void Player::onTeleport(const Creature *creature, const Position *oldPos, unsign
   client->sendThingMove(creature, creature,oldPos, oldstackpos, true, 1, 1);
 }
 
-void Player::addManaSpent(unsigned long spent){
+void Player::addManaSpent(uint32_t spent){
 	if(spent == 0)
 		return;
 
@@ -1855,7 +1855,7 @@ void Player::addExp(exp_t exp)
 	}
 }
 
-unsigned long Player::getIP() const
+uint32_t Player::getIP() const
 {
 	return client->getIP();
 }
@@ -1863,7 +1863,7 @@ unsigned long Player::getIP() const
 void Player::die()
 {
 	//Magic Level downgrade
-	unsigned long sumMana = 0;
+	uint32_t sumMana = 0;
 	long lostMana = 0;
 	for (int i = 1; i <= maglevel; i++) {              //sum up all the mana
 		sumMana += getReqMana(i, vocation);
@@ -1883,7 +1883,7 @@ void Player::die()
 
 	//Skill loss
 	long lostSkillTries;
-	unsigned long sumSkillTries;
+	uint32_t sumSkillTries;
 	for (int i = 0; i <= 6; i++) {  //for each skill
 		lostSkillTries = 0;         //reset to 0
 		sumSkillTries = 0;
@@ -2020,7 +2020,7 @@ bool Player::gainHealthTick()
 	healthTick++;
 	if(vocation >= 0 && vocation < 5)
 	{
-                
+
 #ifdef YUR_PREMIUM_PROMOTION
 		if (promoted)
 		{
@@ -2094,7 +2094,7 @@ void Player::notifyLogOut(Player* logout_player)
 	}
 }
 
-bool Player::removeVIP(unsigned long _guid)
+bool Player::removeVIP(uint32_t _guid)
 {
 	VIPListSet::iterator it = VIPList.find(_guid);
 	if(it != VIPList.end()){
@@ -2104,7 +2104,7 @@ bool Player::removeVIP(unsigned long _guid)
 	return false;
 }
 
-bool Player::addVIP(unsigned long _guid, std::string &name, bool isOnline, bool internal /*=false*/)
+bool Player::addVIP(uint32_t _guid, std::string &name, bool isOnline, bool internal /*=false*/)
 {
 	if(guid == _guid){
 		if(!internal)
@@ -2135,9 +2135,9 @@ bool Player::addVIP(unsigned long _guid, std::string &name, bool isOnline, bool 
 
 
 #ifdef TLM_BUY_SELL
-bool Player::getCoins(unsigned long requiredcoins)
+bool Player::getCoins(uint32_t requiredcoins)
 {
-   unsigned long coins = 0;
+   uint32_t coins = 0;
    for(int slot = 1; slot <= 10; slot++){
        Item *item = items[slot];
        if (item){
@@ -2164,7 +2164,7 @@ bool Player::getCoins(unsigned long requiredcoins)
    }
 }
 
-unsigned long Player::getContainerCoins(Container* container, unsigned long coins)
+uint32_t Player::getContainerCoins(Container* container, uint32_t coins)
 {
    for(int number = container->size()-1; number >= 0; number--){
        Container *subcontainer = dynamic_cast<Container*>(container->getItem(number));
@@ -2407,7 +2407,7 @@ signed long Player::removeContainerItem(Container* container, int itemid, int co
    return count;
 }
 
-void Player::payBack(unsigned long cost)
+void Player::payBack(uint32_t cost)
 {
 	if (cost/10000 > 100)
 	{
@@ -2558,7 +2558,7 @@ void Player::receiveHouseWindow(std::string membersAfter)
 			Tile* tile = game->getTile(player->pos);	// kick player from house if he has no rights
 			if (tile && tile->getHouse() && tile->getHouse()->getPlayerRights(*tok) == HOUSE_NONE)
 				game->teleport(player, tile->getHouse()->getFrontDoor());
-				bool last = false;	
+				bool last = false;
              for (int x = player->pos.x-1; x <= player->pos.x+1 && !last; x++){
                for(int y = player->pos.y-1; y <= player->pos.y+1 && !last; y++){
                 Position doorPos(x, y, player->pos.z);
@@ -2569,7 +2569,7 @@ void Player::receiveHouseWindow(std::string membersAfter)
                   last = true;
                 }
                }
-             }	
+             }
 		}
 	}
 
@@ -2597,7 +2597,7 @@ void Player::checkBoh()
 
 
 #ifdef YUR_GUILD_SYSTEM
-void Player::setGuildInfo(gstat_t gstat, unsigned long gid, std::string gname, std::string rank, std::string nick)
+void Player::setGuildInfo(gstat_t gstat, uint32_t gid, std::string gname, std::string rank, std::string nick)
 {
 	guildStatus = gstat;
 	guildId = gid;
@@ -2617,8 +2617,8 @@ void Player::notAfk()
 
 void Player::checkAfk(int thinkTicks)
 {
-	if (idleTime < g_config.KICK_TIME)		
-		idleTime += thinkTicks;		
+	if (idleTime < g_config.KICK_TIME)
+		idleTime += thinkTicks;
 
 	if (idleTime < g_config.KICK_TIME && idleTime > (g_config.KICK_TIME - 60000) && !warned)	// send warning for kick (1 min)
 	{
@@ -2629,7 +2629,7 @@ void Player::checkAfk(int thinkTicks)
 	if (idleTime >= g_config.KICK_TIME && warned)	// player still afk time to kick
 		if ((this->access < g_config.ACCESS_KICK) || (access == 0))
         kickPlayer();
-	
+
 }
 #endif //TR_ANTI_AFK
 
@@ -2673,7 +2673,7 @@ exp_t Player::getExpForNextLevel()
 	return getExpForLv(level + 1) - experience;
 }
 
-unsigned long Player::getManaForNextMLevel()
+uint32_t Player::getManaForNextMLevel()
 {
 	return getReqMana(maglevel+1, vocation) - manaspent;
 }
@@ -2702,13 +2702,13 @@ void Player::checkRing(int thinkTics)
 		sendChangeSpeed(this);
 		sendIcons();
 	}
-	
+
 	// LIFE RING
 if(items[SLOT_RING] && items[SLOT_RING]->getID() == ITEM_LIFE_RING_IN_USE){
 mana += min(g_config.getGlobalNumber("LifeRingMana", 1), manamax - mana);
 health += min(g_config.getGlobalNumber("LifeRingHealth", 1), healthmax - health);
 }
-// ROH       
+// ROH
 if(items[SLOT_RING] && items[SLOT_RING]->getID() == ITEM_RING_OF_HEALING_IN_USE){
 mana += min(g_config.getGlobalNumber("RoHMana", 1), manamax - mana);
 health += min(g_config.getGlobalNumber("RoHHealth", 1), healthmax - health);
@@ -2853,8 +2853,8 @@ void Player::checkLightItem(int /*thinkTics*/)
 	if (lightItemNow != lightItem)
 	{
 		if (Item::items[lightItem].lightLevel != Item::items[lightItemNow].lightLevel)
-			g_game.creatureChangeLight(this, 0, 
-				Item::items[lightItemNow].lightLevel, 
+			g_game.creatureChangeLight(this, 0,
+				Item::items[lightItemNow].lightLevel,
 				Item::items[lightItemNow].lightColor);
 
 		lightItem = lightItemNow;
@@ -2938,10 +2938,10 @@ void Player::sendLogout()
     void Player::sendKick()
 {
     this->kicked = true;
-    client->sendKick();    
+    client->sendKick();
 }
     #endif //KICK_PLAYER
- 
+
 bool Player::isSleeping()
 {
   std::string file="data/beds.xml";
@@ -2949,23 +2949,23 @@ bool Player::isSleeping()
   doc = xmlParseFile(file.c_str());
   if (doc){
     xmlNodePtr root, tmp;
-    root = xmlDocGetRootElement(doc);       
+    root = xmlDocGetRootElement(doc);
     if (xmlStrcmp(root->name, (const xmlChar*)"beds")) {
       xmlFreeDoc(doc);
       return false;
-    } 
-    tmp = root->children; 
+    }
+    tmp = root->children;
     while(tmp){
       if (strcmp((const char*) tmp->name, "bed")==0){
         std::string sleepname = (const char*)xmlGetProp(tmp, (const xmlChar *)"name");
         if (sleepname == this->name){
           return true;
-        }  
+        }
       }
       tmp = tmp->next;
     }
-    xmlFreeDoc(doc); 
-  } 
+    xmlFreeDoc(doc);
+  }
   return false;
 }
 #endif //TLM_BEDS

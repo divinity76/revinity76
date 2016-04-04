@@ -54,7 +54,7 @@
 
 /* Typedef a 32 bit type */
 #ifndef UINT4
-typedef unsigned long int UINT4;
+typedef uint32_t UINT4;
 #endif
 
 /* Data structure for MD5 (Message Digest) computation */
@@ -67,7 +67,7 @@ typedef struct {
 
 static void MD5_Transform (UINT4 *buf, UINT4 *in);
 
-void MD5Init(MD5_CTX *mdContext, unsigned long pseudoRandomNumber = 0);
+void MD5Init(MD5_CTX *mdContext, uint32_t pseudoRandomNumber = 0);
 void MD5Update(MD5_CTX *mdContext, const unsigned char *inBuf, unsigned int inLen);
 void MD5Final(MD5_CTX *mdContext);
 

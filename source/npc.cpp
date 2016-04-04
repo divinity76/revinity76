@@ -270,7 +270,7 @@ void Npc::onCreatureTurn(const Creature *creature, unsigned char stackpos){
 }
 
 /*
-void Npc::setAttackedCreature(unsigned long id){
+void Npc::setAttackedCreature(uint32_t id){
 	//not implemented yet
 }
 */
@@ -358,21 +358,21 @@ NpcScript::NpcScript(std::string scriptname, Npc* npc){
 		return;
 	luaState = lua_open();
 	//luaopen_loadlib(luaState);
-	luaL_openlibs(luaState);
+	luaopen_loadlib(luaState);
 	luaopen_base(luaState);
 	luaopen_math(luaState);
 	luaopen_string(luaState);
 	luaopen_io(luaState);
 
 	std::string datadir = g_config.getGlobalString("datadir");
-    luaL_dofile(luaState, std::string(datadir + "npc/scripts/lib/npc.lua").c_str());
+    lua_dofile(luaState, std::string(datadir + "npc/scripts/lib/npc.lua").c_str());
 
 	FILE* in=fopen(scriptname.c_str(), "r");
 	if(!in)
 		return;
 	else
 		fclose(in);
-	luaL_dofile(luaState, scriptname.c_str());
+	lua_dofile(luaState, scriptname.c_str());
 	this->loaded=true;
 	this->npc=npc;
 	this->setGlobalNumber("addressOfNpc", (intptr_t)npc);
@@ -395,7 +395,7 @@ void NpcScript::onThink(){
 }
 
 
-void NpcScript::onCreatureAppear(unsigned long cid){
+void NpcScript::onCreatureAppear(uint32_t cid){
 	if(npc->getID() != cid){
 		lua_pushstring(luaState, "onCreatureAppear");
 		lua_gettable(luaState, LUA_GLOBALSINDEX);
@@ -727,7 +727,7 @@ int NpcScript::luaPayMoney(lua_State *L)
 int NpcScript::luaGetPlayerStorageValue(lua_State* L)
 {
 	int id = (int)lua_tonumber(L, -2);
-	unsigned long key = (unsigned long)lua_tonumber(L, -1);
+	uint32_t key = (uint32_t)lua_tonumber(L, -1);
 	lua_pop(L, 2);
 
 	Npc* mynpc = getNpc(L);
@@ -746,7 +746,7 @@ int NpcScript::luaGetPlayerStorageValue(lua_State* L)
 int NpcScript::luaSetPlayerStorageValue(lua_State* L)
 {
 	int id = (int)lua_tonumber(L, -3);
-	unsigned long key = (unsigned long)lua_tonumber(L, -2);
+	uint32_t key = (uint32_t)lua_tonumber(L, -2);
 	long value = (long)lua_tonumber(L, -1);
 	lua_pop(L, 3);
 
@@ -763,7 +763,7 @@ int NpcScript::luaSetPlayerStorageValue(lua_State* L)
 int NpcScript::luaPlayerRemoveItem(lua_State* L)
 {
 	int id = (int)lua_tonumber(L, -2);
-	unsigned long item_id = (unsigned long)lua_tonumber(L, -1);
+	uint32_t item_id = (uint32_t)lua_tonumber(L, -1);
 	lua_pop(L, 2);
 
 	Npc* mynpc = getNpc(L);

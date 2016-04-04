@@ -6,13 +6,28 @@
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
-			<Target title="default">
+			<Target title="quickcompile">
 				<Option output="Divinity" prefix_auto="1" extension_auto="1" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 			</Target>
+			<Target title="optimized">
+				<Option output="Divinity" prefix_auto="1" extension_auto="1" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+			</Target>
+			<Target title="debug">
+				<Option output="Divinity" prefix_auto="1" extension_auto="1" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-Og" />
+					<Add option="-g" />
+				</Compiler>
+			</Target>
 		</Build>
 		<Compiler>
+			<Add option="-std=c++11" />
 			<Add option="-DTLM_BUY_SELL" />
 			<Add option="-DTLM_SERVER_SAVE" />
 			<Add option="-DTLM_HOUSE_SYSTEM" />
@@ -65,14 +80,16 @@
 			<Add option="-DYUR_DRAINS" />
 			<Add option="-DUCB_ONOFF_PRIVATE" />
 			<Add option="-DBD_FOLLOW" />
+			<Add directory="/usr/include/libxml2" />
+			<Add directory="/usr/include/lua50" />
 		</Compiler>
 		<Linker>
-			<Add option="-s" />
 			<Add option="-Wl,-Map=otserv.map" />
 			<Add library="libxml2" />
-			<Add library="lua" />
-			<Add library="lualib" />
-			<Add library="wsock32" />
+			<Add library="lualib50" />
+			<Add library="pthread" />
+			<Add library="lua50" />
+			<Add directory="/usr/lib/" />
 		</Linker>
 		<Unit filename="../account.cpp" />
 		<Unit filename="../account.h" />
@@ -89,6 +106,8 @@
 		<Unit filename="../container.h" />
 		<Unit filename="../creature.cpp" />
 		<Unit filename="../creature.h" />
+		<Unit filename="../database.cpp" />
+		<Unit filename="../database.h" />
 		<Unit filename="../definitions.h" />
 		<Unit filename="../exception.cpp" />
 		<Unit filename="../exception.h" />

@@ -7,7 +7,7 @@
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -25,7 +25,7 @@
 #include <map>
 #include <string>
 
-typedef std::map<unsigned long, std::string> FunctionMap;
+typedef std::map<uintptr_t, std::string> FunctionMap;
 
 struct SEHChain{
 	SEHChain *prev;
@@ -43,7 +43,7 @@ private:
 	bool LoadMap();
 	bool installed;
 	SEHChain chain;
-	
+
 };
 
 #endif  // #ifndef __EXCEPTION_H__

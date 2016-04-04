@@ -8,7 +8,7 @@
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -41,7 +41,7 @@ ReturnValue Tile::isBlocking(int objectstate, bool ignoreCreature /* = false*/, 
 	if(((objectstate & BLOCK_PATHFIND) == BLOCK_PATHFIND) && (floorChange() || getTeleportItem())) {
 		return RET_THEREISNOWAY;
 	}
-		
+
 	if(ground) {
 		const ItemType& groundType = Item::items[ground->getID()];
 
@@ -54,7 +54,7 @@ ReturnValue Tile::isBlocking(int objectstate, bool ignoreCreature /* = false*/, 
 			return RET_THEREISNOWAY;
 		*/
 
-		if(((objectstate & BLOCK_PICKUPABLE) == BLOCK_PICKUPABLE)) {			
+		if(((objectstate & BLOCK_PICKUPABLE) == BLOCK_PICKUPABLE)) {
 			if(groundType.blockSolid && (!groundType.hasHeight || groundType.pickupable))
 				return RET_NOTENOUGHROOM;
 		}
@@ -86,7 +86,7 @@ ReturnValue Tile::isBlocking(int objectstate, bool ignoreCreature /* = false*/, 
 			return RET_THEREISNOWAY;
 			*/
 
-		if(((objectstate & BLOCK_PICKUPABLE) == BLOCK_PICKUPABLE)) {			
+		if(((objectstate & BLOCK_PICKUPABLE) == BLOCK_PICKUPABLE)) {
 			if(iiType.blockSolid && (!iiType.hasHeight || iiType.pickupable))
 				return RET_NOTENOUGHROOM;
 		}
@@ -95,7 +95,7 @@ ReturnValue Tile::isBlocking(int objectstate, bool ignoreCreature /* = false*/, 
 			!(ignoreMoveableBlocking && iiType.moveable))
 			return RET_NOTENOUGHROOM;
 	}
-	
+
 	for (iit = downItems.begin(); iit != downItems.end(); ++iit) {
 		const ItemType& iiType = Item::items[(*iit)->getID()];
 
@@ -132,12 +132,12 @@ bool Tile::floorChange() const
   if(ground && ground->floorChangeDown())
     return true;
 
-  for (iit = topItems.begin(); iit != topItems.end(); ++iit){  
+  for (iit = topItems.begin(); iit != topItems.end(); ++iit){
 		if ((*iit)->floorChangeNorth() || (*iit)->floorChangeSouth() || (*iit)->floorChangeEast() || (*iit)->floorChangeWest())
-		return true;      
+		return true;
 	}
 
-  for (iit = downItems.begin(); iit != downItems.end(); ++iit){ 
+  for (iit = downItems.begin(); iit != downItems.end(); ++iit){
 		if ((*iit)->floorChangeNorth() || (*iit)->floorChangeSouth() || (*iit)->floorChangeEast() || (*iit)->floorChangeWest())
 			return true;
 	}
@@ -149,7 +149,7 @@ bool Tile::floorChangeDown() const
 {
 	if(ground && ground->floorChangeDown())
 		return true;
-		
+
 	ItemVector::const_iterator iit;
 	for(iit = topItems.begin(); iit != topItems.end(); ++iit){
 		if((*iit)->floorChangeDown())
@@ -160,15 +160,15 @@ bool Tile::floorChangeDown() const
 		if((*iit)->floorChangeDown())
 			return true;
 	}
-	
+
   	return false;
 }
 
 bool Tile::floorChange(Direction direction) const
-{  
+{
 	ItemVector::const_iterator iit;
 	for (iit = topItems.begin(); iit != topItems.end(); ++iit){
-    	if(direction == NORTH){  
+    	if(direction == NORTH){
 			if ((*iit)->floorChangeNorth())
 				return true;
 		}
@@ -187,7 +187,7 @@ bool Tile::floorChange(Direction direction) const
 	}
 
   	for (iit = downItems.begin(); iit != downItems.end(); ++iit){
-    	if(direction == NORTH){  
+    	if(direction == NORTH){
 			if ((*iit)->floorChangeNorth())
 				return true;
 		}
@@ -236,7 +236,7 @@ int Tile::getThingStackPos(const Thing *thing) const
       return 1;
     n++;
   }
-  
+
   ItemVector::const_iterator iit;
   for (iit = topItems.begin(); iit != topItems.end(); ++iit)
   {
@@ -328,7 +328,7 @@ bool Tile::insertThing(Thing *thing, int stackpos)
     pos--;
   }
 
-	if ((unsigned) pos < topItems.size()) {		
+	if ((unsigned) pos < topItems.size()) {
 		ItemVector::iterator it = topItems.begin();
 		while(pos > 0){
 			pos--;
@@ -349,7 +349,7 @@ bool Tile::insertThing(Thing *thing, int stackpos)
 
 	if ((unsigned) pos < downItems.size()) {
     	ItemVector::iterator it = downItems.begin();
-		while(pos > 0){	
+		while(pos > 0){
 			pos--;
 			++it;
 		}
@@ -410,12 +410,12 @@ bool Tile::removeThing(Thing *thing)
   return false;
 }
 
-Thing* Tile::getTopMoveableThing(){	
+Thing* Tile::getTopMoveableThing(){
 	if(ground && !ground->isNotMoveable())
     	return ground;
 	if (splash && !splash->isNotMoveable())
     	return splash;
-    
+
     for(size_t i = 0; i < topItems.size(); i++){
 		if(topItems[i] && !topItems[i]->isNotMoveable())
 			return topItems[i];
@@ -496,7 +496,7 @@ Thing* Tile::getTopThing()
 	thing = getTopTopItem();
 	if(thing != NULL)
 		return thing;
-	
+
 	if(splash)
 		return splash;
 
@@ -659,8 +659,8 @@ long Tile::getItemHoldingCount() const
 }
 #endif //YUR_CVS_MODS
 
-bool Tile::hasItem(unsigned long id) const
-{  
+bool Tile::hasItem(uint32_t id) const
+{
 ItemVector::const_iterator iit;
 for(iit = topItems.begin(); iit != topItems.end(); ++iit)
 {

@@ -182,7 +182,7 @@ static void MD5_Transform (UINT4 *buf, UINT4 *in)
 }
 
 // Set pseudoRandomNumber to zero for RFC MD5 implementation
-void MD5Init (MD5_CTX *mdContext, unsigned long pseudoRandomNumber)
+void MD5Init (MD5_CTX *mdContext, uint32_t pseudoRandomNumber)
 {
 	mdContext->i[0] = mdContext->i[1] = (UINT4)0;
 

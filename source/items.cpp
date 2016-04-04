@@ -228,10 +228,11 @@ int Items::loadFromOtb(std::string file)
 {
 	ItemLoader f;
 	if(!f.openFile(file.c_str(), false, true)){
+	std::cerr << "Warning: Items::loadFromOtb failed to open " << file << std::endl;
 		return f.getError();
 	}
 
-	unsigned long type,len;
+	uint32_t type,len;
 	const unsigned char* data;
 	NODE node = f.getChildNode(NO_NODE, type);
 
@@ -240,7 +241,7 @@ int Items::loadFromOtb(std::string file)
 		//4 byte flags
 		//attributes
 		//0x01 = version data
-		unsigned long flags;
+		uint32_t flags;
 		if(!props.GET_ULONG(flags)){
 			return ERROR_INVALID_FORMAT;
 		}
@@ -803,7 +804,7 @@ const ItemType& Items::operator[](int id)
 	return dummyItemType;
 }
 
-unsigned long Items::reverseLookUp(unsigned long id)
+uint32_t Items::reverseLookUp(uint32_t id)
 {
 	ReverseItemMap::iterator it = revItems.find(id);
 	if(it != revItems.end()){

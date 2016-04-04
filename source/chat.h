@@ -34,12 +34,12 @@ class ChatChannel
 public:
 	ChatChannel(unsigned short channelId, std::string channelName);
 	~ChatChannel(){};
-	
+
 	bool addUser(Player *player);
 	bool removeUser(Player *player);
-	
+
 	bool talk(Player *fromPlayer, SpeakClasses type, std::string &text, unsigned short channelId);
-	
+
 	const std::string& getName(){ return m_name; };
 	const unsigned short getId(){ return m_id; };
 private:
@@ -58,21 +58,21 @@ public:
 	~Chat(){};
 	ChatChannel *createChannel(Player *player, unsigned short channelId);
 	bool deleteChannel(Player *player, unsigned short channelId);
-	
+
 	bool addUserToChannel(Player *player, unsigned short channelId);
 	bool removeUserFromChannel(Player *player, unsigned short channelId);
 	void removeUserFromAllChannels(Player *player);
-	
-	bool talkToChannel(Player *player, SpeakClasses type, std::string &text, unsigned short channelId);	
-	
-	std::string getChannelName(Player *player, unsigned short channelId);	
+
+	bool talkToChannel(Player *player, SpeakClasses type, std::string &text, unsigned short channelId);
+
+	std::string getChannelName(Player *player, unsigned short channelId);
 	ChannelList getChannelList(Player *player);
-	
+
 private:
 	ChatChannel *getChannel(Player *player, unsigned short channelId);
-	
+
 	typedef std::map<unsigned short, ChatChannel*> NormalChannelMap;
-	typedef std::map<unsigned long, ChatChannel*> GuildChannelMap;
+	typedef std::map<uint32_t, ChatChannel*> GuildChannelMap;
 	NormalChannelMap m_normalChannels;
 	GuildChannelMap m_guildChannels;
 };

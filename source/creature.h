@@ -37,7 +37,7 @@ extern LuaScript g_config;
 #ifdef YUR_HIGH_LEVELS
 typedef int64_t exp_t;
 #else
-typedef unsigned long exp_t;
+typedef uint32_t exp_t;
 #endif //YUR_HIGH_LEVELS
 
 typedef std::vector<Creature*> CreatureVector;
@@ -132,8 +132,8 @@ public:
 	virtual const std::string& getName() const = 0;
 
 	void setID(){this->id = auto_id | this->idRange();}
-	virtual unsigned long idRange() = 0;
-	unsigned long getID() const { return id; }
+	virtual uint32_t idRange() = 0;
+	uint32_t getID() const { return id; }
 	virtual void removeList() = 0;
 	virtual void addList() = 0;
 
@@ -175,7 +175,7 @@ public:
 	virtual void die(){};
 	virtual std::string getDescription(bool self = false) const;
 	virtual void setAttackedCreature(const Creature* creature);
-	//virtual void setAttackedCreature(unsigned long id);
+	//virtual void setAttackedCreature(uint32_t id);
 
 	virtual void setMaster(Creature* creature);
 	virtual Creature* getMaster() {return master;}
@@ -193,11 +193,11 @@ public:
 		return 0;
 	}
 
-	unsigned long attackedCreature;
+	uint32_t attackedCreature;
 	#ifdef BD_FOLLOW
-    unsigned long followCreature;
+    uint32_t followCreature;
     std::list<Position> pathList;
-    unsigned long eventCheckFollow;
+    uint32_t eventCheckFollow;
     #endif //BD_FOLLOW
 	virtual bool isAttackable() const { return true; };
 	virtual bool isPushable() const {return true;}
@@ -219,7 +219,7 @@ public:
 	long manaShieldTicks, hasteTicks, paralyzeTicks;
 	int immunities;
 
-	//unsigned long experience;
+	//uint32_t experience;
 	Position masterPos;
 
 	int health, healthmax;
@@ -285,7 +285,7 @@ public:
 	virtual exp_t getLostExperience();
 	virtual int getInflicatedDamage(Creature* attacker);
 	virtual int getTotalInflictedDamage();
-	virtual int getInflicatedDamage(unsigned long id);
+	virtual int getInflicatedDamage(uint32_t id);
 
 #ifdef TR_SUMMONS
 	size_t getSummonCount() const { return summons.size(); }
@@ -307,8 +307,8 @@ protected:
 	int invisibleTicks;
 #endif //YUR_INVISIBLE
 
-	unsigned long eventCheck;
-	unsigned long eventCheckAttacking;
+	uint32_t eventCheck;
+	uint32_t eventCheckAttacking;
 
 	Creature *master;
 	std::list<Creature*> summons;
@@ -374,7 +374,7 @@ protected:
 	friend class Commands;
 	friend class GameState;
 
-	unsigned long id;
+	uint32_t id;
 	//std::string name;
 };
 

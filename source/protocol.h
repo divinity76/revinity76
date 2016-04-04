@@ -39,7 +39,7 @@ public:
 	virtual ~Protocol();
 
 	void setPlayer(Player* p);
-	unsigned long getIP() const;
+	uint32_t getIP() const;
 
 	virtual bool CanSee(int x, int y, int z) const = 0;
 	virtual bool CanSee(const Creature*) const = 0;
@@ -136,16 +136,16 @@ public:
 	virtual void sendToChannel(const Creature * creature, SpeakClasses type, const std::string &text, unsigned short channelId) = 0;
 	virtual void sendOpenPriv(const std::string &receiver) =0;
 
-	virtual void sendVIPLogIn(unsigned long guid) = 0;
-	virtual void sendVIPLogOut(unsigned long guid) = 0;
-	virtual void sendVIP(unsigned long guid, const std::string &name, bool isOnline) = 0;
+	virtual void sendVIPLogIn(uint32_t guid) = 0;
+	virtual void sendVIPLogOut(uint32_t guid) = 0;
+	virtual void sendVIP(uint32_t guid, const std::string &name, bool isOnline) = 0;
 
 	virtual void sleepTillMove();
 	virtual void flushOutputBuffer() = 0;
 	virtual void logout() = 0;
 	#ifdef KICK_PLAYER
     virtual void sendKick() = 0;
-    #endif //KICK_PLAYER	
+    #endif //KICK_PLAYER
 	virtual void sendInfoBox(std::string text, int itemid) = 0;
 	 virtual void sendTextDialog(const std::string &text) = 0;
 

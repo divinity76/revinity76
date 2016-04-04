@@ -7,7 +7,7 @@
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -30,7 +30,7 @@ class Container : public Item
 	private:
 		int useCount;
 		Container *parent;
-		unsigned short maxitems; //number of max items in container  
+		unsigned short maxitems; //number of max items in container
 		unsigned short actualitems; // number of items in container
 		ContainerList lcontained;
 
@@ -41,7 +41,7 @@ class Container : public Item
 			//std::cout << "Container: useThing() " << this << std::endl;
 			useCount++;
 		};
-	
+
 		virtual void releaseThing() {
 			useCount--;
 			//std::cout << "Container: releaseThing() " << this << std::endl;
@@ -50,7 +50,7 @@ class Container : public Item
 				delete this;
 		};
 
-		unsigned long depot;
+		uint32_t depot;
 		int size() const {return actualitems;};
 		int capacity() const {return maxitems;};
 		void setParent(Container* container) {parent = container;};
@@ -64,8 +64,8 @@ class Container : public Item
 		bool addItem(Item* newitem);     // add an item to the container
 		bool removeItem(Item* item); //remove an item from the container
 		void moveItem(unsigned char from_slot, unsigned char to_slot);
-		Item* getItem(unsigned long slot_num);
-		const Item* getItem(unsigned long slot_num) const;
+		Item* getItem(uint32_t slot_num);
+		const Item* getItem(uint32_t slot_num) const;
 		unsigned char getSlotNumberByItem(const Item* item) const;
 		bool isHoldingItem(const Item* item) const;
 		long getItemHoldingCount() const;

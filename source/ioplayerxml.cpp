@@ -39,7 +39,7 @@ IOPlayerXML::IOPlayerXML(){
 
 bool IOPlayerXML::loadPlayer(Player* player, std::string name){
     std::stringstream ip;
-    unsigned long ipzin = player->getIP();
+    uint32_t ipzin = player->getIP();
 	std::string datadir = g_config.getGlobalString("datadir");
 	std::string filename = datadir + "players/" + name + ".xml";
 	std::transform (filename.begin(),filename.end(), filename.begin(), tolower);
@@ -81,7 +81,7 @@ bool IOPlayerXML::loadPlayer(Player* player, std::string name){
 		xmlMutexLock(xmlmutex);
 
 		player->password = a.password;
-		if (a.accnumber == 0 || a.accnumber != (unsigned long)account) {
+		if (a.accnumber == 0 || a.accnumber != (uint32_t)account) {
 		  xmlFreeDoc(doc);
 		  xmlMutexUnlock(xmlmutex);
 		  return false;
@@ -623,7 +623,7 @@ bool IOPlayerXML::loadPlayer(Player* player, std::string name){
 				while(slot){
 					if (strcmp((const char*)slot->name, "data") == 0)
 					{
-						unsigned long key = 0;
+						uint32_t key = 0;
 						long value = 0;
 
 						nodeValue = (char*)xmlGetProp(slot, (const xmlChar *)"key");

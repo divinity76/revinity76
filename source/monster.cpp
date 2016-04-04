@@ -36,7 +36,7 @@ extern Monsters g_monsters;
 
 Monster* Monster::createMonster(const std::string& name, Game* game)
 {
-	unsigned long id = g_monsters.getIdByName(name);
+	uint32_t id = g_monsters.getIdByName(name);
 	if(!id){
 		return NULL;
 	}
@@ -82,8 +82,8 @@ Creature()
 #endif //TJ_MONSTER_BLOOD
 }
 
-unsigned long Monster::getRandom(){
-	return (unsigned long)((rand()<< 16 | rand()) % CHANCE_MAX);
+uint32_t Monster::getRandom(){
+	return (uint32_t)((rand()<< 16 | rand()) % CHANCE_MAX);
 }
 
 

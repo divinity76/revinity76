@@ -7,7 +7,7 @@
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -27,7 +27,7 @@
 #include "game.h"
 
 typedef unsigned char attribute_t;
-typedef unsigned long flags_t;
+typedef uint32_t flags_t;
 
 enum tile_flags_t{
 	TILE_PZ = 1,
@@ -65,11 +65,11 @@ enum OTBM_AttrTypes_t{
 #pragma pack(1)
 
 struct OTBM_root_header{
-	unsigned long version;
+	uint32_t version;
 	unsigned short width;
 	unsigned short height;
-	unsigned long majorVersionItems;
-	unsigned long minorVersionItems;
+	uint32_t majorVersionItems;
+	uint32_t minorVersionItems;
 };
 
 struct OTBM_TeleportDest{
@@ -99,8 +99,8 @@ bool IOMapOTBM::loadMap(Map* map, std::string identifier)
 	if(!f.openFile(identifier.c_str(), false, true)){
 		return false;
 	}
-	
-	unsigned long type;
+
+	uint32_t type;
 	PropStream propStream;
 
 	NODE root = f.getChildNode((NODE)NULL, type);
@@ -113,16 +113,16 @@ bool IOMapOTBM::loadMap(Map* map, std::string identifier)
 	if(!propStream.GET_STRUCT(root_header)){
 		return false;
 	}
-	
+
 	if(root_header->version != 0){
 		return false;
 	}
-	
-	if(root_header->majorVersionItems > (unsigned long)Items::dwMajorVersion){
+
+	if(root_header->majorVersionItems > (uint32_t)Items::dwMajorVersion){
 		return false;
 	}
 
-	if(root_header->minorVersionItems > (unsigned long)Items::dwMinorVersion){
+	if(root_header->minorVersionItems > (uint32_t)Items::dwMinorVersion){
 		std::cout << "Warning: This map needs an updated items OTB file." <<std::endl;
 	}
 
@@ -156,9 +156,9 @@ bool IOMapOTBM::loadMap(Map* map, std::string identifier)
 			break;
 		}
 	}
-		
+
 	std::cout << "Map description: " << map_description << std::endl;
-	
+
 	NODE tile_area = f.getChildNode(map_data, type);
 	while(tile_area != NO_NODE){
 		if(f.getError() != ERROR_NONE){
@@ -169,28 +169,28 @@ bool IOMapOTBM::loadMap(Map* map, std::string identifier)
 			if(!f.getProps(tile_area, propStream)){
 				return false;
 			}
-			
+
 			OTBM_Tile_area_coords* area_coord;
 			if(!propStream.GET_STRUCT(area_coord)){
 				return false;
 			}
-			
+
 			int base_x, base_y, base_z;
 			base_x = area_coord->_x;
 			base_y = area_coord->_y;
 			base_z = area_coord->_z;
-			
+
 			NODE tile_node = f.getChildNode(tile_area, type);
 			while(tile_node != NO_NODE){
 				if(f.getError() != ERROR_NONE){
 					return false;
 				}
-				
+
 				if(type == OTBM_TILE){
 					if(!f.getProps(tile_node, propStream)){
 						return false;
 					}
-					
+
 					OTBM_Tile_coords* tile_coord;
 					if(!propStream.GET_STRUCT(tile_coord)){
 						return false;
@@ -206,18 +206,18 @@ bool IOMapOTBM::loadMap(Map* map, std::string identifier)
 						while(propStream.GET_UCHAR(attribute)){
 							switch(attribute){
 							case OTBM_ATTR_TILE_FLAGS:
-								unsigned long flags;
+								uint32_t flags;
 								if(!propStream.GET_ULONG(flags)){
 									return false;
 								}
-								
+
 								if(flags & TILE_PZ)
 									tile->setPz();;
-								
+
 								break;
 							case OTBM_ATTR_ITEM:
 								Item* item;
-								
+
 								item  = unserializaItemAttr(propStream);
 								if(item){
 									item->pos.x = px;
@@ -261,7 +261,7 @@ bool IOMapOTBM::loadMap(Map* map, std::string identifier)
 		}
 		tile_area = f.getNextNode(tile_area, type);
 	}
-	
+
 	if(f.getError() != ERROR_NONE){
 		return false;
 	}
@@ -273,7 +273,7 @@ Item* IOMapOTBM::unserializaItemAttr(PropStream &propStream)
 {
 	unsigned short _id;
 	unsigned char _count;
-	
+
 	if(!propStream.GET_USHORT(_id)){
 		return NULL;
 	}
@@ -313,10 +313,10 @@ Item* IOMapOTBM::unserializaItemNode(FileLoader* f, NODE node)
 
 		unsigned char attr_type;
 		while(propStream.GET_UCHAR(attr_type)){
-			
+
 			unsigned short tmp_short;
 			std::string a;
-			
+
 			switch(attr_type){
 			case OTBM_ATTR_ACTION_ID:
 				if(!propStream.GET_USHORT(tmp_short)){
@@ -394,10 +394,10 @@ Item* IOMapOTBM::unserializaItemNode(FileLoader* f, NODE node)
 				break;
 			}
 		}
-		
+
 		Container* container;
 		if(container = dynamic_cast<Container*>(item)){
-			unsigned long type;
+			uint32_t type;
 			NODE item_node = f->getChildNode(node, type);
 			while(item_node){
 				if(type == OTBM_ITEM){
@@ -411,7 +411,7 @@ Item* IOMapOTBM::unserializaItemNode(FileLoader* f, NODE node)
 				}
 				item_node = f->getNextNode(item_node, type);
 			}
-		}		
+		}
 	}
 	else{
 		return NULL;

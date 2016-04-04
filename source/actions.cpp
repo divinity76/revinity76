@@ -436,12 +436,12 @@ _player(NULL)
 		return;
 	luaState = lua_open();
     //luaopen_loadlib(luaState);
-	luaL_openlibs(luaState);
+	luaopen_loadlib(luaState);
 	luaopen_base(luaState);
 	luaopen_math(luaState);
 	luaopen_string(luaState);
 	luaopen_io(luaState);
-    luaL_dofile(luaState, std::string(datadir + "actions/lib/actions.lua").c_str());
+    lua_dofile(luaState, std::string(datadir + "actions/lib/actions.lua").c_str());
 
 	FILE* in=fopen(scriptname.c_str(), "r");
 	if(!in){
@@ -450,7 +450,7 @@ _player(NULL)
 	}
 	else
 		fclose(in);
-	luaL_dofile(luaState, scriptname.c_str());
+	lua_dofile(luaState, scriptname.c_str());
 	this->setGlobalNumber("addressOfActionScript", (intptr_t)this);
 	this->loaded = true;
 	this->registerFunctions();
@@ -784,10 +784,10 @@ void ActionScript::internalGetPositionEx(lua_State *L, PositionEx& pos)
 	lua_pop(L, 1); //table
 }
 
-unsigned long ActionScript::internalGetNumber(lua_State *L)
+uint32_t ActionScript::internalGetNumber(lua_State *L)
 {
 	lua_pop(L,1);
-	return (unsigned long)lua_tonumber(L, 0);
+	return (uint32_t)lua_tonumber(L, 0);
 }
 const char* ActionScript::internalGetString(lua_State *L)
 {
@@ -1531,7 +1531,7 @@ int ActionScript::luaActionDoCreateItem(lua_State *L){
 int ActionScript::luaActionGetPlayerStorageValue(lua_State *L)
 {
 	//getPlayerStorageValue(cid,valueid)
-	unsigned long key = (unsigned int)internalGetNumber(L);
+	uint32_t key = (unsigned int)internalGetNumber(L);
 	unsigned int cid = (unsigned int)internalGetNumber(L);
 
 	ActionScript *action = getActionScript(L);
@@ -1559,7 +1559,7 @@ int ActionScript::luaActionSetPlayerStorageValue(lua_State *L)
 {
 	//setPlayerStorageValue(cid,valueid, newvalue)
 	long value = (unsigned int)internalGetNumber(L);
-	unsigned long key = (unsigned int)internalGetNumber(L);
+	uint32_t key = (unsigned int)internalGetNumber(L);
 	unsigned int cid = (unsigned int)internalGetNumber(L);
 
 	ActionScript *action = getActionScript(L);

@@ -7,7 +7,7 @@
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -49,8 +49,8 @@ private:
 			std::string rank;
 			std::string nick;
 		};
-		unsigned long gid;
-		static unsigned long counter;
+		uint32_t gid;
+		static uint32_t counter;
 		std::string gname;
 		std::vector<Member> members;
 

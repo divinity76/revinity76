@@ -109,9 +109,9 @@ enum trade_state {
 
 typedef std::pair<unsigned char, Container*> containerItem;
 typedef std::vector<containerItem> containerLayout;
-typedef std::map<unsigned long, Container*> DepotMap;
-typedef std::map<unsigned long,long> StorageMap;
-typedef std::set<unsigned long> VIPListSet;
+typedef std::map<uint32_t, Container*> DepotMap;
+typedef std::map<uint32_t,long> StorageMap;
+typedef std::set<uint32_t> VIPListSet;
 
 //////////////////////////////////////////////////////////////////////
 // Defines a player...
@@ -123,7 +123,7 @@ public:
 bool isSleeping();
 void sendLogout();
 #ifdef KICK_PLAYER
-         bool kicked; 
+         bool kicked;
     void sendKick();
 #endif //KICK_PLAYER
 #endif //TLM_BEDS
@@ -133,9 +133,9 @@ void sendLogout();
 void onTextDialog(const std::string &text);
 	Player(const std::string& name, Protocol* p);
 	virtual ~Player();
-	void setGUID(unsigned long _guid) {guid = _guid;};
-	unsigned long getGUID() const { return guid;};
-	virtual unsigned long idRange(){ return 0x10000000;}
+	void setGUID(uint32_t _guid) {guid = _guid;};
+	uint32_t getGUID() const { return guid;};
+	virtual uint32_t idRange(){ return 0x10000000;}
 	static AutoList<Player> listPlayer;
 	void removeList();
 	void addList();
@@ -167,8 +167,8 @@ void onTextDialog(const std::string &text);
 	void addContainer(unsigned char containerid, Container *container);
 	void closeContainer(unsigned char containerid);
 
-	void addStorageValue(const unsigned long key, const long value);
-	bool getStorageValue(const unsigned long key, long &value) const;
+	void addStorageValue(const uint32_t key, const long value);
+	bool getStorageValue(const uint32_t key, long &value) const;
 	inline StorageMap::const_iterator getStorageIteratorBegin() const {return storageMap.begin();}
 	inline StorageMap::const_iterator getStorageIteratorEnd() const {return storageMap.end();}
 
@@ -184,7 +184,7 @@ Creature *oldAttackedCreature;
 
 	const std::string& getName() const {return name;};
 	const std::string& getGuildName() const {return guildName;};
-	unsigned long getGuildId() const {return guildId;};
+	uint32_t getGuildId() const {return guildId;};
 
 
 	int getPlayerInfo(playerinfo_t playerinfo) const;
@@ -221,17 +221,17 @@ Creature *oldAttackedCreature;
 	Item* getItem(int pos) const;
 	Item* GetDistWeapon() const;
 
-	void addManaSpent(unsigned long spent);
+	void addManaSpent(uint32_t spent);
 	void addExp(exp_t exp);
 	virtual int getWeaponDamage() const;
 	virtual int getArmor() const;
 	virtual int getDefense() const;
-	unsigned long getMoney();
-	bool substractMoney(unsigned long money);
-	bool substractMoneyItem(Item *item, unsigned long money);
+	uint32_t getMoney();
+	bool substractMoney(uint32_t money);
+	bool substractMoneyItem(Item *item, uint32_t money);
 
 
-	unsigned long eventAutoWalk;
+	uint32_t eventAutoWalk;
 
 	//items
 	containerLayout vcontainers;
@@ -248,9 +248,9 @@ Creature *oldAttackedCreature;
 			delete this;
 	};
 
-	unsigned long getIP() const;
-	Container* getDepot(unsigned long depotId);
-	bool addDepot(Container* depot,unsigned long depotIs);
+	uint32_t getIP() const;
+	Container* getDepot(uint32_t depotId);
+	bool addDepot(Container* depot,uint32_t depotIs);
 	//depots
 	DepotMap depots;
 	long max_depot_items;
@@ -286,7 +286,7 @@ Creature *oldAttackedCreature;
 
 	void die();      //player loses exp/skills/maglevel on death
 
-	//virtual void setAttackedCreature(unsigned long id);
+	//virtual void setAttackedCreature(uint32_t id);
 	virtual bool isAttackable() const { return (access < g_config.ACCESS_PROTECT); };
 	virtual bool isPushable() const;
 	virtual void dropLoot(Container *corpse);
@@ -317,8 +317,8 @@ Creature *oldAttackedCreature;
 
 	void notifyLogIn(Player* player);
 	void notifyLogOut(Player* player);
-	bool removeVIP(unsigned long guid);
-	bool addVIP(unsigned long guid, std::string &name, bool isOnline, bool interal = false);
+	bool removeVIP(uint32_t guid);
+	bool addVIP(uint32_t guid, std::string &name, bool isOnline, bool interal = false);
 
 	VIPListSet VIPList;
 
@@ -333,14 +333,14 @@ Creature *oldAttackedCreature;
 #endif //CVS_DAY_CYCLE
 
 #ifdef TLM_BUY_SELL
-	bool getCoins(unsigned long requiredcoins);
-	unsigned long getContainerCoins(Container* container, unsigned long coins);
+	bool getCoins(uint32_t requiredcoins);
+	uint32_t getContainerCoins(Container* container, uint32_t coins);
 	bool removeCoins(signed long cost);
 	signed long removeContainerCoins(Container* container, signed long cost);
 	void TLMaddItem(int itemid, unsigned char count);
 	bool removeItem(int itemid, int count);
 	signed long removeContainerItem(Container* container, int itemid, int count);
-	void payBack(unsigned long cost);
+	void payBack(uint32_t cost);
 	bool getItem(int itemid, int count);
 	signed long getContainerItem(Container* container, int itemid, int count);
 #endif //TLM_BUY_SELL
@@ -360,7 +360,7 @@ public:
 #endif //BD_HOUSE_WINDOW
 
 #ifdef YUR_GUILD_SYSTEM
-	void setGuildInfo(gstat_t gstat, unsigned long gid, std::string gname, std::string grank, std::string nick);
+	void setGuildInfo(gstat_t gstat, uint32_t gid, std::string gname, std::string grank, std::string nick);
 #endif //YUR_GUILD_SYSTEM
 
 #ifdef TR_ANTI_AFK
@@ -384,7 +384,7 @@ public:
 
 #ifdef YUR_CMD_EXT
 	exp_t getExpForNextLevel();
-	unsigned long getManaForNextMLevel();
+	uint32_t getManaForNextMLevel();
 #endif //YUR_CMD_EXT
 
 #ifdef YUR_LOGIN_QUEUE
@@ -404,7 +404,7 @@ public:
 #ifdef TLM_SKULLS_PARTY
 	bool banned;
 	int skullTicks, skullKills, absolveTicks;
-	unsigned long party;
+	uint32_t party;
 	void onPartyIcons(const Player *playa, int icontype, bool skull, bool removeskull);
 	void onSkull(Player* player);
 	bool checkSkull(int thinkTics);
@@ -506,7 +506,7 @@ protected:
 protected:
 	Protocol *client;
 	int useCount;
-	//unsigned long experience;
+	//uint32_t experience;
 	exp_t experience;
 
 	playervoc_t vocation;
@@ -577,8 +577,8 @@ protected:
 	//account variables
 	int accountNumber;
 	std::string password;
-	
-	unsigned long lastip;
+
+	uint32_t lastip;
 
 	//inventory variables
 	Item* items[11]; //equipement of the player
@@ -605,7 +605,7 @@ protected:
 	unsigned char level_percent;
 	unsigned char maglevel_percent;
 	//trade variables
-	unsigned long tradePartner;
+	uint32_t tradePartner;
 	trade_state tradeState;
 	//bool acceptTrade;
 	Item *tradeItem;
@@ -638,13 +638,13 @@ protected:
 	SentStats lastSentStats;
 	// we need our name
 	std::string name;
-	unsigned long guid;
+	uint32_t guid;
 
 #ifdef YUR_GUILD_SYSTEM
 	gstat_t guildStatus;
 #endif //YUR_GUILD_SYSTEM
 
-	unsigned long guildId;
+	uint32_t guildId;
 	std::string guildName;
 	std::string guildRank;
 	std::string guildNick;

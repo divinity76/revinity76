@@ -1,13 +1,13 @@
 //////////////////////////////////////////////////////////////////////
 // OpenTibia - an opensource roleplaying game
 //////////////////////////////////////////////////////////////////////
-// 
+//
 //////////////////////////////////////////////////////////////////////
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -25,7 +25,7 @@
 
 typedef unsigned char attribute_t;
 typedef unsigned short datasize_t;
-typedef unsigned long flags_t;
+typedef uint32_t flags_t;
 
 enum itemgroup_t{
 	ITEM_GROUP_NONE = 0,
@@ -92,8 +92,8 @@ enum itemattrib_t {
 
 enum itemflags_t {
  FLAG_BLOCK_SOLID = 1,
- FLAG_BLOCK_PROJECTILE = 2, 
- FLAG_BLOCK_PATHFIND = 4, 
+ FLAG_BLOCK_PROJECTILE = 2,
+ FLAG_BLOCK_PATHFIND = 4,
  FLAG_HAS_HEIGHT = 8,
  FLAG_USEABLE = 16,
  FLAG_PICKUPABLE = 32,
@@ -186,9 +186,9 @@ struct lightBlock{
 #pragma pack(1)
 
 struct VERSIONINFO{
-	unsigned long dwMajorVersion;
-	unsigned long dwMinorVersion;
-	unsigned long dwBuildNumber;
+	uint32_t dwMajorVersion;
+	uint32_t dwMinorVersion;
+	uint32_t dwBuildNumber;
 	char CSDVersion[128];
 };
 

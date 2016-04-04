@@ -7,7 +7,7 @@
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -26,7 +26,7 @@
 #include "luascript.h"
 
 extern xmlMutexPtr xmlmutex;
-extern LuaScript g_config; 
+extern LuaScript g_config;
 
 IOAccountXML::IOAccountXML(){
 	if(xmlmutex == NULL){
@@ -34,7 +34,7 @@ IOAccountXML::IOAccountXML(){
 	}
 }
 
-Account IOAccountXML::loadAccount(unsigned long accno){
+Account IOAccountXML::loadAccount(uint32_t accno){
 	Account acc;
 
 	std::stringstream accsstr;
@@ -51,7 +51,7 @@ Account IOAccountXML::loadAccount(unsigned long accno){
 
 		if (xmlStrcmp(root->name,(const xmlChar*) "account"))
 		{
-			xmlFreeDoc(doc);			
+			xmlFreeDoc(doc);
 			xmlMutexUnlock(xmlmutex);
 			return acc;
 		}
@@ -97,28 +97,28 @@ Account IOAccountXML::loadAccount(unsigned long accno){
 			}
 			p = p->next;
 		}
-		
+
 		xmlFreeDoc(doc);
 
 		// Organize the char list.
 		acc.charList.sort();
 		acc.accnumber = accno;
-	}	
+	}
 	xmlMutexUnlock(xmlmutex);
 	return acc;
 }
 
 
-bool IOAccountXML::getPassword(unsigned long accno, const std::string &name, std::string &password)
+bool IOAccountXML::getPassword(uint32_t accno, const std::string &name, std::string &password)
 {
 	std::string acc_password;
-	
+
 	std::stringstream accsstr;
 	std::string datadir = g_config.getGlobalString("datadir");
 	accsstr << datadir + "accounts/" << accno << ".xml";;
 	std::string filename = accsstr.str();
 	std::transform(filename.begin(), filename.end(), filename.begin(), tolower);
-	
+
 	xmlMutexLock(xmlmutex);
 	xmlDocPtr doc = xmlParseFile(filename.c_str());
 	if (doc)
@@ -128,7 +128,7 @@ bool IOAccountXML::getPassword(unsigned long accno, const std::string &name, std
 
 		if (xmlStrcmp(root->name,(const xmlChar*) "account"))
 		{
-			xmlFreeDoc(doc);			
+			xmlFreeDoc(doc);
 			xmlMutexUnlock(xmlmutex);
 			return false;
 		}
@@ -170,9 +170,9 @@ bool IOAccountXML::getPassword(unsigned long accno, const std::string &name, std
 			}
 			p = p->next;
 		}
-		
+
 		xmlFreeDoc(doc);
-	}	
+	}
 	xmlMutexUnlock(xmlmutex);
 	return false;
 }

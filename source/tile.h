@@ -8,7 +8,7 @@
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -90,7 +90,7 @@ public:
 #endif //YUR_CVS_MODS
 
   bool removeThing(Thing *thing);
-  bool hasItem(unsigned long id) const;
+  bool hasItem(uint32_t id) const;
   void addThing(Thing *thing);
 	bool insertThing(Thing *thing, int stackpos);
 	MagicEffectItem* getFieldItem();
@@ -101,7 +101,7 @@ public:
 	Item* getTopTopItem();
 	Item* getTopDownItem();
 	Item* getMoveableBlockingItem();
-	
+
   int getCreatureStackPos(Creature *c) const;
   int getThingStackPos(const Thing *thing) const;
 	int getThingCount() const;
@@ -115,11 +115,11 @@ public:
 
   bool isPz() const;
   void setPz();
-  
+
   bool floorChange() const;
   bool floorChangeDown() const;
   bool floorChange(Direction direction) const;
-  
+
   std::string getDescription() const;
 
 protected:

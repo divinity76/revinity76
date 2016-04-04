@@ -7,7 +7,7 @@
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -51,7 +51,7 @@ Protocol::~Protocol()
 	game = NULL;
 }
 
-unsigned long Protocol::getIP() const
+uint32_t Protocol::getIP() const
 {
 	sockaddr_in sain;
 	socklen_t salen = sizeof(sockaddr_in);
@@ -63,7 +63,7 @@ unsigned long Protocol::getIP() const
 		return sain.sin_addr.s_addr;
 #endif
 	}
-	
+
 	return 0;
 }
 
@@ -77,11 +77,11 @@ void Protocol::sleepTillMove()
 {
 	long long delay = player->getSleepTicks();
 	if(delay > 0 ){
-             
-#if __DEBUG__     
-		std::cout << "Delaying "<< player->getName() << " --- " << delay << std::endl;		
+
+#if __DEBUG__
+		std::cout << "Delaying "<< player->getName() << " --- " << delay << std::endl;
 #endif
-		
+
 		OTSYS_SLEEP((uint32_t)delay);
 	}
 

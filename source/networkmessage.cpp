@@ -7,7 +7,7 @@
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -50,7 +50,7 @@ NetworkMessage::~NetworkMessage()
 void NetworkMessage::Reset()
 {
   m_MsgSize = 0;
-  m_ReadPos = 2;  
+  m_ReadPos = 2;
 }
 
 
@@ -60,7 +60,7 @@ bool NetworkMessage::ReadFromSocket(SOCKET socket)
 {
 	// just read the size to avoid reading 2 messages at once
 	m_MsgSize = recv(socket, (char*)m_MsgBuf, 2, 0);
-	
+
 	// for now we expect 2 bytes at once, it should not be splitted
 	int datasize = m_MsgBuf[0] | m_MsgBuf[1] << 8;
 	if((m_MsgSize != 2) || (datasize > NETWORKMESSAGE_MAXSIZE-2)){
@@ -103,14 +103,14 @@ bool NetworkMessage::WriteToSocket(SOCKET socket)
 
 	m_MsgBuf[0] = (unsigned char)(m_MsgSize);
 	m_MsgBuf[1] = (unsigned char)(m_MsgSize >> 8);
-  
+
 	bool ret = true;
 	int sendBytes = 0;
 	int flags;
 
 #if defined WIN32 || defined __WINDOWS__
 	// Set the socket I/O mode; iMode = 0 for blocking; iMode != 0 for non-blocking
-	unsigned long mode = 1;
+	uint32_t mode = 1;
 	ioctlsocket(socket, FIONBIO, &mode);
 	flags = 0;
 #else
@@ -259,7 +259,7 @@ void NetworkMessage::AddString(const std::string &value)
 
 void NetworkMessage::AddString(const char* value)
 {
-  unsigned long stringlen = (unsigned long) strlen(value);
+  uint32_t stringlen = (uint32_t) strlen(value);
   if(!canAdd(stringlen+2) || stringlen > 8192)
     return;
   AddU16((unsigned short)stringlen);

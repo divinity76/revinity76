@@ -7,7 +7,7 @@
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -32,20 +32,20 @@ template<class T> class AutoList
 {
 public:
 	AutoList(){}
-	
+
 	~AutoList(){
 		list.clear();
 	}
-	
+
 	void addList(T* t){
 		list[t->getID()] = t;
 	}
-	
-	void removeList(unsigned long _id){
+
+	void removeList(uint32_t _id){
 		list.erase(_id);
 	}
-	
-	typedef std::map<unsigned long, T*> list_type;
+
+	typedef std::map<uint32_t, T*> list_type;
 	list_type list;
 
 	typedef typename list_type::iterator listiterator;
@@ -58,7 +58,7 @@ public:
 		count++;
 		if(count >= 0xFFFFFF)
 			count = 1000;
-		
+
 		while(list.find(count) != list.end()){
 			if(count >= 0xFFFFFF)
 				count = 1000;
@@ -74,13 +74,13 @@ public:
 			list.erase(it);
 	}
 
-	typedef std::set<unsigned long> list_type;
+	typedef std::set<uint32_t> list_type;
 
-	unsigned long auto_id;
+	uint32_t auto_id;
 	static OTSYS_THREAD_LOCKVAR autoIDLock;
-	
+
 protected:
-	static unsigned long count;
+	static uint32_t count;
 	static list_type list;
 
 };
