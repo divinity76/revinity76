@@ -79,6 +79,7 @@ bool FileLoader::openFile(const char* filename, bool write, bool caching /*= fal
 			fread(&version, sizeof(unsigned long), 1, m_file);
 			if(version > 0){
 				fclose(m_file);
+				m_file=NULL;
 				m_lastError = ERROR_INVALID_FILE_VERSION;
 				return false;
 			}
