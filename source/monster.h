@@ -52,7 +52,7 @@ public:
 
 	virtual ~Monster();
 	//const Monster& operator=(const Monster& rhs);
-	virtual unsigned long idRange(){ return 0x40000000;}
+	virtual uint32_t idRange(){ return 0x40000000;}
 	static AutoList<Monster> listMonster;
 	void removeList() {listMonster.removeList(getID());}
 	void addList() {listMonster.addList(this);}
@@ -72,12 +72,12 @@ public:
 	virtual int getArmor() const;
 	virtual int getDefense() const;
 	virtual const std::string& getName() const;
-	
+
 	virtual void setMaster(Creature* creature);
 	bool isSummon() {return (getMaster() != NULL);}
 	virtual void onAttack();
-	static unsigned long getRandom();
-	
+	static uint32_t getRandom();
+
 private:
 	Game* game;
 	std::list<Position> route;
@@ -88,7 +88,7 @@ private:
 	Position moveToPos;
 	bool hasLostMaster;
 	MonsterType *mType;
-	
+
 	void doMoveTo(int dx, int dy);
 	int getCurrentDistanceToTarget(const Position &target);
 	int getTargetDistance();
@@ -127,7 +127,7 @@ protected:
 	bool validateDistanceAttack(const Position &pos);
 	bool monsterMoveItem(Item* item, int radius);
 	bool isCreatureAttackable(const Creature* creature);
-	
+
 	virtual exp_t getLostExperience();
 
 	virtual void dropLoot(Container *corpse);
@@ -143,7 +143,7 @@ protected:
 
 	virtual bool isAttackable() const { return true; };
 	virtual bool isPushable() const;
-	
+
 	virtual int onThink(int& newThinkTicks);
 	virtual void setAttackedCreature(const Creature* creature);
 

@@ -26,7 +26,7 @@
 #include <string>
 #include <cmath>
 #include <sstream>
-
+#include <math.h>//fabs
 bool fileExists(char* filename)
 {
 	FILE *f = fopen(filename, "rb");
@@ -218,7 +218,8 @@ double timer()
 	{
 		end=std::chrono::system_clock::now();//
 		running = false;
-		return ((std::chrono::duration_cast<std::chrono::milliseconds>(start - end)).count())/1000.0;
+		//fixme... gotta be a better way to do this!
+		return fabs(((std::chrono::duration_cast<std::chrono::milliseconds>(start - end)).count())/1000.0);
 	}
 }
 #endif//__oldtimer__

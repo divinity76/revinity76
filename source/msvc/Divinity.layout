@@ -1,90 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
-	<ActiveTarget name="debug" />
-	<File name="../guilds.h" open="0" top="0" tabpos="39" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<ActiveTarget name="quickcompile" />
+	<File name="../itemloader.h" open="0" top="0" tabpos="30" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1578" topLine="36" />
-		</Cursor>
-	</File>
-	<File name="../player.cpp" open="0" top="0" tabpos="32" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="73619" topLine="2659" />
-		</Cursor>
-	</File>
-	<File name="../exception.cpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="11131" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../actions.h" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="7150" topLine="214" />
-		</Cursor>
-	</File>
-	<File name="../tools.cpp" open="0" top="0" tabpos="28" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="6082" topLine="215" />
-		</Cursor>
-	</File>
-	<File name="../luascript.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1396" topLine="23" />
-		</Cursor>
-	</File>
-	<File name="../fileloader.cpp" open="0" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="9676" topLine="457" />
-		</Cursor>
-	</File>
-	<File name="../tasks.h" open="0" top="0" tabpos="34" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3381" topLine="111" />
-		</Cursor>
-	</File>
-	<File name="../account.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="133" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../player.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="19583" topLine="630" />
-		</Cursor>
-	</File>
-	<File name="../container.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3379" topLine="103" />
-		</Cursor>
-	</File>
-	<File name="../actions.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="42664" topLine="1545" />
-		</Cursor>
-	</File>
-	<File name="../protocol76.cpp" open="0" top="0" tabpos="37" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="86160" topLine="3326" />
-		</Cursor>
-	</File>
-	<File name="../otserv.cpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="21353" topLine="761" />
-		</Cursor>
-	</File>
-	<File name="../ioplayer.h" open="0" top="0" tabpos="35" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1977" topLine="32" />
-		</Cursor>
-	</File>
-	<File name="../otsystem.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="6817" topLine="214" />
-		</Cursor>
-	</File>
-	<File name="../map.h" open="0" top="0" tabpos="33" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="7643" topLine="261" />
+			<Cursor1 position="4968" topLine="215" />
 		</Cursor>
 	</File>
 	<File name="../ioaccountxml.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -92,99 +12,9 @@
 			<Cursor1 position="1631" topLine="23" />
 		</Cursor>
 	</File>
-	<File name="../container.h" open="0" top="0" tabpos="36" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="../creature.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2588" topLine="51" />
-		</Cursor>
-	</File>
-	<File name="../magic.cpp" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="7178" topLine="219" />
-		</Cursor>
-	</File>
-	<File name="../summons.cpp" open="0" top="0" tabpos="27" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1248" topLine="18" />
-		</Cursor>
-	</File>
-	<File name="../scheduler.cpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="156" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../ioaccountxml.cpp" open="0" top="0" tabpos="41" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3177" topLine="95" />
-		</Cursor>
-	</File>
-	<File name="../chat.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2564" topLine="58" />
-		</Cursor>
-	</File>
-	<File name="../protocol.h" open="0" top="0" tabpos="42" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="7151" topLine="124" />
-		</Cursor>
-	</File>
-	<File name="../spells.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="31094" topLine="1104" />
-		</Cursor>
-	</File>
-	<File name="../itemloader.h" open="0" top="0" tabpos="30" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="4968" topLine="215" />
-		</Cursor>
-	</File>
-	<File name="../npc.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="5768" topLine="152" />
-		</Cursor>
-	</File>
-	<File name="../items.h" open="0" top="0" tabpos="38" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="4426" topLine="149" />
-		</Cursor>
-	</File>
-	<File name="../definitions.h" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1798" topLine="51" />
-		</Cursor>
-	</File>
-	<File name="../spawn.h" open="0" top="0" tabpos="43" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2220" topLine="55" />
-		</Cursor>
-	</File>
-	<File name="../items.cpp" open="0" top="0" tabpos="40" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="20915" topLine="790" />
-		</Cursor>
-	</File>
-	<File name="../database.cpp" open="0" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="4" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../game.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="18090" topLine="508" />
-		</Cursor>
-	</File>
-	<File name="../loginqueue.cpp" open="0" top="0" tabpos="22" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="5612" topLine="186" />
-		</Cursor>
-	</File>
-	<File name="../creature.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1200" topLine="27" />
-		</Cursor>
-	</File>
-	<File name="../account.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1303" topLine="31" />
+			<Cursor1 position="5578" topLine="217" />
 		</Cursor>
 	</File>
 	<File name="../fileloader.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -192,74 +22,9 @@
 			<Cursor1 position="4035" topLine="137" />
 		</Cursor>
 	</File>
-	<File name="../guilds.cpp" open="0" top="0" tabpos="18" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="../definitions.h" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="3403" topLine="118" />
-		</Cursor>
-	</File>
-	<File name="../monsters.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="5013" topLine="184" />
-		</Cursor>
-	</File>
-	<File name="../allocator.cpp" open="1" top="1" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../tile.cpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="14455" topLine="645" />
-		</Cursor>
-	</File>
-	<File name="../templates.h" open="0" top="0" tabpos="31" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2101" topLine="66" />
-		</Cursor>
-	</File>
-	<File name="../spells.h" open="0" top="0" tabpos="16" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3549" topLine="133" />
-		</Cursor>
-	</File>
-	<File name="../creature.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="5578" topLine="217" />
-		</Cursor>
-	</File>
-	<File name="../magic.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="5424" topLine="156" />
-		</Cursor>
-	</File>
-	<File name="../spawn.cpp" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="12073" topLine="440" />
-		</Cursor>
-	</File>
-	<File name="../luascript.cpp" open="0" top="0" tabpos="23" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1446" topLine="40" />
-		</Cursor>
-	</File>
-	<File name="../database.h" open="0" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="5304" topLine="182" />
-		</Cursor>
-	</File>
-	<File name="../commands.cpp" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="35810" topLine="1288" />
-		</Cursor>
-	</File>
-	<File name="../md5.h" open="0" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3696" topLine="53" />
-		</Cursor>
-	</File>
-	<File name="../ioplayerxml.cpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="16993" topLine="609" />
+			<Cursor1 position="1798" topLine="51" />
 		</Cursor>
 	</File>
 	<File name="../game.cpp" open="0" top="0" tabpos="17" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -267,9 +32,29 @@
 			<Cursor1 position="201982" topLine="6633" />
 		</Cursor>
 	</File>
-	<File name="../item.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="../allocator.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="3797" topLine="117" />
+			<Cursor1 position="699" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../spells.h" open="0" top="0" tabpos="16" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3549" topLine="133" />
+		</Cursor>
+	</File>
+	<File name="../magic.cpp" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="7178" topLine="219" />
+		</Cursor>
+	</File>
+	<File name="../templates.h" open="0" top="0" tabpos="31" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2101" topLine="66" />
+		</Cursor>
+	</File>
+	<File name="../container.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3379" topLine="103" />
 		</Cursor>
 	</File>
 	<File name="../npc.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -277,14 +62,34 @@
 			<Cursor1 position="20639" topLine="749" />
 		</Cursor>
 	</File>
-	<File name="../monster.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="../protocol.h" open="0" top="0" tabpos="42" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1698" topLine="38" />
+			<Cursor1 position="7151" topLine="124" />
 		</Cursor>
 	</File>
-	<File name="../scheduler.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="../player.cpp" open="0" top="0" tabpos="32" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1964" topLine="49" />
+			<Cursor1 position="73619" topLine="2659" />
+		</Cursor>
+	</File>
+	<File name="../tile.cpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="14455" topLine="645" />
+		</Cursor>
+	</File>
+	<File name="../magic.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5424" topLine="156" />
+		</Cursor>
+	</File>
+	<File name="../actions.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="42664" topLine="1545" />
+		</Cursor>
+	</File>
+	<File name="../player.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="19583" topLine="630" />
 		</Cursor>
 	</File>
 	<File name="../monsters.cpp" open="0" top="0" tabpos="24" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -292,9 +97,204 @@
 			<Cursor1 position="6757" topLine="259" />
 		</Cursor>
 	</File>
+	<File name="../loginqueue.cpp" open="0" top="0" tabpos="22" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5612" topLine="186" />
+		</Cursor>
+	</File>
+	<File name="../account.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1303" topLine="31" />
+		</Cursor>
+	</File>
+	<File name="../scheduler.cpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="156" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../chat.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2564" topLine="58" />
+		</Cursor>
+	</File>
+	<File name="../database.h" open="0" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5304" topLine="182" />
+		</Cursor>
+	</File>
+	<File name="../guilds.h" open="0" top="0" tabpos="39" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1578" topLine="36" />
+		</Cursor>
+	</File>
+	<File name="../ioplayer.h" open="0" top="0" tabpos="35" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1977" topLine="32" />
+		</Cursor>
+	</File>
+	<File name="../protocol76.cpp" open="0" top="0" tabpos="37" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="86160" topLine="3326" />
+		</Cursor>
+	</File>
+	<File name="../items.cpp" open="0" top="0" tabpos="40" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="20915" topLine="790" />
+		</Cursor>
+	</File>
+	<File name="../monster.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2395" topLine="62" />
+		</Cursor>
+	</File>
+	<File name="../ioaccountxml.cpp" open="0" top="0" tabpos="41" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3177" topLine="95" />
+		</Cursor>
+	</File>
+	<File name="../container.h" open="0" top="0" tabpos="36" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2588" topLine="51" />
+		</Cursor>
+	</File>
+	<File name="../actions.h" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="7150" topLine="214" />
+		</Cursor>
+	</File>
+	<File name="../fileloader.cpp" open="0" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="9676" topLine="457" />
+		</Cursor>
+	</File>
+	<File name="../commands.cpp" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="35810" topLine="1288" />
+		</Cursor>
+	</File>
+	<File name="../spells.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="31094" topLine="1104" />
+		</Cursor>
+	</File>
+	<File name="../spawn.cpp" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="12073" topLine="440" />
+		</Cursor>
+	</File>
+	<File name="../md5.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="765" topLine="9" />
+		</Cursor>
+	</File>
+	<File name="../scheduler.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1964" topLine="49" />
+		</Cursor>
+	</File>
+	<File name="../luascript.cpp" open="0" top="0" tabpos="23" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1446" topLine="40" />
+		</Cursor>
+	</File>
+	<File name="../items.h" open="0" top="0" tabpos="38" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4426" topLine="149" />
+		</Cursor>
+	</File>
+	<File name="../map.h" open="0" top="0" tabpos="33" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="7643" topLine="261" />
+		</Cursor>
+	</File>
+	<File name="../luascript.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1396" topLine="23" />
+		</Cursor>
+	</File>
+	<File name="../item.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3797" topLine="117" />
+		</Cursor>
+	</File>
+	<File name="../ioplayerxml.cpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="16993" topLine="609" />
+		</Cursor>
+	</File>
+	<File name="../tasks.h" open="0" top="0" tabpos="34" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3381" topLine="111" />
+		</Cursor>
+	</File>
+	<File name="../spawn.h" open="0" top="0" tabpos="43" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2220" topLine="55" />
+		</Cursor>
+	</File>
+	<File name="../game.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="18090" topLine="508" />
+		</Cursor>
+	</File>
+	<File name="../creature.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1200" topLine="27" />
+		</Cursor>
+	</File>
 	<File name="../exception.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="1542" topLine="33" />
+		</Cursor>
+	</File>
+	<File name="../summons.cpp" open="0" top="0" tabpos="27" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1248" topLine="18" />
+		</Cursor>
+	</File>
+	<File name="../account.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="161" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../otsystem.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="6817" topLine="214" />
+		</Cursor>
+	</File>
+	<File name="../tools.cpp" open="1" top="1" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="6018" topLine="207" />
+		</Cursor>
+	</File>
+	<File name="../npc.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5768" topLine="152" />
+		</Cursor>
+	</File>
+	<File name="../otserv.cpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="21353" topLine="761" />
+		</Cursor>
+	</File>
+	<File name="../exception.cpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="11131" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../monsters.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5013" topLine="184" />
+		</Cursor>
+	</File>
+	<File name="../guilds.cpp" open="0" top="0" tabpos="18" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3403" topLine="118" />
+		</Cursor>
+	</File>
+	<File name="../database.cpp" open="0" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4" topLine="0" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

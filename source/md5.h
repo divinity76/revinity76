@@ -51,7 +51,7 @@
 
 #ifndef ___MD5_H___
 #define ___MD5_H___
-
+#include <inttypes.h>
 /* Typedef a 32 bit type */
 #ifndef UINT4
 typedef uint32_t UINT4;
