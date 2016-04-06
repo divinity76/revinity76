@@ -151,9 +151,11 @@ bool IOMapOTBM::loadMap(Map* map, std::string identifier)
 			map->spawnfile = identifier.substr(0, identifier.rfind('/') + 1);
 			map->spawnfile += tmp;
 			break;
-		default:
+		default:{
+		std::cerr << "Error in IOMapOTBM::loadMap: unknown map attribute id: "<< int(attribute) << std::endl;
 			return false;
 			break;
+        }
 		}
 	}
 
@@ -406,7 +408,7 @@ Item* IOMapOTBM::unserializaItemNode(FileLoader* f, NODE node)
 						container->addItem(item);
 					}
 					else{
-						return false;
+						return nullptr;
 					}
 				}
 				item_node = f->getNextNode(item_node, type);
